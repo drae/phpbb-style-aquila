@@ -1,0 +1,21 @@
+/* Prevent display of anything we may be kludging "inside" a table with a container */
+.table-plain {
+    .container, .container-fluid {
+        overflow: hidden;
+    }
+}
+
+/* Force columns of equal height */
+.row.equalise [class*="col-"]{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    
+    @media (min-width: $screen-sm-min) {
+        margin-bottom: -99999px;
+        padding-bottom: 99999px;
+    }
+}
+
+.row.equalise {
+    overflow: hidden;
+}

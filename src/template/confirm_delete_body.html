@@ -1,0 +1,80 @@
+<!-- IF S_AJAX_REQUEST -->
+	<form action="{S_CONFIRM_ACTION}" method="post">
+
+		<p>{MESSAGE_TEXT}</p>
+
+		<!-- IF not S_SOFTDELETED and (S_DELETE_REASON or (S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE)) -->
+		<!-- IF S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE -->
+		<div class="checkbox">
+			<label for="viewonline">
+				<input type="checkbox" name="delete_permanent" id="delete_permanent" value="1" {S_CHECKED_PERMANENT} /> <!-- IF S_TOPIC_MODE -->{L_DELETE_TOPIC_PERMANENTLY}<!-- ELSE -->{L_DELETE_POST_PERMANENTLY}<!-- ENDIF -->
+			</label>
+		</div>
+		<!-- ENDIF -->
+
+		<!-- IF S_DELETE_REASON -->
+		<div class="form-group">
+			<label for="{USERNAME_CREDENTIAL}">{L_DELETE_REASON}{L_COLON}</label>
+			<input class="form-control" type="text" name="{delete_reason}" id="{delete_reason}" value="" maxlength="120" />
+		</div>
+		<!-- ENDIF -->
+		<!-- ENDIF -->
+
+		<div class="text-center">
+			<input class="btn btn-primary btn-large" type="button" name="confirm" value="{L_YES}" /> &nbsp; 
+			<input class="btn btn-primary btn-large" type="button" name="cancel" value="{L_NO}" />
+		</div>
+	</form>
+<!-- ELSE -->
+<!-- INCLUDE overall_header.html -->
+
+			<div class="actionbar">
+				<div class="actionbar-inner">
+				</div>
+			</div>
+
+			<div class="table-plain response">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-6 col-sm-offset-3">
+							<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+
+								<h2>{MESSAGE_TITLE}</h2>
+
+								<p>{MESSAGE_TEXT}</p>
+
+								<!-- IF not S_SOFTDELETED and (S_DELETE_REASON or (S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE)) -->
+								<!-- IF S_ALLOWED_DELETE and S_ALLOWED_SOFTDELETE -->
+								<div class="checkbox">
+									<label for="viewonline">
+										<input type="checkbox" name="delete_permanent" id="delete_permanent" value="1" {S_CHECKED_PERMANENT} /> <!-- IF S_TOPIC_MODE -->{L_DELETE_TOPIC_PERMANENTLY}<!-- ELSE -->{L_DELETE_POST_PERMANENTLY}<!-- ENDIF -->
+									</label>
+								</div>
+								<!-- ENDIF -->
+
+								<!-- IF S_DELETE_REASON -->
+								<div class="form-group">
+									<label for="{USERNAME_CREDENTIAL}">{L_DELETE_REASON}{L_COLON}</label>
+									<input class="form-control" type="text" name="{delete_reason}" id="{delete_reason}" value="" maxlength="120" />
+								</div>
+								<!-- ENDIF -->
+								<!-- ENDIF -->
+
+								<div class="text-center">
+									{S_HIDDEN_FIELDS}
+										<input class="btn btn-primary btn-large" type="submit" name="confirm" value="{L_YES}" /> &nbsp; 
+										<input class="btn btn-primary btn-large" type="submit" name="cancel" value="{L_NO}" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="actionbar">
+				<div class="actionbar-inner">
+				</div>
+			</div>
+
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

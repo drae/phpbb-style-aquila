@@ -1,0 +1,89 @@
+<!-- INCLUDE overall_header.html -->
+
+			<div class="actionbar">
+					<!-- IF PAGE_NUMBER -->
+					<div class="pagination">
+						<!-- INCLUDE pagination.html -->
+					</div>
+					<!-- ENDIF -->
+
+					<div class="pull-left">
+						<!-- IF S_SWITCH_GUEST_DISPLAY -->
+						<ul class="nav">
+							<li><a href="{U_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a></li>
+						</ul>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+
+			<ul class="table online">
+				<li class="header">
+					<dl>
+						<dt><a href="{U_SORT_USERNAME}">{L_USERNAME}</a></dt>
+						<dd class="location"><a href="{U_SORT_LOCATION}">{L_FORUM_LOCATION}</a></dd>
+						<dd class="updated"><a href="{U_SORT_UPDATED}">{L_LAST_UPDATED}</a></dd>
+					</dl>
+				</li>
+				<!-- IF .user_row -->
+				<!-- BEGIN user_row -->
+				<li class="row<!-- IF user_row.S_ROW_COUNT % 2 --> row2<!-- ELSE --> row1<!-- ENDIF -->">
+					<dl>
+						<dt>{user_row.USERNAME_FULL}
+							<!-- IF user_row.USER_IP --><span>{L_IP}: <a href="{user_row.U_USER_IP}">{user_row.USER_IP}</a> [ <a href="{user_row.U_WHOIS}" onclick="popup(this.href, 750, 500); return false;">{L_WHOIS}</a> ]</span><!-- ENDIF -->
+							<!-- IF user_row.USER_BROWSER --><span>Browser: {user_row.USER_BROWSER}</span><!-- ENDIF --></dt>
+						<dd class="location"><a href="{user_row.U_FORUM_LOCATION}">{user_row.FORUM_LOCATION}</a></dd>
+						<dd class="updated">{user_row.LASTUPDATE}</dd>
+					</dl>
+				</li>
+				<!-- END user_row -->
+				<!-- ELSE -->
+				<li class="row1">
+					<dl>
+						<dt>{L_NO_ONLINE_USERS}<!-- IF S_SWITCH_GUEST_DISPLAY --> &bull; <a href="{U_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a><!-- ENDIF --></dt>
+					</dl>
+				</li>
+				<!-- ENDIF -->
+			</ul>
+
+			<div class="clear"></div>
+
+			<div class="actionbar">
+				<div class="actionbar-inner">
+					<!-- IF PAGE_NUMBER -->
+					<div class="pull-right">
+						<div class="pagination">
+							<!-- INCLUDE pagination.html -->
+						</div>
+					</div>
+					<!-- ENDIF -->
+
+					<div class="pull-left">
+						<!-- IF S_SWITCH_GUEST_DISPLAY -->
+						<ul class="nav">
+							<li><a href="{U_SWITCH_GUEST_DISPLAY}">{L_SWITCH_GUEST_DISPLAY}</a></li>
+						</ul>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+
+			<div class="table-plain info">
+				<div class="container">
+					<div class="span12">
+						<div class="well">
+							<!-- IF LEGEND -->
+							<h2>{L_LEGEND}</h2>
+
+							<p>{TOTAL_REGISTERED_USERS_ONLINE} &bull; {TOTAL_GUEST_USERS_ONLINE}</p>
+
+							<p>{LEGEND}</p>
+							<!-- ENDIF -->
+
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+<!-- INCLUDE overall_footer.html -->

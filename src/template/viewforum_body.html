@@ -1,0 +1,315 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE breadcrumbs.html -->
+
+			<!-- IF S_HAS_SUBFORUM -->
+			<div class="actionbar">
+				<div class="row">
+					<div class="tools">
+						<div class="dropdown" id="dropdown-tools">
+							<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-cog"></i> Tools
+							</a>
+							<div class="dropdown-menu">
+								<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+								<!-- EVENT index_body_markforums_before -->
+								<a class="dropdown-item" href="{U_MARK_FORUMS}" data-ajax="mark_forums_read"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_MARK_FORUMS_READ}</a>
+								<!-- EVENT index_body_markforums_after -->
+								<!-- ENDIF -->
+								<!-- IF U_MCP -->
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- INCLUDE forumlist_body.html -->
+			<!-- ENDIF -->
+
+			<!-- IF S_FORUM_RULES -->
+			<div class="rules">
+				<i class="rules-exclamation"></i>
+				<div class="rules-content">
+					<!-- IF U_FORUM_RULES -->
+					<a href="{U_FORUM_RULES}">{L_FORUM_RULES}</a>
+					<!-- ELSE -->
+					<h3>{L_FORUM_RULES}</h3>
+
+					<p class="justify">{FORUM_RULES}</p>
+					<!-- ENDIF -->
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<div class="actionbar">
+				<div class="row">
+					<div class="actionbar-items">
+						<div class="button-group">
+							<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+							<a class="btn btn-large btn-posting<!-- IF S_IS_LOCKED --> disabled<!-- ENDIF -->" href="{U_POST_NEW_TOPIC}"><!-- IF S_IS_LOCKED --><i class="fa fa-lock fa-fw" aria-hidden="true"></i> {L_BUTTON_FORUM_LOCKED}<!-- ELSE --><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> {L_BUTTON_NEW_TOPIC}<!-- ENDIF --></a>
+							<!-- ENDIF -->
+						</div>
+
+						<div class="tools">
+							<div class="dropdown" id="dropdown-tools">
+								<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="fa fa-cog"></i> Tools
+								</a>
+								<div class="dropdown-menu">
+									<!-- IF not S_IS_BOT and U_MARK_TOPICS -->
+									<!-- EVENT index_body_marktopics_before -->
+									<a class="dropdown-item" href="{U_MARK_TOPICS}" data-ajax="mark_topics_read"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_MARK_TOPICS_READ}</a>
+									<!-- EVENT index_body_marktopics_after -->
+									<!-- ENDIF -->
+									<!-- IF U_MCP -->
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+									<!-- ENDIF -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- IF PAGE_NUMBER -->
+					<div class="pagination">
+						<span>{TOTAL_TOPICS}</span>
+						&nbsp; &bull; &nbsp;
+						<!-- INCLUDE pagination.html -->
+					</div>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			<!-- IF S_NO_READ_ACCESS -->
+			<div class="table-plain response">
+				<div class="container">
+					<div class="col-12">
+						<p>{L_NO_READ_ACCESS}</p>
+					</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- BEGIN topicrow -->
+			<!-- IF not topicrow.S_TOPIC_TYPE_SWITCH and not topicrow.S_FIRST_ROW -->
+			</ul>
+			<!-- ENDIF -->
+
+			<!-- IF topicrow.S_FIRST_ROW or not topicrow.S_TOPIC_TYPE_SWITCH -->
+			<div class="break-gradient"></div>
+
+			<ul class="table topics-<!-- IF topicrow.S_TOPIC_TYPE gt 1 -->announce<!-- ELSE -->normal<!-- ENDIF -->">
+				<li class="header">
+					<dl>
+						<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>
+						<dd class="posts">{L_REPLIES}</dd>
+						<dd class="views">{L_VIEWS}</dd>
+						<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+					</dl>
+				</li>
+			<!-- ENDIF -->
+				<!-- EVENT viewforum_body_topic_row_before -->
+				<li class="row <!-- IF topicrow.S_TOPIC_REPORTED -->reported<!-- ELSEIF topicrow.S_ROW_COUNT % 2 -->row2<!-- ELSE -->row1<!-- ENDIF -->">
+					<!-- EVENT viewforum_body_topic_row_prepend -->
+					<dl class="icon {topicrow.TOPIC_IMG_STYLE}">
+						<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+
+							<div class="forum-desc">
+
+								<div class="viewforum-topic-title">
+									<!-- EVENT topiclist_row_prepend -->
+
+									<!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT -->
+									<a href="{topicrow.U_NEWEST_POST}" class="row-item-link"></a>
+									<!-- ENDIF -->
+
+									<!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT -->
+									<a href="{topicrow.U_NEWEST_POST}">
+										<i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>
+									</a>
+									<!-- ENDIF -->
+
+									<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+									<a href="{topicrow.U_MCP_QUEUE}">
+										<i class="fa fa-question fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_UNAPPROVED}</span>
+									</a>
+									<!-- ENDIF -->
+
+									<!-- IF topicrow.S_TOPIC_DELETED -->
+									<a href="{topicrow.U_MCP_QUEUE}" title="{TOPIC_DELETED">
+										<i class="fa fa-recycle fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_DELETED}</span>
+									</a>
+									<!-- ENDIF -->
+
+									<!-- IF topicrow.S_TOPIC_REPORTED -->
+									<a href="{topicrow.U_MCP_REPORT}">
+										<i class="fa fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_REPORTED}</span>
+									</a>
+									<!-- ENDIF -->
+
+									<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>
+
+									<!-- IF topicrow.S_HAS_POLL -->
+									<i class="fa fa-bar-chart fa-fw" aria-hidden="true"></i>
+									<!-- ENDIF -->
+
+									<!-- IF topicrow.ATTACH_ICON_IMG -->
+									<i class="fa fa-paperclip fa-fw" aria-hidden="true"></i>
+									<!-- ENDIF -->
+								</div>
+
+								<div class="viewforum-topic-extra">
+									<div class="viewforum-topic-author">
+										{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL} &raquo; {topicrow.FIRST_POST_TIME}
+										<!-- IF topicrow.S_POST_GLOBAL and FORUM_ID != topicrow.FORUM_ID --> &raquo; {L_IN} <a href="{topicrow.U_VIEW_FORUM}">{topicrow.FORUM_NAME}</a><!-- ENDIF -->
+									</div>
+									<!-- IF .topicrow.pagination -->
+									<div class="pagination viewforum-pagination">
+										<ul>
+										<!-- BEGIN pagination -->
+											<!-- IF topicrow.pagination.S_IS_PREV -->
+											<!-- ELSEIF topicrow.pagination.S_IS_CURRENT --><li class="active"><span>{topicrow.pagination.PAGE_NUMBER}</span></li>
+											<!-- ELSEIF topicrow.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+											<!-- ELSEIF topicrow.pagination.S_IS_NEXT -->
+											<!-- ELSE --><li><a href="{topicrow.pagination.PAGE_URL}">{topicrow.pagination.PAGE_NUMBER}</a></li>
+											<!-- ENDIF -->
+										<!-- END pagination -->
+										</ul>
+									</div>
+									<!-- ENDIF -->
+								</div>
+
+							</div>
+						</dt>
+						<dd class="posts">{topicrow.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+						<dd class="views">{topicrow.VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+						<dd class="lastpost">
+							<span>
+								<dfn>{L_LAST_POST} </dfn>{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}
+								<!-- IF not S_IS_BOT and not forumrow.S_DISPLAY_SUBJECT -->
+								<a href="{topicrow.U_LAST_POST}">
+									<i class="fa fa-sign-out fa-fw" aria-hidden="true"></i><span class="sr-only">{VIEW_LATEST_POST}</span>
+								</a>
+								<!-- ENDIF -->
+								<br />{topicrow.LAST_POST_TIME}
+							</span>
+						</dd>
+					</dl>
+					<!-- EVENT viewforum_body_topic_row_append -->
+				</li>
+				<!-- EVENT viewforum_body_topic_row_after -->
+			<!-- IF topicrow.S_LAST_ROW -->
+			</ul>
+			<!-- ENDIF -->
+
+			<!-- BEGINELSE -->
+			<div class="break-gradient"></div>
+
+			<!-- IF S_IS_POSTABLE -->
+			<div class="table-plain response">
+				<div class="container">
+					<div class="col-sm-12">
+						<h3>{L_NO_TOPICS}</h3>
+					</div>
+				</div>
+			</div>
+			<!-- ENDIF -->
+			<!-- END topicrow -->
+
+			<div class="break-gradient"></div>
+
+			<div class="actionbar">
+				<div class="row">
+					<div class="actionbar-items">
+						<div class="button-group">
+							<!-- IF not S_IS_BOT and S_DISPLAY_POST_INFO -->
+							<a class="btn btn-large btn-posting<!-- IF S_IS_LOCKED --> disabled<!-- ENDIF -->" href="{U_POST_NEW_TOPIC}"><!-- IF S_IS_LOCKED --><i class="fa fa-lock fa-fw" aria-hidden="true"></i> {L_BUTTON_FORUM_LOCKED}<!-- ELSE --><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> {L_BUTTON_NEW_TOPIC}<!-- ENDIF --></a>
+							<!-- ENDIF -->
+						</div>
+
+						<div class="tools">
+							<div class="dropdown" id="dropdown-tools">
+								<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="fa fa-cog"></i> Tools
+								</a>
+								<div class="dropdown-menu">
+									<!-- IF not S_IS_BOT and U_MARK_TOPICS -->
+									<!-- EVENT index_body_marktopics_before -->
+									<a class="dropdown-item" href="{U_MARK_TOPICS}" data-ajax="mark_topics_read"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_MARK_TOPICS_READ}</a>
+									<!-- EVENT index_body_marktopics_after -->
+									<!-- ENDIF -->
+									<!-- IF U_MCP -->
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+									<!-- ENDIF -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- IF PAGE_NUMBER -->
+					<div class="pagination">
+						<span>{TOTAL_TOPICS}</span>
+						&nbsp; &bull; &nbsp;
+						<!-- INCLUDE pagination.html -->
+					</div>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+			<!-- IF S_SELECT_SORT_DAYS and not S_DISPLAY_ACTIVE -->
+			<div class="results-order">
+				<form class="form-inline" method="post" action="{S_FORUM_ACTION}">
+					<!-- IF not S_IS_BOT -->
+					<label class="mr-sm-2">{L_DISPLAY_POSTS}</label>
+					<select class="form-control mr-sm-2" name="{S_SORT_DAYS_NAME}" id="{S_SORT_DAYS_NAME}">
+						<!-- BEGIN sort_days -->
+						<option value="{sort_days.VALUE}"{sort_days.SELECTED}>{sort_days.TEXT}</option>
+						<!-- END sort_days -->
+					</select>
+
+					<label class="mr-sm-2">{L_SORT_BY}</label>
+					<select class="form-control mr-sm-2" name="{S_SORT_KEY_NAME}" id="{S_SORT_KEY_NAME}">
+						<!-- BEGIN sort_key -->
+						<option value="{sort_key.VALUE}"{sort_key.SELECTED}>{sort_key.TEXT}</option>
+						<!-- END sort_key -->
+					</select>
+
+					<select class="form-control mr-sm-2" name="{S_SORT_DIR_NAME}" id="{S_SORT_DIR_NAME}">
+						<!-- BEGIN sort_dir -->
+						<option value="{sort_dir.VALUE}"{sort_dir.SELECTED}>{sort_dir.TEXT}</option>
+						<!-- END sort_dir -->
+					</select>
+
+					<input type="submit" name="sort" value="{L_GO}" class="btn btn-default" />
+					<!-- ENDIF -->
+				</form>
+			</div>
+			<!-- ENDIF -->
+
+			<div class="table-plain viewonline">
+				<div class="row">
+					<div class="posting-rules">
+						<!-- IF S_DISPLAY_POST_INFO -->
+						<h2>{L_FORUM_PERMISSIONS}</h2>
+						<p><!-- BEGIN rules -->{rules.RULE}<br /><!-- END rules --></p>
+						<!-- ENDIF -->
+					</div>
+
+					<div class="forum-online">
+						<!-- IF S_DISPLAY_ONLINE_LIST -->
+						<h2><!-- IF U_VIEWONLINE --><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a><!-- ELSE -->{L_WHO_IS_ONLINE}<!-- ENDIF --></h2>
+						<p>{LOGGED_IN_USER_LIST}</p>
+						<!-- ENDIF -->
+
+						<!-- IF MODERATORS -->
+						<h2><!-- IF S_SINGLE_MODERATOR -->{L_MODERATOR}<!-- ELSE -->{L_MODERATORS}<!-- ENDIF -->:</h2>
+						<p>{MODERATORS}</p>
+						<!-- ENDIF -->
+					</div>
+
+				</div>
+			</div>
+
+<!-- INCLUDE overall_footer.html -->

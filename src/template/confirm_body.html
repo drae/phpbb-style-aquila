@@ -1,0 +1,44 @@
+<!-- IF S_AJAX_REQUEST -->
+	<form action="{S_CONFIRM_ACTION}" method="post">
+		<h2>{MESSAGE_TITLE}</h2>
+
+		<p>{MESSAGE_TEXT}</p>
+
+		<div class="posting-buttons">
+			{S_HIDDEN_FIELDS}
+			<button class="btn btn-large btn-posting" type="submit" id="confirm" name="confirm" value="{L_YES}">{L_YES}</button>
+			<button class="btn btn-large" type="submit" id="cancel" name="cancel" value="0">{L_NO}</button>
+		</div>
+	</form>
+
+<!-- ELSE -->
+
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE breadcrumbs.html -->
+
+			<div class="actionbar"></div>
+
+			<div class="table-plain response">
+				<div class="row">
+					<div class="col-12">
+						<form id="confirm" action="{S_CONFIRM_ACTION}" method="post">
+
+							<h2>{MESSAGE_TITLE}</h2>
+
+							<p>{MESSAGE_TEXT}</p>
+
+							<div class="posting-buttons">
+								{S_HIDDEN_FIELDS}
+								<button class="btn btn-large btn-posting" type="submit" id="confirm" name="confirm" value="{L_YES}">{L_YES}</button>
+								<button class="btn btn-large" type="submit" id="cancel" name="cancel" value="0">{L_NO}</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="actionbar"></div>
+
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

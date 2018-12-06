@@ -1,0 +1,184 @@
+<!-- INCLUDE overall_header.html -->
+
+			<div class="actionbar">
+				<div class="actionbar-inner">
+				
+					<!-- IF PAGE_NUMBER -->
+					<div class="pull-right">
+						<div class="pagination">
+							<!-- INCLUDE pagination.html -->
+						</div>
+					</div>
+					<!-- ENDIF -->
+
+					<ul class="nav">
+					<!-- IF S_DISPLAY_SEARCH -->
+						<li class="dropdown" id="dropdown-search">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							{L_SEARCH}
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}">{L_SEARCH_ADV}</a></li>
+								<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a></li>
+								<!-- IF S_USER_LOGGED_IN --><li><a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a></li><!-- ENDIF -->
+								<li><a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
+							</ul>
+						</li>
+					<!-- ENDIF -->
+					</ul>
+					
+				</div>
+			</div>
+			
+
+			<!-- IF S_SHOW_TOPICS -->
+			<!-- IF .searchresults -->
+			<ul class="table topics-normal">
+				<li class="header">
+					<dl>
+						<dt>{L_TOPICS}</dt>
+						<dd class="posts">{L_REPLIES}</dd>
+						<dd class="views">{L_VIEWS}</dd>
+						<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+					</dl>
+				</li>
+				<!-- BEGIN searchresults -->
+				<li class="row <!-- IF searchresults.S_TOPIC_REPORTED -->reported<!-- ELSEIF searchresults.S_ROW_COUNT % 2 -->row2<!-- ELSE -->row1<!-- ENDIF -->">
+					<dl class="icon {searchresults.TOPIC_IMG_STYLE}">
+						<dt<!-- IF searchresults.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{searchresults.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{searchresults.TOPIC_FOLDER_IMG_ALT}">
+							<div class="forum-desc">
+								<!-- IF .searchresults.pagination -->
+								<div class="pagination pull-right">
+									<ul>
+									<!-- BEGIN pagination -->
+										<!-- IF searchresults.pagination.S_IS_PREV -->
+										<!-- ELSEIF searchresults.pagination.S_IS_CURRENT --><li class="active"><span>{searchresults.pagination.PAGE_NUMBER}</span></li>
+										<!-- ELSEIF searchresults.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+										<!-- ELSEIF searchresults.pagination.S_IS_NEXT -->
+										<!-- ELSE --><li><a href="{searchresults.pagination.PAGE_URL}">{searchresults.pagination.PAGE_NUMBER}</a></li>
+										<!-- ENDIF -->
+									<!-- END pagination -->
+									</ul>
+								</div>
+								<!-- ENDIF -->
+								<!-- IF searchresults.S_UNREAD_TOPIC --><a href="{searchresults.U_NEWEST_POST}">{NEWEST_POST_IMG}</a> <!-- ENDIF --><a href="{searchresults.U_VIEW_TOPIC}" class="topictitle">{searchresults.TOPIC_TITLE}</a>
+								<!-- IF searchresults.S_TOPIC_UNAPPROVED or searchresults.S_POSTS_UNAPPROVED --><a href="{searchresults.U_MCP_QUEUE}">{searchresults.UNAPPROVED_IMG}</a> <!-- ENDIF -->
+								<!-- IF searchresults.S_TOPIC_REPORTED --><a href="{searchresults.U_MCP_REPORT}">{REPORTED_IMG}</a><!-- ENDIF --><br />
+								<!-- IF searchresults.ATTACH_ICON_IMG -->{searchresults.ATTACH_ICON_IMG} <!-- ENDIF -->{L_POST_BY_AUTHOR} {searchresults.TOPIC_AUTHOR_FULL} &raquo; {searchresults.FIRST_POST_TIME}
+							</div>
+						</dt>
+						<dd class="posts">{searchresults.TOPIC_REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+						<dd class="views">{searchresults.TOPIC_VIEWS} <dfn>{L_VIEWS}</dfn></dd>
+						<dd class="lastpost"><span>
+							<dfn>{L_LAST_POST} </dfn>
+							<!-- IF searchresults.S_DISPLAY_SUBJECT --><a href="{searchresults.U_LAST_POST}" title="{searchresults.LAST_POST_SUBJECT}">{searchresults.LAST_POST_SUBJECT_TRUNCATED}</a> <br /><!-- ENDIF --> 
+							{L_POST_BY_AUTHOR} {searchresults.LAST_POST_AUTHOR_FULL}
+							<!-- IF not S_IS_BOT and not forumrow.S_DISPLAY_SUBJECT --><a href="{searchresults.U_LAST_POST}">{LAST_POST_IMG}</a> <!-- ENDIF --><br />{searchresults.LAST_POST_TIME}</span>
+						</dd>
+					</dl>
+				</li>
+				<!-- END searchresults -->
+			</ul>
+			
+			<!-- ELSE -->
+			
+			<div class="table-plain info">
+				<div class="container">
+				
+					<div class="span12">
+						<div class="well">
+							<p>{L_NO_SEARCH_RESULTS}</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<!-- ELSE -->
+
+			<!-- BEGIN searchresults -->
+			<article class="table posts">
+				<div id="p{searchresults.POST_ID}" class="post <!-- IF searchresults.S_UNREAD_POST --> unreadpost<!-- ENDIF --><!-- IF searchresults.S_POST_REPORTED --> reported<!-- ENDIF --><!-- IF searchresults.S_ONLINE --> online<!-- ENDIF -->">
+					<!-- IF searchresults.S_IGNORE_POST -->
+					<div class="span12 ignore">
+						{searchresults.L_IGNORE_POST}
+					</div>
+					<!-- ELSE -->
+					<div class="span3">
+						<div class="author-info">
+						
+							<h3><!-- IF not searchresults.U_POST_AUTHOR -->{searchresults.POST_AUTHOR}<!-- ELSE -->{searchresults.POST_AUTHOR_FULL}<!-- ENDIF --></h3>
+
+							<p>{searchresults.POST_DATE}</p>
+							
+							<!-- IF searchresults.FORUM_TITLE -->
+							{L_FORUM}: <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_TITLE}</a> <br />
+							{L_TOPIC}: <a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a> <br />
+							<!-- ELSE -->
+							{L_GLOBAL}: <a href="{searchresults.U_VIEW_TOPIC}">{searchresults.TOPIC_TITLE}</a> <br />
+							<!-- ENDIF -->
+							{L_REPLIES}: <strong>{searchresults.TOPIC_REPLIES}</strong> <br />
+							{L_VIEWS}: <strong>{searchresults.TOPIC_VIEWS}</strong>
+						</div>
+					</div>
+					
+					<div class="span9">
+	
+						<h3><!-- IF searchresults.POST_ICON_IMG --><img src="{T_ICONS_PATH}{searchresults.POST_ICON_IMG}" width="{searchresults.POST_ICON_IMG_WIDTH}" height="{searchresults.POST_ICON_IMG_HEIGHT}" alt="" /> <!-- ENDIF --><a href="{searchresults.U_VIEW_POST}">{searchresults.POST_SUBJECT}</a></h3>
+						
+						<div class="content">{searchresults.MESSAGE}</div>
+					</div>
+					<!-- ENDIF -->
+				</div>
+			</article>
+			
+			<div class="clearfix"></div>
+			
+			<!-- BEGINELSE -->
+			<div class="table-plain info">
+				<div class="container">
+				
+					<div class="span12">
+						<div class="well">
+							<p>{L_NO_SEARCH_RESULTS}</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- END searchresults -->
+			
+			<!-- ENDIF -->
+
+			<div class="actionbar">
+				<div class="actionbar-inner">
+				
+					<!-- IF PAGE_NUMBER -->
+					<div class="pull-right">
+						<div class="pagination">
+							<!-- INCLUDE pagination.html -->
+						</div>
+					</div>
+					<!-- ENDIF -->
+
+					<ul class="nav">
+					<!-- IF S_DISPLAY_SEARCH -->
+						<li class="dropdown" id="dropdown-search">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							{L_SEARCH}
+							<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}">{L_SEARCH_ADV}</a></li>
+								<li><a href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a></li>
+								<!-- IF S_USER_LOGGED_IN --><li><a href="{U_SEARCH_NEW}">{L_SEARCH_NEW}</a></li><!-- ENDIF -->
+								<li><a href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a></li>
+							</ul>
+						</li>
+					<!-- ENDIF -->
+					</ul>
+					
+				</div>
+			</div>
+
+<!-- INCLUDE overall_footer.html -->

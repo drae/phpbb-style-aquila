@@ -1,0 +1,176 @@
+<!-- INCLUDE mcp_header.html -->
+
+							<h2>{L_FORUM}{L_COLON} {FORUM_NAME}</h2>
+
+							<!-- DEFINE $CUSTOM_FIELDSET_CLASS = 'forum-selection2' -->
+							<!-- INCLUDE jumpbox.html -->
+							
+							<div class="clearfix"></div>
+				
+							<form class="form-horizontal" method="post" id="mcp" action="{S_MCP_ACTION}">
+
+								<div class="actionbar">
+									<div class="actionbar-inner">
+										<div class="pagination pull-left">
+											<a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a>
+										</div>
+										<!-- IF .pagination or TOTAL_TOPICS -->
+										<div class="pagination pull-right">
+											{TOTAL_TOPICS}
+											<!-- IF .pagination -->
+											<!-- INCLUDE pagination.html -->
+											<!-- ELSE -->
+											&bull; {PAGE_NUMBER}
+											<!-- ENDIF -->
+											</div>
+										<!-- ENDIF -->
+									</div>
+								</div>	
+
+								<div id="topicreview" class="topicreview">
+									<!-- IF .topicrow -->
+									<ul class="table topics-<!-- IF topicrow.S_TOPIC_TYPE gt 1 -->announce<!-- ELSE -->normal<!-- ENDIF --><!-- IF S_MERGE_SELECT --> missing-column<!-- ENDIF -->">
+										<li class="header">
+											<dl>
+												<dt><!-- IF S_DISPLAY_ACTIVE -->{L_ACTIVE_TOPICS}<!-- ELSEIF topicrow.S_TOPIC_TYPE_SWITCH and topicrow.S_TOPIC_TYPE gt 1 -->{L_ANNOUNCEMENTS}<!-- ELSE -->{L_TOPICS}<!-- ENDIF --></dt>
+												<dd class="posts">{L_REPLIES}</dd>
+												<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+												<!-- IF not S_MERGE_SELECT --><dd class="mark">{L_MARK}</dd><!-- ENDIF -->
+											</dl>
+										</li>
+										<!-- BEGIN topicrow -->
+										<li class="row <!-- IF topicrow.S_TOPIC_REPORTED -->reported<!-- ELSEIF topicrow.S_ROW_COUNT % 2 -->row2<!-- ELSE -->row1<!-- ENDIF -->">
+											<dl class="icon {topicrow.TOPIC_IMG_STYLE}">
+												<dt<!-- IF topicrow.TOPIC_ICON_IMG and S_TOPIC_ICONS --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+													<div class="forum-desc">
+														<!-- IF .topicrow.pagination -->
+														<div class="pagination pull-right">
+															<ul>
+															<!-- BEGIN pagination -->
+																<!-- IF topicrow.pagination.S_IS_PREV -->
+																<!-- ELSEIF topicrow.pagination.S_IS_CURRENT --><li class="active"><span>{topicrow.pagination.PAGE_NUMBER}</span></li>
+																<!-- ELSEIF topicrow.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+																<!-- ELSEIF topicrow.pagination.S_IS_NEXT -->
+																<!-- ELSE --><li><a href="{topicrow.pagination.PAGE_URL}">{topicrow.pagination.PAGE_NUMBER}</a></li>
+																<!-- ENDIF -->
+															<!-- END pagination -->
+															</ul>
+														</div>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_UNREAD_TOPIC and not S_IS_BOT -->
+														<a href="{topicrow.U_NEWEST_POST}">
+															<i class="fa fa-sign-in fa-fw" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+														<a href="{topicrow.U_MCP_QUEUE}">
+															<i class="fa fa-question fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_UNAPPROVED}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_DELETED -->
+														<a href="{topicrow.U_MCP_QUEUE}" title="{TOPIC_DELETED">
+															<i class="fa fa-recycle fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_DELETED}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_REPORTED -->
+														<a href="{topicrow.U_MCP_REPORT}">
+															<i class="fa fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_REPORTED}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- EVENT mcp_forum_topic_title_before -->
+														<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>
+														<!-- EVENT mcp_forum_topic_title_after -->
+														<br />
+														{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL} &raquo; {topicrow.FIRST_POST_TIME}
+														<!-- IF topicrow.S_POST_GLOBAL and FORUM_ID != topicrow.FORUM_ID --> &raquo; {L_IN} <a href="{topicrow.U_VIEW_FORUM}">{topicrow.FORUM_NAME}</a><!-- ENDIF -->
+														<br />
+														<!-- IF topicrow.S_SELECT_TOPIC -->
+														<a href="{topicrow.U_SELECT_TOPIC}">[ {L_SELECT_MERGE} ]</a> 
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+														<a href="{topicrow.U_MCP_QUEUE}" title="{TOPIC_UNAPPROVED}">
+															<i class="fa fa-question fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_UNAPPROVED}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_DELETED or topicrow.S_POSTS_DELETED -->
+														<a href="{topicrow.U_MCP_QUEUE}" title="{TOPIC_DELETED">
+															<i class="fa fa-recycle fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_DELETED}</span>
+														</a> 
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_TOPIC_REPORTED -->
+														<a href="{topicrow.U_MCP_REPORT}" title="{TOPIC_REPORTED}">
+															<i class="fa fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{TOPIC_REPORTED}</span>
+														</a>
+														<!-- ENDIF -->
+														<!-- IF topicrow.S_MOVED_TOPIC and S_CAN_DELETE --> 
+														<a href="{topicrow.U_DELETE_TOPIC}">[ {L_DELETE_SHADOW_TOPIC} ]</a>
+														<!-- ENDIF -->
+														<!-- EVENT topiclist_row_append -->
+													</div>
+												</dt>
+												<dd class="posts">{topicrow.REPLIES} <dfn>{L_REPLIES}</dfn></dd>
+												<dd class="lastpost"><span><dfn>{L_LAST_POST} </dfn>{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}<br />{topicrow.LAST_POST_TIME}</span></dd>
+												<!-- IF not S_MERGE_SELECT -->
+												<dd class="mark">
+													<!-- IF not topicrow.S_MOVED_TOPIC -->
+													<input type="checkbox" name="topic_id_list[]" value="{topicrow.TOPIC_ID}"<!-- IF topicrow.S_TOPIC_CHECKED --> checked="checked"<!-- ENDIF --> />
+													<!-- ENDIF -->
+												</dd>
+												<!-- ENDIF -->
+											</dl>
+										</li>
+										<!-- END topicrow -->
+									</ul>
+									<!-- ELSE -->
+									<ul class="topiclist">
+										<li><p class="notopics">{L_NO_TOPICS}</p></li>
+									</ul>
+									<!-- ENDIF -->
+	
+								</div>
+	
+								<div class="actionbar">
+									<div class="actionbar-inner">
+										<div class="pagination pull-left">
+											<a href="#review" onclick="viewableArea(getElementById('topicreview'), true); var rev_text = getElementById('review').getElementsByTagName('a').item(0).firstChild; if (rev_text.data == '{LA_EXPAND_VIEW}'){rev_text.data = '{LA_COLLAPSE_VIEW}'; } else if (rev_text.data == '{LA_COLLAPSE_VIEW}'){rev_text.data = '{LA_EXPAND_VIEW}'};">{L_EXPAND_VIEW}</a>
+										</div>
+										<!-- IF .pagination or TOTAL_TOPICS -->
+										<div class="pagination pull-right">
+											{TOTAL_TOPICS}
+											<!-- IF .pagination -->
+											<!-- INCLUDE pagination.html -->
+											<!-- ELSE -->
+											&bull; {PAGE_NUMBER}
+											<!-- ENDIF -->
+											</div>
+										<!-- ENDIF -->
+									</div>
+								</div>	
+
+								<!-- IF not S_MERGE_SELECT -->
+								<div class="form-inline pull-right">
+									<a href="#" onclick="marklist('mcp', 'topic_id_list', true); return false;">{L_MARK_ALL}</a> :: <a href="#" onclick="marklist('mcp', 'topic_id_list', false); return false;">{L_UNMARK_ALL}</a> &nbsp; 
+									<div class="input-group">
+										<select class="form-control" name="action">
+											<option value="" selected="selected">{L_SELECT_ACTION}</option>
+											<!-- IF S_CAN_DELETE --><option value="delete_topic">{L_DELETE}</option><!-- ENDIF -->
+											<!-- IF S_CAN_RESTORE --><option value="restore_topic">{L_RESTORE}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MERGE --><option value="merge_topics">{L_MERGE}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MOVE --><option value="move">{L_MOVE}</option><!-- ENDIF -->
+											<!-- IF S_CAN_FORK --><option value="fork">{L_FORK}</option><!-- ENDIF -->
+											<!-- IF S_CAN_LOCK --><option value="lock">{L_LOCK}</option><option value="unlock">{L_UNLOCK}</option><!-- ENDIF -->
+											<!-- IF S_CAN_SYNC --><option value="resync">{L_RESYNC}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MAKE_NORMAL --><option value="make_normal">{L_MAKE_NORMAL}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MAKE_STICKY --><option value="make_sticky">{L_MAKE_STICKY}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MAKE_ANNOUNCE --><option value="make_announce">{L_MAKE_ANNOUNCE}</option><!-- ENDIF -->
+											<!-- IF S_CAN_MAKE_ANNOUNCE_GLOBAL --><option value="make_global">{L_MAKE_GLOBAL}</option><!-- ENDIF -->
+										</select>
+										<span class="input-group-btn">
+											<button class="btn btn-primary" type="submit" value="1" />{L_SUBMIT}</button>
+										</span>
+									</div>
+								</div>
+								<!-- ENDIF -->
+							</form>
+
+<!-- INCLUDE mcp_footer.html -->

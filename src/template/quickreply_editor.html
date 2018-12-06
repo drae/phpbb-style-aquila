@@ -1,0 +1,38 @@
+
+			<div class="table-plain response">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-12">
+							<form class="form-horizontal" id="postform" method="post" action="{U_QR_ACTION}">
+
+								<h2>{L_QUICKREPLY}</h2>
+
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="subject">{L_SUBJECT}:</label>
+									<div class="col-md-9">
+										<input class="form-control" type="text" tabindex="1" name="subject" id="subject" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" title="{L_SUBJECT}" placeholder="{L_SUBJECT}" />
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-md-3 control-label" for="message">{L_MESSAGE}:</label>
+									<div class="col-md-9">
+										<!-- INCLUDE posting_buttons.html -->
+
+										<textarea class="form-control" rows="12"<!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT --> name="signature" id="signature"<!-- ELSE --> name="message" id="message"<!-- ENDIF --> tabindex="4">{MESSAGE}{DRAFT_MESSAGE}{SIGNATURE}</textarea>
+									</div>
+								</div>
+
+								<fieldset class="center submit-buttons">
+									<button class="btn btn-large btn-primary" type="submit" tabindex="6" name="post" id="post" value="{L_SUBMIT}">{L_SUBMIT}</button>
+									&nbsp;
+									<button class="btn btn-large btn-primary" type="submit" tabindex="7" name="preview" id="preview" value="{L_FULL_EDITOR}">{L_FULL_EDITOR}</button>
+
+									{S_FORM_TOKEN}
+									{QR_HIDDEN_FIELDS}
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>

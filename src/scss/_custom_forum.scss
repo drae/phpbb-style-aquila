@@ -1,0 +1,842 @@
+/*
+    Generally these are "specific" styles for the forum but
+    may extend beyond the forum in some circumstances
+*/
+
+img[alt="cron"] {
+    display: none;
+}
+
+form {
+    margin: 0;
+}
+
+hr {
+    margin: 5px 0;
+    border-color: rgba(0,0,0,0.25);
+}
+
+/* Forum and topic layout */
+.rules {
+    background: rgba(200, 0, 0, 0.33);
+    border: #800 1px solid;
+    color: #efefef;
+    display: flex;
+    margin-bottom: 5px;
+    padding: 15px;
+    width: 100%;
+
+    .rules-exclamation {
+        align-self: center;
+        background: transparent url('./images/exclamation-sml.png') 12px 50% no-repeat;
+        display: block;
+        flex: 50px 0 0;
+        flex-direction: column;
+        height: 50px;
+        margin-right: 15px;
+        width: 50px;
+    }
+
+    .rules-content {
+        flex-direction: row;
+
+        h2 {
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+.table {
+    dl.icon {
+        background-position: 10px 50%;
+        background-repeat: no-repeat;
+        background-size: 48px;
+        min-height: 48px;
+    }
+
+    dt {
+        flex-basis: 100%;
+
+        @include media-breakpoint-up('sm') {
+            flex-basis: 76%;
+        }
+
+        @include media-breakpoint-up('md') {
+            flex-basis: 60%;
+        }
+
+        .forum-desc {
+            color: $gray-light;
+            display: flex;
+            flex-direction: column;
+            padding-left: 70px;
+
+            .viewforum-topic-title {
+                display: flex;
+                align-items: center;
+
+                * + .fa {
+                    padding-left: 5px;
+                }
+
+                &.drafts {
+                    align-items: left;
+                    flex-flow: column wrap;
+                    justify-content: flex-start;
+                }
+            }
+
+            .viewforum-body-extra {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .viewforum-topic-extra {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                @include media-breakpoint-up('lg') {
+                    flex-direction: row;
+                    padding: 0;
+                }
+
+                .viewforum-pagination {
+                    li {
+                        margin-top: 5px;
+
+                        @include media-breakpoint-up('lg') {
+                            margin-top: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    dd {
+        &.posts,
+        &.topics,
+        &.views,
+        &.lastpost,
+        &.redirect {
+            display: none;
+        }
+
+        @include media-breakpoint-up(md) {
+            &.posts,
+            &.topics,
+            &.views {
+                display: block;
+                flex-basis: 8%;
+                text-align: center;
+            }
+        }
+
+        @include media-breakpoint-up(sm) {
+            &.lastpost {
+                display: block;
+                flex-basis: 24%;
+            }
+
+            &.redirect {
+                display: flex;
+                flex-basis: 40%;
+                justify-content: center;
+            }
+        }
+
+        &.mark {
+            text-align: center;
+        }
+    }
+
+    .subfora {
+        display: block;
+        list-style-type: none;
+        margin-top: 5px;
+        overflow: hidden;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .subforum {
+        font-size: 0.85rem;
+
+        // font awesome icon
+        .fa {
+            font-size: 0.75rem;
+        }
+    }
+}
+
+/**
+ * Moderation Control Panel overrides
+ */
+.section-mcp {
+    .table {
+        dd {
+            &.posts {
+                width: 12%;
+                text-align: center;
+            }
+
+            &.lastpost {
+                width: 20%;
+            }
+
+            &.mark {
+                width: 8%;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.section-ucp {
+    .table-ucp {
+
+    }
+}
+
+/* Polls */
+.topic_poll .dl-horizontal {
+    margin: 0 0 21px 0;
+    overflow: auto;
+
+    dt {
+        width: 25%;
+        float: left;
+        padding-top: 1px;
+        text-align: right;
+    }
+
+    dd.poll_option_select {
+        width: auto;
+        float: left;
+        margin: 0;
+        padding: 1px 0 0 5px;
+    }
+
+    dd.resultbar {
+        width: 50%;
+        float: left;
+        margin: 0 5px;
+        background-color: #fff;
+
+        .progress {
+            margin-bottom: 0;
+        }
+
+        .pollbar1 {
+            background-color: transparent;
+            color: inherit;
+        }
+
+        .pollbar2 {
+            background-color: #050;
+            color: #efefef;
+        }
+
+        .pollbar3 {
+            background-color: #060;
+            color: #efefef;
+        }
+
+        .pollbar4 {
+            background-color: #070;
+            color: #efefef;
+        }
+
+        .pollbar5 {
+            background-color: #0a0;
+            color: #efefef;
+        }
+
+        [class^="pollbar"] {
+            text-align: right;
+            padding: 2px 5px;
+        }
+    }
+
+    dd.poll_option_percent {
+        width: 20%;
+        float: left;
+        margin: 0;
+        overflow: hidden;
+        padding-top: 1px;
+        text-overflow: ellipsis;
+        white-space:nowrap;
+    }
+
+}
+
+/* Post layout */
+.viewtopic,
+.viewmessage {
+    border-bottom: solid 2px transparent;
+    border-top: solid 2px transparent;
+    border-image: linear-gradient(to right, #769944 0%, #769944 22.916667%, #9fb84a 37.5%, #e8e361 55%, #769944 100%);
+    border-image-slice: 1;
+    margin-bottom: 5px;
+    width: 100%;
+
+    article {
+        background: linear-gradient(to bottom, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.05) 100%);
+        border: solid 1px rgba(0,0,0,0.25);
+        display: flex;
+        flex: 0 0 100%;
+        flex-direction: column;
+        margin: 5px 0;
+        overflow: visible;
+        padding: 15px;
+
+        &:after {
+            background-image: linear-gradient(45deg, #769944 0%, #769944 22.916667%, #9fb84a 37.5%, #e8e361 55%, #769944 100%);
+        }
+
+        .avatar-container img {
+            height: 70px;
+            width: 70px;
+        }
+
+        .postprofile {
+            @include make-col(12);
+            border-bottom: solid 1px rgba(255, 255, 255, 0.05);
+            border-right: none;
+            padding: 0 15px 15px;
+            text-align: center;
+        }
+
+        .postoutput {
+            @include make-col(12);
+            padding: 15px 15px 0;
+        }
+
+        .post-buttons {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.25);
+            margin: 0;
+            overflow: hidden;
+            position: absolute;
+            padding: 0;
+            right: 0;
+            top: 0;
+
+            &.list-inline > li {
+                display: inline-block;
+                padding: 0;
+            }
+        }
+
+        .post-author {
+            color: $gray-light;
+            font-size: 0.9rem;
+            margin: 0;
+            padding: 0;
+
+            a {
+                color: $gray;
+
+                i {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+
+        .post-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 15px 0;
+
+            @include word-wrap();
+
+            ul {
+                margin: 20px;
+                padding: 0;
+            }
+
+            li {
+                display: list-item;
+                line-height: 2rem;
+                list-style-type: disc;
+                margin: 0 20px;
+                padding: 0;
+            }
+
+            img {
+                max-width: 99%; /* Force size down */
+            }
+
+            img.smilies {
+                border: 0;
+            }
+
+            blockquote {
+                background-color: rgba(255,255,255,0.1);
+                border-left: solid 6px #666;
+                margin: 0 0 15px 0;
+                padding: 10px;
+            }
+
+            blockquote cite {
+                border-bottom: solid 1px #666;
+                display: block;
+                margin-bottom: 5px;
+                padding-bottom: 3px;
+            }
+
+            blockquote.blue {
+                background-color: rgba(255,255,255,0.1);
+                background-image: none;
+                border-color: rgba(128, 128, 128, 0.75);
+                color: #00B4FF;
+                text-shadow: 0 1px 0 #000000;
+            }
+
+            blockquote.blue cite {
+                border-bottom: solid 1px #666;
+            }
+
+            .inline-attachment {
+                dd {
+                    display: none;
+                }
+            }
+
+            .codebox {
+                background: rgba(0,0,0,0.25);
+                border: solid 4px rgba(255,255,255,0.1);
+
+                p {
+                    background: rgba(255,255,255,0.1);
+                    padding: 5px 15px;
+                    margin-bottom: 0;
+                }
+
+                pre {
+                    color: $body-color;
+                    margin: 0;
+                    padding: 15px;
+                    white-space: pre-wrap;
+                }
+            }
+        }
+
+        /* attachments */
+        .attachbox {
+            border-top: solid 1px rgba(255, 255, 255, 0.1);
+
+            > dt {
+                width: auto;
+                float: none;
+                padding: 8px;
+            }
+
+            > dd {
+                float: none;
+                clear: both;
+                padding: 8px;
+            }
+
+            dd dt, dd dd {
+                float: none;
+                width: auto;
+            }
+        }
+
+        /* Signatures - duh */
+        .signature {
+            font-size: 0.9rem;
+            padding-top: 5px;
+            border-top: solid 1px #666;
+        }
+
+        /* Navigation */
+        .btn-bar {
+            margin: 15px 0;
+        }
+    }
+}
+
+.viewtopic {
+    article {
+        @include media-breakpoint-up('md') {
+            flex-direction: row;
+        }
+
+        .postprofile {
+            @include media-breakpoint-up('md') {
+                @include make-col(3);
+                border-bottom: none;
+                border-right: solid 1px rgba(255, 255, 255, 0.05);
+                padding-top: 0;
+            }
+        }
+
+        .postoutput {
+            @include media-breakpoint-up('md') {
+                @include make-col(9);
+                padding-top: 0;
+            }
+        }
+    }
+}
+
+.viewmessage {
+    article {
+        background: $body-bg url('./images/bg_pattern.jpg') repeat;
+        font-size: 1rem;
+
+        // post buttons to right location
+        .post-body {
+            position: relative;
+        }
+    }
+}
+
+// table break divider
+.break {
+    background: rgba(255,255,255,0.05);
+    height: 1px;
+    width: 100%;
+}
+
+.break-gradient {
+    background: linear-gradient(to right, #769944 0%, #769944 22.916667%, #9fb84a 37.5%, #e8e361 55%, #769944 100%);
+    height: 2px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.results-order {
+    align-items: center;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex: 0 0 100%;
+    justify-content: center;
+    padding: 10px 0;
+
+    form {
+        justify-content: center;
+    }
+
+    label {
+        display: none;
+        margin: 0;
+        padding: 0;
+
+        @include media-breakpoint-up('md') {
+            display: block;
+        }
+    }
+}
+
+/*
+    Posting
+*/
+.format-buttons {
+    background: #333;
+    border: solid 1px #000;
+    margin-bottom: 2px;
+    padding: 5px 5px 1px 5px;
+
+    .btn {
+        margin-bottom: 2px;
+    }
+
+    @include media-breakpoint-up(md) {
+        .btn {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.posting-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    flex: 1 100%;
+
+    .btn {
+        margin: 0.25rem;
+    }
+}
+
+// Topic review on posting page
+.topicreview {
+    border: solid 1px #000;
+    overflow: auto;
+    height: 300px;
+    margin-bottom: 5px;
+}
+
+/* plupload overrides */
+#attach-panel table {
+    &.table {
+        background: none;
+        border: 0;
+    }
+
+    tr.attach-row {
+        border-top: solid 1px rgba(255,255,255,0.1);
+    }
+
+    th, td {
+        border: 0;
+        vertical-align: middle;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    .attach-name {
+        width: 50%;
+    }
+
+    .attach-comment {
+        width: auto;
+    }
+
+    .file-name {
+        display: inline-block;
+        max-width: 45%;
+    }
+
+    .file-status {
+        &.file-uploaded {
+            max-width: 256px;
+            max-height: 256px;
+            background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMTZweCIgdmlld0JveD0iMCAwIDQzOC41MzMgNDM4LjUzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDM4LjUzMyA0MzguNTMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQwOS4xMzMsMTA5LjIwM2MtMTkuNjA4LTMzLjU5Mi00Ni4yMDUtNjAuMTg5LTc5Ljc5OC03OS43OTZDMjk1LjczNiw5LjgwMSwyNTkuMDU4LDAsMjE5LjI3MywwICAgYy0zOS43ODEsMC03Ni40Nyw5LjgwMS0xMTAuMDYzLDI5LjQwN2MtMzMuNTk1LDE5LjYwNC02MC4xOTIsNDYuMjAxLTc5LjgsNzkuNzk2QzkuODAxLDE0Mi44LDAsMTc5LjQ4OSwwLDIxOS4yNjcgICBjMCwzOS43OCw5LjgwNCw3Ni40NjMsMjkuNDA3LDExMC4wNjJjMTkuNjA3LDMzLjU5Miw0Ni4yMDQsNjAuMTg5LDc5Ljc5OSw3OS43OThjMzMuNTk3LDE5LjYwNSw3MC4yODMsMjkuNDA3LDExMC4wNjMsMjkuNDA3ICAgczc2LjQ3LTkuODAyLDExMC4wNjUtMjkuNDA3YzMzLjU5My0xOS42MDIsNjAuMTg5LTQ2LjIwNiw3OS43OTUtNzkuNzk4YzE5LjYwMy0zMy41OTYsMjkuNDAzLTcwLjI4NCwyOS40MDMtMTEwLjA2MiAgIEM0MzguNTMzLDE3OS40ODUsNDI4LjczMiwxNDIuNzk1LDQwOS4xMzMsMTA5LjIwM3ogTTM2MS40NDUsMTg1Ljg2M0wyMDYuNDIsMzQwLjg4OWMtMy42MTcsMy42Mi03Ljk5Miw1LjQyOC0xMy4xMzQsNS40MjggICBjLTQuOTQ4LDAtOS4yMjktMS44MDgtMTIuODQ3LTUuNDI4TDc3LjA4MywyMzcuNTM5Yy0zLjQyMi0zLjQyOS01LjEzNy03LjcwMy01LjEzNy0xMi44NDdjMC01LjMyOCwxLjcwOS05LjcwOSw1LjEzNy0xMy4xMzYgICBsMjUuOTgxLTI1LjY5M2MzLjYyMS0zLjYxNiw3Ljg5OC01LjQyNCwxMi44NS01LjQyNHM5LjIzNSwxLjgwOSwxMi44NSw1LjQyNGw2NC41MjUsNjQuNTIzbDExNi40ODUtMTE2LjE5OSAgIGMzLjYxNy0zLjYxNyw3Ljg5OC01LjQyNiwxMi44NDctNS40MjZjNC45NDUsMCw5LjIzMywxLjgwOSwxMi44NDcsNS40MjZsMjUuOTgxLDI1LjY5N2MzLjQzMiwzLjQyNCw1LjE0LDcuODAxLDUuMTQsMTMuMTI5ICAgQzM2Ni41ODksMTc4LjE1NCwzNjQuODgxLDE4Mi40MzcsMzYxLjQ0NSwxODUuODYzeiIgZmlsbD0iIzkxREM1QSIvPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
+        }
+    }
+}
+
+#posting-add-poll {
+    .vote-change label {
+        line-height: 22px;
+        min-height: 21px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }
+}
+
+/*
+    UCP/MCP
+*/
+.section-ucp, .section-mcp {
+    .table-plain {
+        hr {
+            margin-bottom: 15px;
+        }
+    }
+}
+
+/* Progress bar / folder limits */
+.progress-label {
+    margin-right: 1em;
+}
+
+/* PM marking colours */
+.pm_message_reported_colour {
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+.pm_marked_colour,
+.pm_replied_colour,
+.pm_friend_colour,
+.pm_foe_colour {
+    padding: 0;
+    border-left: solid 5px transparent;
+}
+
+.pm-legend {
+    border-left-width: 10px;
+    border-left-style: solid;
+    border-right-width: 0;
+    margin-bottom: 5px;
+    padding-left: 8px;
+}
+
+.pm_message_reported_colour {
+    border-left-color: #BC2A4D;
+    border-right-color: #BC2A4D;
+}
+
+.pm_marked_colour {
+    border-color: #FF6600;
+}
+
+.pm_replied_colour {
+    border-color: #A9B8C2;
+}
+
+.pm_friend_colour {
+    border-color: #5D8FBD;
+}
+
+.pm_foe_colour {
+    border-color: #000000;
+}
+
+.friend-offline {
+    margin-bottom: 8px;// Slightly larger to allow for the buttons
+    clear: both;
+}
+
+/**
+ * Bootstrap/phpBB modal
+ **/
+#darkenwrapper {
+    display: none;
+    z-index: 17;
+}
+
+#darken {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.5;
+}
+
+.modal {
+    bottom: initial;
+    display: none;
+    left: initial;
+    position: fixed;
+    right: initial;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.modal .table-plain {
+    width: 450px;
+    margin: 0 auto;
+
+    @include box-shadow-helper(3);
+
+/*    @media screen and (max-width: $screen-sm-min) {
+        width: 320px;
+    }*/
+}
+
+.modal .content {
+    padding: 0 20px;
+}
+
+.modal dt {
+    float: left;
+    width: 3em;
+}
+
+.modal dd {
+    margin-left: 3em;
+}
+
+.modal textarea {
+    width: 80%;
+}
+
+
+/**
+ * plupload
+**/
+.attach-panel-multi {
+	display: none;
+	margin-bottom: 1em;
+}
+
+.file-list td {
+	vertical-align: middle;
+}
+
+.attach-name {
+	width: 50%;
+}
+
+.attach-comment {
+	width: 30%;
+}
+
+.attach-filesize {
+	width: 15%;
+}
+
+.attach-status {
+	width: 5%;
+}
+
+.attach-filesize, .attach-status {
+	text-align: center;
+}
+
+.attach-controls {
+	float: right;
+}
+
+.nojs .file-inline-bbcode {
+	display: none;
+}
+
+.file-total-progress {
+	height: 2px;
+	display: block;
+	position: relative;
+	margin: 4px -10px -6px -10px;
+}
+
+.file-progress {
+	background-color: #CCCCCC;
+	display:inline-block;
+	height: 8px;
+	width: 50px;
+}
+
+.file-progress-bar, .file-total-progress-bar {
+	background-color: green;
+	display: block;
+	height: 100%;
+	width: 0;
+}
+
+.file-status.file-working {
+	background: url('./images/plupload/throbber.gif');
+}
+
+.file-status.file-uploaded {
+	background: url('./images/plupload/done.gif');
+}
+
+.file-status.file-error {
+	background: url('./images/plupload/error.gif');
+}
+
+.file-status {
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+}
+
+.file-name {
+	max-width: 65%;
+	vertical-align: bottom;
+}
+

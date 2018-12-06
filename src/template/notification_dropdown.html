@@ -1,0 +1,30 @@
+
+											<div class="dropdown-header">{L_NOTIFICATIONS}</div>
+											<div class="dropdown-divider"></div>
+											<!-- IF not .notifications -->
+											<div class="no_notifications">{L_NO_NOTIFICATIONS}</div>
+											<!-- ENDIF -->
+											<!-- BEGIN notifications -->
+											<dl>
+												<dt><!-- IF notifications.AVATAR -->{notifications.AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF --></dt>
+												<dd>
+													<!-- IF notifications.URL -->
+													<a class="notification-block" href="<!-- IF notifications.UNREAD -->{notifications.U_MARK_READ}" data-real-url="{notifications.URL}<!-- ELSE -->{notifications.URL}<!-- ENDIF -->">
+													<!-- ENDIF -->
+													<span class="notification-title">{notifications.FORMATTED_TITLE} {notifications.REFERENCE} {notifications.FORUM} {notifications.REASON}</span>
+													<!-- IF notifications.URL --></a><!-- ENDIF -->
+													<span class="notification-time">
+														<!-- IF notifications.UNREAD --><span class="pull-right"><a href="{notifications.U_MARK_READ}" class="fa fa-check mark-read" data-ajax="notification.mark_read" title="{L_MARK_READ}"></a></span><!-- ENDIF -->
+														{notifications.TIME}
+													</span>
+												</dd>
+											</dl>
+											<!-- END notifications -->
+											<div class="dropdown-divider"></div>
+
+											<span class="pull-right">
+												<a href="{U_NOTIFICATION_SETTINGS}">{L_SETTINGS}</a>
+												<!-- IF NOTIFICATIONS_COUNT --> &bull; <a href="{U_MARK_ALL_NOTIFICATIONS}" data-ajax="notification.mark_all_read">{L_MARK_ALL_READ}</a><!-- ENDIF -->
+											</span>
+											<a href="{U_VIEW_ALL_NOTIFICATIONS}"><span>{L_SEE_ALL}</span></a>
+

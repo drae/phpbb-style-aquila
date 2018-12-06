@@ -1,0 +1,258 @@
+/**
+*
+* WoW Class colours
+*
+**/
+
+// Username coloured is a phpBB general thing but we use colours for classes
+// so we'll just abuse it here
+.username-coloured {
+    border: 0;
+
+    &:hover {
+        border: 0;
+    }
+}
+
+.deathknight {
+    color: #c41e3b;
+
+    a {
+        border-color: #c41e3b;
+        color: #c41e3b;
+
+        &:hover {
+            color: lighten(#c41e3b, 15%);
+            border-color: lighten(#c41e3b, 15%);
+        }
+    }
+}
+
+.demonhunter {
+    color: #A330C9;
+
+    a {
+        border-color: #A330C9;
+        color: #A330C9;
+
+        &:hover {
+            color: lighten(#A330C9, 15%);
+            border-color: lighten(#A330C9, 15%);
+        }
+    }
+}
+
+.druid {
+    color: #ff7d0a;
+
+    a {
+        border-color: #ff7d0a;
+        color: #ff7d0a;
+
+        &:hover {
+            color: lighten(#ff7d0a, 15%);
+            border-color: lighten(#ff7d0a, 15%);
+        }
+    }
+}
+
+.hunter {
+    color: #abd473;
+
+    a {
+        border-color: #abd473;
+        color: #abd473;
+
+        &:hover {
+            color: lighten(#abd473, 15%);
+            border-color: lighten(#abd473, 15%);
+        }
+    }
+}
+
+.mage {
+    color: #69ccf0;
+
+    a {
+        border-color: #69ccf0;
+        color: #69ccf0;
+
+        &:hover {
+            color: lighten(#69ccf0, 15%);
+            border-color: lighten(#69ccf0, 15%);
+        }
+    }
+}
+
+.monk {
+    color: #008467;
+
+    a {
+        border-color: #008467;
+        color: #008467;
+
+        &:hover {
+            color: lighten(#008467, 15%);
+            border-color: lighten(#008467, 15%);
+        }
+    }
+}
+
+.paladin {
+    color: #ffaedd;
+
+    a {
+        border-color: #ffaedd;
+        color: #ffaedd;
+
+        &:hover {
+            color: lighten(#ffaedd, 15%);
+            border-color: lighten(#ffaedd, 15%);
+        }
+    }
+}
+
+.priest {
+    color: #ffffff;
+
+    a {
+        border-color: #ffffff;
+        color: #ffffff;
+
+        &:hover {
+            color: lighten(#efefef, 15%);
+            border-color: lighten(#efefef, 15%);
+        }
+    }
+}
+
+.rogue {
+    color: #fff569;
+
+    a {
+        border-color: #fff569;
+        color: #fff569;
+
+        &:hover {
+            color: lighten(#fff569, 15%);
+            border-color: lighten(#fff569, 15%);
+        }
+    }
+}
+
+.shaman {
+    color: #2459ff;
+
+    a {
+        border-color: #2459ff;
+        color: #2459ff;
+
+        &:hover {
+            color: lighten(#2459ff, 15%);
+            border-color: lighten(#2459ff, 15%);
+        }
+    }
+}
+
+.warlock {
+    color: #9482c9;
+
+    a {
+        border-color: #9482c9;
+        color: #9482c9;
+
+        &:hover {
+            color: lighten(#9482c9, 15%);
+            border-color: lighten(#9482c9, 15%);
+        }
+    }
+}
+
+.warrior {
+    color: #c79c6e;
+
+    a {
+        border-color: #c79c6e;
+        color: #c79c6e;
+
+        &:hover {
+            color: lighten(#c79c6e, 15%);
+            border-color: lighten(#c79c6e, 15%);
+        }
+    }
+}
+
+/* Block style - coloured background */
+.class {
+    color: #efefef;
+    display: block;
+    padding: 8px;
+
+    &.deathknight {
+        background-color: #A91B33;
+    }
+
+    &.demonhunter {
+        background-color: #A330C9;
+    }
+
+    &.druid {
+        background-color: #C45F11;
+    }
+
+    &.hunter {
+        background-color: #596A4A;
+    }
+
+    &.mage {
+        background-color: #46ADD8;
+    }
+
+    &.monk {
+        background-color: #558a84;
+    }
+
+    &.paladin {
+        background-color: #ffaedd;
+    }
+
+    &.priest {
+        background-color: #efefef;
+        color: #555;
+
+        a {
+            color: #555;
+        }
+    }
+
+    &.rogue {
+        background-color: #D69435;
+    }
+
+    &.shaman {
+        background-color: #354AFF;
+    }
+
+    &.warlock {
+        background-color: #B629A4;
+    }
+
+    &.warrior {
+        background-color: #734F3A;
+    }
+
+    /* Highlight on mouseover */
+    &:hover {
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 100%);
+    }
+
+    a {
+        border-bottom: dotted 1px;
+        text-decoration: none;
+
+        &:hover {
+            border-bottom: solid 1px;
+        }
+    }
+
+}

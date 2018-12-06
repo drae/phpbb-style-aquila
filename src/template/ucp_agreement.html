@@ -1,0 +1,45 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE breadcrumbs.html -->
+
+			<div class="actionbar"></div>
+
+			<div class="table-plain info">
+				<div class="row">
+					<div class="col-12">
+
+						<!-- IF S_SHOW_COPPA or S_REGISTRATION -->
+						<form class="form-horizontal" id="agreement" method="post" action="{S_UCP_ACTION}">
+
+							<h2>{SITENAME} - {L_REGISTRATION}</h2>
+
+							<p><!-- IF S_SHOW_COPPA -->{L_COPPA_BIRTHDAY}<!-- ELSE -->{L_TERMS_OF_USE}<!-- ENDIF --></p>
+
+							<!-- IF S_SHOW_COPPA -->
+							<strong class="center"><a href="{U_COPPA_NO}" class="button1">{L_COPPA_NO}</a></strong>&nbsp; <a href="{U_COPPA_YES}" class="button2">{L_COPPA_YES}</a>
+							<!-- ELSE -->
+							<div class="text-center">
+								<button class="btn btn-primary btn-large" type="submit" id="agreed" name="agreed" value="{L_YES}">{L_AGREE}</button>
+								&nbsp;
+								<button class="btn btn-primary btn-large" type="submit" id="not_agreed" name="not_agreed" value="0">{L_NOT_AGREE}</button>
+							</div>
+							<!-- ENDIF -->
+							{S_HIDDEN_FIELDS}
+							{S_FORM_TOKEN}
+
+						</form>
+						<!-- ELSEIF S_AGREEMENT -->
+
+						<h2>{SITENAME} - {AGREEMENT_TITLE}</h2>
+
+						<p>{AGREEMENT_TEXT}</p>
+
+						<p class="text-center"><a href="{U_BACK}" class="button2">{L_BACK}</a></p>
+						<!-- ENDIF -->
+					</div>
+
+				</div>
+			</div>
+
+			<div class="actionbar"></div>
+
+<!-- INCLUDE overall_footer.html -->

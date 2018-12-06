@@ -1,0 +1,166 @@
+//
+// Navbars
+// --------------------------------------------------
+
+
+// Wrapper and base class
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+.navbar {
+    font-family: Asul, Geneva, Arial, Helvetica, sans-serif;
+    left: 0;
+    padding-top: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2000;
+
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .dropdown-item-pm {
+        position: relative;
+
+        .notify-unread {
+            font-family: 'Droid Sans Mono', monospace;
+            position: absolute;
+            right: 0;
+            top: 3px;
+            padding: 5px 7px;
+            border-radius: 3px;
+            background-color: #a00;
+            display: inline-block;
+            line-height: 1em;
+        }
+    }
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row; // cannot use `inherit` to get the `.navbar`s value
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+
+    .nav-link {
+        padding: 1rem;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        float: none;
+    }
+
+    .dropdown-menu-right {
+        right: 0;
+        left: auto; // Reset the default from `.dropdown-menu`
+    }
+
+    .show > .nav-link,
+    .nav-link.show {
+        background-color: #333;
+    }
+
+    .active > .nav-link,
+    .nav-link.active {
+        background-color: #3f704d;
+    }
+}
+
+.navbar-collapse {
+    flex-basis: 100%;
+    align-items: center;
+    order: initial;
+
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        @include media-breakpoint-up('md') {
+            flex-basis: auto;
+            align-items: left;
+            order: 1;
+
+            .navbar-nav {
+                flex-direction: row;
+            }
+        }
+    }
+}
+
+.navbar-no-collapse {
+    font-family: $font-family-sans-serif;
+    order: initial;
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        @include media-breakpoint-up('md') {
+            order: 2;
+        }
+    }
+}
+
+.navbar-expand {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        &#{$infix} {
+            @include media-breakpoint-up($next) {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+
+                .navbar-nav {
+                    flex-direction: row;
+
+                    .nav-link {
+                        padding-right: 0.75rem;
+                        padding-left: 0.75rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-toggler {
+    color: $navbar-dark-color;
+    border-color: $navbar-dark-toggler-border-color;
+}
+
+.navbar-toggler-icon {
+    background-image: $navbar-dark-toggler-icon-bg;
+}
+
+/*
+    Overrides when on index since navbar floats till landing page
+    is scrolled past
+*/
+.section-index {
+    .navbar {
+        padding: 35px 0;
+        background-color: transparent;
+        box-shadow: none;
+        transition: padding 0.2s;
+        transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+
+        &.at-top {
+    //        background-color: #000;
+    //        @include box-shadow-helper(2);
+        }
+
+        &.at-navbar {
+            padding: 10px;
+        }
+    }
+}

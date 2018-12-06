@@ -1,0 +1,180 @@
+				<h3>{L_POST_REVIEW}</h3>
+
+				<p>{L_POST_REVIEW_EXPLAIN}</p>
+
+				<!-- BEGIN post_review_row -->
+				<article id="p{post_review_row.POST_ID}" class="table posts has-profile<!-- IF post_review_row.S_UNREAD_POST --> unreadpost<!-- ENDIF --><!-- IF post_review_row.S_POST_REPORTED --> reported<!-- ENDIF --><!-- IF post_review_row.S_ONLINE --> online<!-- ENDIF -->">
+					<!-- IF not post_review_row.S_IGNORE_POST -->
+
+					<!-- IF not post_review_row.S_IGNORE_POST -->
+					<div class="postprofile">
+						<div class="author-info">
+							<!-- IF post_review_row.POSTER_AVATAR -->
+							<div class="avatar-container">
+								<!-- EVENT viewtopic_body_avatar_before -->
+								<!-- IF post_review_row.U_POST_AUTHOR -->
+								<a class="avatar" data-profile-card="{post_review_row.POST_AUTHOR}" href="{post_review_row.U_POST_AUTHOR}">{post_review_row.POSTER_AVATAR}</a>
+								<!-- ELSE -->
+								<a data-profile-card="{post_review_row.POST_AUTHOR}" href="#" class="avatar">{post_review_row.POSTER_AVATAR}</a>
+								<!-- ENDIF -->
+								<!-- EVENT viewtopic_body_avatar_after -->
+							</div>
+							<!-- ENDIF -->
+
+							<h3><a data-profile-card="{post_review_row.POST_AUTHOR}" href="<!-- IF not post_review_row.U_POST_AUTHOR -->#<!-- ELSE -->{post_review_row.POST_AUTHOR}<!-- ENDIF -->"<!-- IF post_review_row.POST_AUTHOR_COLOUR --> class="username-coloured" style="color:{post_review_row.POST_AUTHOR_COLOUR}"<!-- ENDIF -->>{post_review_row.POST_AUTHOR}</a></h3>
+							<!-- EVENT viewtopic_body_post_author_after -->
+
+							<!-- EVENT viewtopic_body_post_review_row_rank_before -->
+							<!-- IF post_review_row.RANK_TITLE or post_review_row.RANK_IMG -->{post_review_row.RANK_TITLE}<!-- IF post_review_row.RANK_TITLE and post_review_row.RANK_IMG --><br /><!-- ENDIF -->{post_review_row.RANK_IMG}<br /><!-- ENDIF -->
+						</div>
+					</div>
+					<!-- ENDIF -->
+
+					<!-- IF post_review_row.S_IGNORE_POST -->
+					<div class="col-12 ignore">{post_review_row.L_IGNORE_POST}</div>
+					<!-- ELSE -->
+
+					<div class="postoutput">
+						<!-- IF post_review_row.S_POST_HIDDEN -->
+						<!-- IF post_review_row.S_POST_DELETED -->
+						<div class="ignore" id="post_hidden{post_review_row.POST_ID}">
+							{post_review_row.L_POST_DELETED_MESSAGE}<br />
+							{post_review_row.L_POST_DISPLAY}
+						</div>
+						<!-- ELSEIF post_review_row.S_IGNORE_POST -->
+						<div class="ignore" id="post_hidden{post_review_row.POST_ID}">
+							{post_review_row.L_IGNORE_POST}<br />
+							{post_review_row.L_POST_DISPLAY}
+						</div>
+						<!-- ENDIF -->
+						<!-- ENDIF -->
+
+						<div id="post_content{post_review_row.POST_ID}" class="post-body"<!-- IF post_review_row.S_POST_HIDDEN --> style="display: none;"<!-- ENDIF -->>
+							<!-- DEFINE $SHOW_POST_BUTTONS = (post_review_row.U_EDIT or post_review_row.U_DELETE or post_review_row.U_REPORT or post_review_row.U_WARN or post_review_row.U_INFO or post_review_row.U_QUOTE) -->
+							<!-- EVENT viewtopic_body_post_buttons_list_before -->
+							<!-- IF not S_IS_BOT -->
+							<!-- IF $SHOW_POST_BUTTONS -->
+							<ul class="post-buttons list-inline" style="visibility: hidden">
+								<!-- EVENT viewtopic_body_post_buttons_before -->
+								<!-- IF post_review_row.U_EDIT -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_EDIT}" title="{L_EDIT_POST}">
+										<i class="fa fa-pencil fa-fw" aria-hidden="true"></i><span class="sr-only">{L_BUTTON_EDIT}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- IF post_review_row.U_DELETE -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_DELETE}" title="{L_DELETE_POST}">
+										<i class="fa fa-times fa-fw" aria-hidden="true"></i><span class="sr-only">{L_DELETE_POST}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- IF post_review_row.U_REPORT -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_REPORT}" title="{L_REPORT_POST}">
+										<i class="fa fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{L_REPORT_POST}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- IF post_review_row.U_WARN -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_WARN}" title="{L_WARN_USER}" class="button button-icon-only">
+										<i class="fa fa-exclamation-triangle fa-fw" aria-hidden="true"></i><span class="sr-only">{L_WARN_USER}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- IF post_review_row.U_INFO -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_INFO}" title="{L_INFORMATION}">
+										<i class="fa fa-info fa-fw" aria-hidden="true"></i><span class="sr-only">{L_INFORMATION}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- IF post_review_row.U_QUOTE -->
+								<li>
+									<a class="btn btn-default btn-sm btn-icon-only" href="{post_review_row.U_QUOTE}" title="{L_REPLY_WITH_QUOTE}">
+										<i class="fa fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">{L_QUOTE}</span>
+									</a>
+								</li>
+								<!-- ENDIF -->
+								<!-- EVENT viewtopic_body_post_buttons_after -->
+							</ul>
+							<!-- ENDIF -->
+							<!-- ENDIF -->
+							<!-- ENDIF -->
+
+							<!-- EVENT viewtopic_body_post_buttons_list_after -->
+
+							<!-- EVENT viewtopic_body_post_review_row_post_details_before -->
+							<!-- IF post_review_row.POST_SUBJECT -->
+							<h4 <!-- IF post_review_row.S_FIRST_ROW -->class="first"<!-- ENDIF -->><!-- IF post_review_row.POST_ICON_IMG --><img src="{T_ICONS_PATH}{post_review_row.POST_ICON_IMG}" width="{post_review_row.POST_ICON_IMG_WIDTH}" height="{post_review_row.POST_ICON_IMG_HEIGHT}" alt="{post_review_row.POST_ICON_IMG_ALT}" title="{post_review_row.POST_ICON_IMG_ALT}" /> <!-- ENDIF --><a href="#p{post_review_row.POST_ID}">{post_review_row.POST_SUBJECT}</a></h4>
+							<!-- ENDIF -->
+
+							<p class="post-author">
+								<!-- IF S_IS_BOT -->
+								<span><i class="fa fa-file fa-fw fa-md" aria-hidden="true"></i><span class="sr-only">{post_review_row.MINI_POST}</span></span>
+								<!-- ELSE -->
+								<a href="{post_review_row.U_MINI_POST}" title="{post_review_row.MINI_POST}">
+								<i class="fa fa-file fa-fw fa-md" aria-hidden="true"></i><span class="sr-only">{post_review_row.MINI_POST}</span>
+								</a>
+								<!-- ENDIF -->
+								{post_review_row.POST_DATE}
+							</p>
+							<!-- EVENT viewtopic_body_post_review_row_post_details_after -->
+
+							<!-- IF post_review_row.S_POST_UNAPPROVED -->
+							<form method="post" class="mcp_approve" action="{post_review_row.U_APPROVE_ACTION}">
+								<p class="post-notice unapproved">
+									<strong>{L_POST_UNAPPROVED_ACTION}</strong>
+									<input class="btn btn-default btn-sm" type="submit" value="{L_DISAPPROVE}" name="action[disapprove]" />
+									<input class="btn btn-default btn-sm" type="submit" value="{L_APPROVE}" name="action[approve]" />
+									<input type="hidden" name="post_id_list[]" value="{post_review_row.POST_ID}" />
+									{S_FORM_TOKEN}
+								</p>
+							</form>
+							<!-- ELSEIF post_review_row.S_POST_DELETED -->
+							<form method="post" class="mcp_approve" action="{post_review_row.U_APPROVE_ACTION}">
+								<p class="post-notice deleted">
+									<strong>{L_POST_DELETED_ACTION}</strong>
+									<!-- IF post_review_row.S_DELETE_PERMANENT -->
+										<input class="btn btn-default btn-sm" type="submit" value="{L_DELETE}" name="action[delete]" />
+									<!-- ENDIF -->
+									<input class="btn btn-default btn-sm" type="submit" value="{L_RESTORE}" name="action[restore]" />
+									<input type="hidden" name="post_id_list[]" value="{post_review_row.POST_ID}" />
+									{S_FORM_TOKEN}
+								</p>
+							</form>
+							<!-- ENDIF -->
+
+							<!-- IF post_review_row.S_POST_REPORTED -->
+							<p class="post-notice reported">
+								<a href="{post_review_row.U_MCP_REPORT}"><strong>{L_POST_REPORTED}</strong></a>
+							</p>
+							<!-- ENDIF -->
+
+							<div class="post-content">{post_review_row.MESSAGE}</div>
+
+							<!-- IF post_review_row.DELETED_MESSAGE or post_review_row.DELETE_REASON -->
+							<div class="notice post_deleted_msg">
+								{post_review_row.DELETED_MESSAGE}
+								<!-- IF post_review_row.DELETE_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{post_review_row.DELETE_REASON}</em><!-- ENDIF -->
+							</div>
+						<!-- ELSEIF post_review_row.EDITED_MESSAGE or post_review_row.EDIT_REASON -->
+							<div class="notice">
+								{post_review_row.EDITED_MESSAGE}
+								<!-- IF post_review_row.EDIT_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{post_review_row.EDIT_REASON}</em><!-- ENDIF -->
+							</div>
+						<!-- ENDIF -->
+
+						<!-- IF post_review_row.BUMPED_MESSAGE --><div class="notice">{post_review_row.BUMPED_MESSAGE}</div><!-- ENDIF -->
+						<!-- EVENT viewtopic_body_post_review_row_post_notices_after -->
+						<!-- IF post_review_row.SIGNATURE --><div id="sig{post_review_row.POST_ID}" class="signature">{post_review_row.SIGNATURE}</div><!-- ENDIF -->
+						<!-- EVENT viewtopic_body_post_review_row_post_content_footer -->
+						</div>
+					</div>
+				</article>
+
+				<div class="break"></div>
+				<!-- END post_review_row -->
+

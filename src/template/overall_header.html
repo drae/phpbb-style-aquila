@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#000000" />
+	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+	<meta http-equiv="content-type" content="text/html" />
+	<meta http-equiv="content-style-type" content="text/css" />
+	<meta http-equiv="content-language" content="{S_USER_LANG}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<!-- Additional meta data -->
+	{META}
+
+	<title><!-- IF UNREAD_NOTIFICATIONS_COUNT -->({UNREAD_NOTIFICATIONS_COUNT}) <!-- ENDIF --><!-- IF not S_VIEWTOPIC and not S_VIEWFORUM -->{SITENAME} - <!-- ENDIF --><!-- IF S_IN_MCP -->{L_MCP} - <!-- ELSEIF S_IN_UCP -->{L_UCP} - <!-- ENDIF -->{PAGE_TITLE}<!-- IF S_VIEWTOPIC or S_VIEWFORUM --> - {SITENAME}<!-- ENDIF --></title>
+
+	<!-- Core stylesheets -->
+	<link href="/styles/aquila/theme/stylesheet.min.css" rel="stylesheet" type="text/css" media="screen, projection" />
+	<link href="/styles/aquila/theme/vendor.min.css" rel="stylesheet" type="text/css" media="screen, projection" />
+
+	<!-- BEGIN extra_css -->
+	<link href="{extra_css.PATH}" rel="stylesheet" type="text/css" media="screen,projection" />
+	<!-- END extra_css -->
+
+	<!-- 3rd party vendor scripts-->
+	<script src="/styles/aquila/js/vendor.min.js"></script>
+
+	<!-- RSS feeds -->
+	<!-- IF S_ENABLE_FEEDS -->
+	<!-- IF S_ENABLE_FEEDS_OVERALL -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{U_FEED}" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_NEWS -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_NEWS}" href="{U_FEED}?mode=news" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUMS -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_ALL_FORUMS}" href="{U_FEED}?mode=forums" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_NEW}" href="{U_FEED}?mode=topics" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS_ACTIVE -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_ACTIVE}" href="{U_FEED}?mode=topics_active" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUM and S_FORUM_ID -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FORUM} - {FORUM_NAME}" href="{U_FEED}?f={S_FORUM_ID}" />
+	<!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPIC and S_TOPIC_ID -->
+	<link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_TOPIC} - {TOPIC_TITLE}" href="{U_FEED}?f={S_FORUM_ID}&amp;t={S_TOPIC_ID}" />
+	<!-- ENDIF -->
+	<!-- EVENT overall_header_feeds -->
+	<!-- ENDIF -->
+
+	<!-- IF U_CANONICAL -->
+	<link rel="canonical" href="{U_CANONICAL}" />
+	<!-- ENDIF -->
+
+	<!-- EVENT overall_header_head_append -->
+
+	{$STYLESHEETS}
+
+	<!-- EVENT overall_header_stylesheets_after -->
+</head>
+
+<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">
+
+	<header>
+		<svg class="starfield-gradient-non-index">
+			<defs>
+				<linearGradient id="alphaLinearMain" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="33%" stop-color="#ffffff" stop-opacity="100%" />
+					<stop offset="100%" stop-color="#000000" stop-opacity="0%" />
+				</linearGradient>
+
+				<mask id="MaskMain">
+					<rect x="0" y="0" width="100%" height="200" fill="url(#alphaLinearMain)"  />
+				</mask>
+			</defs>
+
+			<image href="/styles/aquila/theme/images/banner/starfield.jpg" x="0" y="0" width="100%" height="200" preserveAspectRatio="xMinYMin slice" mask="url(#MaskMain)"/>
+		</svg>
+
+		<nav class="navbar navbar-expand-md">
+			<div class="container">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="navbar-no-collapse">
+					<ul class="navbar-nav">
+						<!-- IF not S_USER_LOGGED_IN -->
+						<li class="nav-item"><a  class="nav-link" href="{U_FAQ}" title="{L_FAQ_EXPLAIN}">{L_FAQ}</a></li><!-- ENDIF -->
+						<!-- IF S_DISPLAY_SEARCH -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-lg fa-search"></i>
+							</a>
+							<div class="dropdown-menu" role="menu" aria-labelledby="navbarDropdownSearch">
+								<a class="dropdown-item" href="{U_SEARCH}" title="{L_ADVANCED SEARCH}">{L_SEARCH_ADV}</a>
+								<a class="dropdown-item" href="{U_SEARCH_NEW}">{L_NEW_POSTS}</a>
+								<a class="dropdown-item" href="{U_SEARCH_UNREAD}">{L_UNREAD_POSTS}</a>
+								<a class="dropdown-item" href="{U_SEARCH_ACTIVE_TOPICS}">{L_SEARCH_ACTIVE_TOPICS}</a>
+								<a class="dropdown-item" href="{U_SEARCH_UNANSWERED}">{L_SEARCH_UNANSWERED}</a>
+							</div>
+						</li>
+						<!-- ENDIF -->
+						<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownNotify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<i class="fa <!-- IF NOTIFICATIONS_COUNT <= 0 -->fa-bell-o<!-- ELSE -->fa-bell animated faa-ring<!-- ENDIF --> fa-lg"></i><!-- IF NOTIFICATIONS_COUNT --><span class="notify-unread">{NOTIFICATIONS_COUNT}</span><!-- ENDIF -->
+							</a>
+							<div class="dropdown-menu dropdown-menu-right wide notifications" role="menu" aria-labelledby="navbarDropdownNotify">
+									<!-- INCLUDE notification_dropdown.html -->
+							</div>
+						</li>
+						<li class="nav-item dropdown active" id="dropdown-ucp" role="presentation">
+							<a class="nav-link dropdown-toggle" href="{U_PROFILE}" title="{L_PROFILE}" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{S_USERNAME}</a>
+							<div class="dropdown-menu dropdown-menu-right wide profile" aria-labelledby="navbarDropdownProfile">
+								<div class="row">
+									<div class="col-4 nav-profile-avatar">
+										{CURRENT_USER_AVATAR}
+									</div>
+									<div class="col-8 nav-profile-menu">
+											<a class="dropdown-item" href="{U_LOGIN_LOGOUT}" title="{L_LOGOUT}" accesskey="l">{L_LOGOUT}</a>
+											<a class="dropdown-item dropdown-item-pm" href="{U_PRIVATEMSGS}" title="{L_PRIVATE_MESSAGES}">{L_PRIVATE_MESSAGES}
+												<!-- IF PRIVATE_MESSAGE_COUNT --><span class="notify-unread">{PRIVATE_MESSAGE_COUNT}</span><!-- ENDIF -->
+											</a>
+											<a class="dropdown-item" href="{U_OWN_PROFILE}" title="My Profile">Profile</a>
+											<a class="dropdown-item" href="{U_PROFILE}" title="{L_PROFILE}">Settings</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" href="{U_SEARCH_SELF}" title="My Posts">My posts</a>
+											<!-- IF U_ACP -->
+											<div class="dropdown-divider"></div>
+											<!-- IF U_RESTORE_PERMISSIONS --><a href="{U_RESTORE_PERMISSIONS}">{L_RESTORE_PERMISSIONS}</a><!-- ENDIF -->
+											<a class="dropdown-item" href="{U_ACP}">{L_ACP}</a>
+										<!-- ENDIF -->
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- ELSE -->
+						<li class="nav-item"><a class="nav-link" id="nav-register" href="{U_REGISTER}">{L_REGISTER}</a></li>
+						<li class="nav-item"><a class="nav-link" id="nav-login" href="{U_LOGIN_LOGOUT}" title="{L_LOGIN}" accesskey="l">{L_LOGIN}</a></li>
+						<!-- ENDIF -->
+					</ul>
+				</div>
+
+				<div class="collapse navbar-collapse navbar-menu" id="navbarSupportedContent">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="{U_INDEX}#page-top">{L_INDEX}</a></li>
+						<!-- EVENT overall_header_navigation_append -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<section class="landing">
+		<div class="site-logo"></div>
+
+		<a class="arrow-wrap" href="#page-news">
+			<span class="arrow"></span>
+		</a>
+	</section>
+
+	<!-- EVENT overall_header_body_before -->
+
+	<a id="page-top"></a>
+
+	<main>
+
+		<!-- EVENT overall_header_content_before -->

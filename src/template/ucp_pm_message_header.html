@@ -1,0 +1,74 @@
+						<h2>{L_TITLE}<!-- IF CUR_FOLDER_NAME -->{L_COLON} {CUR_FOLDER_NAME}<!-- ENDIF --></h2>
+
+						<!-- IF FOLDER_STATUS and FOLDER_MAX_MESSAGES neq 0 -->
+						<div class="progress-label">
+							{L_MESSAGES}:	{FOLDER_CUR_MESSAGES} / {FOLDER_MAX_MESSAGES}
+						</div>
+
+						<div class="progress">
+							<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{FOLDER_PERCENT}" aria-valuemin="0" aria-valuemax="{FOLDER_MAX_MESSAGES}" style="min-width: 2em;width: {FOLDER_PERCENT}%;">
+								{FOLDER_PERCENT}%
+							</div>
+						</div>
+						<!-- ENDIF -->
+
+						<form id="viewfolder" method="post" action="{S_PM_ACTION}">
+
+							<div class="actionbar">
+								<div class="row">
+									<div class="actionbar-items">
+										<!-- IF U_POST_REPLY_PM or U_POST_NEW_TOPIC or U_FORWARD_PM -->
+										<div class="button-group">
+											<!-- IF U_POST_REPLY_PM -->
+											<a title="{L_POST_REPLY_PM}" href="{U_POST_REPLY_PM}" class="btn btn-posting btn-large">
+												<i class="fa fa-reply fa-fw" aria-hidden="true"></i> <span>{L_BUTTON_PM_REPLY}</span>
+											</a>
+											<!-- ELSEIF U_POST_NEW_TOPIC -->
+											<a href="{U_POST_NEW_TOPIC}" accesskey="n" title="{L_UCP_PM_COMPOSE}" class="btn btn-posting btn-large">
+												<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span>{L_BUTTON_PM_NEW}</span>
+											</a>
+											<!-- ENDIF -->
+											<!-- IF U_FORWARD_PM -->
+											<a title="{L_POST_FORWARD_PM}" href="{U_FORWARD_PM}" class="btn btn-posting btn-large">
+												<i class="fa fa-mail-forward fa-fw" aria-hidden="true"></i> <span>{L_BUTTON_PM_FORWARD}</span>
+											</a>
+											<!-- ENDIF -->
+											<!-- IF U_POST_REPLY_PM and S_PM_RECIPIENTS gt 1 -->
+											<a title="{L_REPLY_TO_ALL}" href="{U_POST_REPLY_ALL}" class="btn btn-posting btn-large">
+												<i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span>{L_BUTTON_PM_REPLY_ALL}</span>
+											</a>
+											<!-- ENDIF -->
+										</div>
+										<!-- ENDIF -->
+
+										<div class="tools">
+											<div class="dropdown" id="dropdown-tools">
+												<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+													<i class="fa fa-cog"></i> Tools
+												</a>
+												<div class="dropdown-menu">
+													<!-- IF U_MARK_ALL -->
+													<a class="dropdown-item" href="{U_MARK_ALL}"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_PM_MARK_ALL_READ}</a>
+													<!-- ENDIF -->
+													<!-- IF U_PRINT_PM -->
+													<a class="dropdown-item" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print fa-fw" aria-hidden="true"></i> <span>{L_PRINT_PM}</span></a>
+													<!-- ENDIF -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- IF TOTAL_MESSAGES or S_VIEW_MESSAGE -->
+									<div class="pagination">
+										<!-- IF FOLDER_CUR_MESSAGES neq 0 -->
+										{TOTAL_MESSAGES}
+										<!-- IF .pagination -->
+											&nbsp;&bull;&nbsp;
+											<!-- INCLUDE pagination.html -->
+										<!-- ELSEIF PAGE_NUMBER -->
+										&nbsp;&bull;&nbsp;{PAGE_NUMBER}
+										<!-- ENDIF -->
+										<!-- ENDIF -->
+									</div>
+									<!-- ENDIF -->
+								</div>
+							</div>

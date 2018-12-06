@@ -1,0 +1,67 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE breadcrumbs.html -->
+
+			<ul id="ucp-tabs" class="nav nav-tabs ucp-tabs" role="tablist" aria-controls="ucp-panel">
+				<!-- BEGIN t_block1 -->
+				<li role="presentation"<!-- IF t_block1.S_SELECTED --> class="active"<!-- ENDIF -->"><a href="{t_block1.U_TITLE}">{t_block1.L_TITLE}</a></li>
+				<!-- END t_block1 -->
+			</ul>
+
+			<div class="table-plain response bordered">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-3">
+							<div class="nav-pills-container">
+								<ul class="nav nav-pills nav-stacked">
+									<!-- BEGIN t_block2 -->
+									<!-- IF t_block2.S_SELECTED -->
+									<li id="active-subsection" class="active"><a href="{t_block2.U_TITLE}"><span>{t_block2.L_TITLE}</span></a></li>
+									<!-- ELSE -->
+									<li><a href="{t_block2.U_TITLE}"><span>{t_block2.L_TITLE}</span></a></li>
+									<!-- ENDIF -->
+									<!-- END t_block2 -->
+								</ul>
+							</div>
+						</div>
+
+						<div class="col-sm-9">
+
+							<!-- IF MESSAGE or CONFIRM_MESSAGE -->
+							<div id="cp-main" class="mcp-main">
+								<!-- IF MESSAGE -->
+								<div class="content">
+									<h2 style="font: 26px 'Hoefler Text', Garamond, Times New Roman, Times, serif;font-weight:400;padding:0 8px 8px 0;margin:0">{L_MESSAGE}</h2>
+
+									<div class="error">
+										<p>{MESSAGE}</p>
+									</div>
+
+									<p><!-- BEGIN return_links -->{return_links.MESSAGE_LINK}<br /><br /><!-- END return_links --></p>
+								</div>
+								<!-- ENDIF -->
+
+								<!-- IF CONFIRM_MESSAGE -->
+								<form id="confirm" method="post" action="{S_CONFIRM_ACTION}"{S_FORM_ENCTYPE}>
+									<div class="content">
+										<h2 style="font: 26px 'Hoefler Text', Garamond, Times New Roman, Times, serif;font-weight:400;padding:0 8px 8px 0;margin:0">{L_PLEASE_CONFIRM}</h2>
+										<p>{CONFIRM_MESSAGE}</p>
+
+										<fieldset class="submit-buttons">
+											<button type="submit" value="1" name="submit" id="submit" value="1" class="ui-button btn1">
+												<span>
+													<span>{L_YES}</span>
+												</span>
+											</button>
+											&nbsp;
+											<button type="cancel" class="ui-button btn1">
+												<span>
+													<span>{L_NO}</span>
+												</span>
+											</button>
+											{S_HIDDEN_FIELDS}
+										</fieldset>
+									</div>
+								</form>
+								<!-- ENDIF -->
+							</div>
+							<!-- ENDIF -->

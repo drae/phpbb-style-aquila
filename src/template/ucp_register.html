@@ -1,0 +1,189 @@
+<!-- INCLUDE overall_header.html -->
+<!-- INCLUDE breadcrumbs.html -->
+
+			<div class="actionbar"></div>
+
+			<script type="text/javascript">
+			// <![CDATA[
+				/**
+				* Change language
+				*/
+				function change_language(lang_iso)
+				{
+					document.cookie = '{COOKIE_NAME}_lang=' + lang_iso + '; path={COOKIE_PATH}';
+					document.forms['register'].change_lang.value = lang_iso;
+					document.forms['register'].submit.click();
+				}
+			// ]]>
+			</script>
+
+			<div class="table-plain info">
+				<div class="row">
+					<div class="col-12">
+						<form class="form-horizontal" id="register" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+							<h2>{SITENAME} - {L_REGISTRATION}</h2>
+
+							<!-- IF L_REG_COND -->
+							<p>{L_REG_COND}</p>
+							<!-- ENDIF -->
+
+							<!-- IF ERROR -->
+							<div class="error">
+								<p>{ERROR}</p>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- EVENT ucp_register_options_before -->
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="bday_day">{L_LANGUAGE}{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<label for="lang"><select class="form-control" name="lang" id="lang" onchange="change_language(this.value); return false;" tabindex="6" title="{L_LANGUAGE}">{S_LANG_OPTIONS}</select></label>
+								</div>
+							</div>
+
+							<!-- INCLUDE timezone_option.html -->
+
+							<!-- EVENT ucp_register_credentials_before -->
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="username">{L_USERNAME}<sup>#</sup>{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<input class="form-control" type="text" name="username" id="username" size="30" value="{USERNAME}" title="{L_USERNAME}" />
+									<span class="help-block"># {L_USERNAME_EXPLAIN}</span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="email">{L_EMAIL_ADDRESS}{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<input class="form-control" type="email" name="email" id="email" size="30" maxlength="100" value="{EMAIL}" title="{L_EMAIL_ADDRESS}" autocomplete="off" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="new_password">{L_NEW_PASSWORD}<sup>#</sup>{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<input class="form-control" type="password" name="new_password" id="new_password" size="30" maxlength="255" value="{NEW_PASSWORD}" title="{L_CHANGE_PASSWORD}" autocomplete="off" />
+									<div class="password-strength-warning" style="display:inline-block;margin-left:3rem" class="control-label"></div>
+									<div style="height:4px;background-color:white;width:0px;" class="password-strength"><div style="height:100%"></div></div>
+									<span class="help-block"># {L_PASSWORD_EXPLAIN}</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="password_confirm">{L_CONFIRM_PASSWORD}<sup>#</sup>{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<input class="form-control" type="password" name="password_confirm" id="password_confirm" size="30" maxlength="255" value="{PASSWORD_CONFIRM}" title="{L_CONFIRM_PASSWORD}" autocomplete="off" />
+									<span class="help-block"># {L_CONFIRM_PASSWORD_EXPLAIN}</span>
+								</div>
+							</div>
+
+							<!-- EVENT ucp_register_credentials_after -->
+
+							<!-- EVENT ucp_register_profile_fields_before -->
+							<!-- IF .profile_fields -->
+							<hr />
+
+							<p class="text-center">{L_ITEMS_REQUIRED}</p>
+
+							<!-- BEGIN profile_fields -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label"<!-- IF profile_fields.FIELD_ID --> for="{profile_fields.FIELD_ID}"<!-- ENDIF -->>{profile_fields.LANG_NAME}<!-- IF profile_fields.LANG_EXPLAIN --><sup>#</sup><!-- ENDIF -->{L_COLON}<!-- IF profile_fields.S_REQUIRED --> *<!-- ENDIF --></label>
+								<div class="col-sm-9 form-inline">
+									{profile_fields.FIELD}
+									<!-- IF profile_fields.LANG_EXPLAIN --><span class="help-block"># {profile_fields.LANG_EXPLAIN}</span><!-- ENDIF -->
+									<!-- IF profile_fields.ERROR --><br /><span class="error">{profile_fields.ERROR}</span><!-- ENDIF -->
+								</div>
+							</div>
+							<!-- END profile_fields -->
+							<!-- ENDIF -->
+
+							<!-- EVENT ucp_register_profile_fields_after -->
+
+							<!-- IF CAPTCHA_TEMPLATE -->
+							<hr />
+
+							<!-- DEFINE $CAPTCHA_TAB_INDEX = 8 -->
+							<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+							<!-- ENDIF -->
+
+							<!-- IF S_COPPA -->
+							<h4>{L_COPPA_COMPLIANCE}</h4>
+
+							<p>{L_COPPA_EXPLAIN}</p>
+							<!-- ENDIF -->
+
+							<div class="text-center">
+								<input type="submit" name="submit" value="{L_SUBMIT}" class="btn btn-primary btn-lg" /> &nbsp;
+								<input type="reset" value="{L_RESET}" name="reset" class="btn btn-primary btn-lg" />
+							</div>
+
+							{S_HIDDEN_FIELDS}
+							{S_FORM_TOKEN}
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<script>
+			//<![CDATA[
+				var r, _listener, last_q, last_username, last_email;
+				var colors = ['red', 'brown', 'orange', 'yellow', 'green'];
+
+				(function() {
+					var ZXCVBN_SRC = '/styles/aquila/js/zxcvbn.js';
+
+					var async_load = function() {
+						var first, s;
+						s = document.createElement('script');
+						s.src = ZXCVBN_SRC;
+						s.type = 'text/javascript';
+						s.async = true;
+						first = document.getElementsByTagName('script')[0];
+						return first.parentNode.insertBefore(s, first);
+					};
+
+					if (window.attachEvent != null) {
+						window.attachEvent('onload', async_load);
+					} else {
+						window.addEventListener('load', async_load, false);
+					}
+				}).call(this);
+
+				$(document).ready(function() {
+					$('.password-strength').css({ width: $('input[name=new_password]').css('width') });
+
+					_listener = function() {
+						var current, currentUsername, currentEmail;
+
+						current = $('input[name=new_password]').val();
+						currentUsername = $('input[name=username]').val();
+						currentEmail = $('input[name=email]').val();
+
+						if (!current) {
+							$('.password-strength div').css( {width: '0%'} );
+							$('.password-strength-warning').text('');
+							return;
+						}
+
+						if (current !== last_q || currentUsername !== last_username || currentEmail !== last_email) {
+							last_q = current;
+							last_username = currentUsername;
+							last_email = currentEmail;
+
+							r = zxcvbn(current, [ $('input[name=username]').val(), $('input[name=email]').val() ]);
+
+							$('.password-strength div').css( {width: ((r.score + 1)/ 5 * 100) + '%', backgroundColor: colors[r.score]} );
+							$('.password-strength-warning').text(r.feedback.warning);
+
+						}
+					}
+					return setInterval(_listener, 100);
+				});
+			//]]>
+			</script>
+
+			<div class="actionbar"></div>
+
+<!-- INCLUDE overall_footer.html -->

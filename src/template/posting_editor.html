@@ -1,0 +1,190 @@
+
+								<!-- IF ERROR -->
+								<div class="alert alert-danger">
+									<p>{ERROR}</p>
+								</div>
+								<!-- ENDIF -->
+
+								<!-- IF not S_PRIVMSGS and S_DISPLAY_USERNAME -->
+								<div class="form-group">
+									<label class="control-label" for="username">{L_USERNAME}{L_COLON}</label>
+									<input class="form-control" type="text" tabindex="1" name="username" id="username" title="{L_USERNAME}" value="{USERNAME}" placeholder="{L_USERNAME}"/>
+								</div>
+								<!-- ENDIF -->
+
+								<!-- EVENT posting_editor_subject_before -->
+
+								<!-- IF S_POST_ACTION or S_PRIVMSGS or S_EDIT_DRAFT -->
+								<div class="form-group">
+									<label class="control-label" for="subject">{L_SUBJECT}{L_COLON}</label>
+									<input class="form-control" type="text" tabindex="1" name="subject" id="subject" maxlength="<!-- IF S_NEW_MESSAGE -->60<!-- ELSE -->64<!-- ENDIF -->" title="{L_SUBJECT}" value="{SUBJECT}" placeholder="{L_SUBJECT}" />
+								</div>
+
+								<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+									<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
+									<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+								<!-- ENDIF -->
+								<!-- ENDIF -->
+
+								<!-- EVENT posting_editor_subject_after -->
+
+								<!-- EVENT posting_editor_message_before -->
+
+								<div class="form-group">
+									<label for="message">{L_MESSAGE}:</label>
+									<div id="message-box">
+										<!-- INCLUDE posting_buttons.html -->
+
+										<textarea class="form-control" rows="15"<!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT --> name="signature" id="signature"<!-- ELSE --> name="message" id="message"<!-- ENDIF --> tabindex="4">{MESSAGE}{DRAFT_MESSAGE}{SIGNATURE}</textarea>
+
+										<!-- IF L_SIGNATURE_EXPLAIN -->
+										<span class="help-block">{L_SIGNATURE_EXPLAIN}</span>
+										<!-- ENDIF -->
+									</div>
+								</div>
+
+								<!-- EVENT posting_editor_message_after -->
+
+								<!-- IF S_EDIT_REASON -->
+								<div class="form-group">
+									<label class="control-label" for="subject">{L_EDIT_REASON}{L_COLON}</label>
+									<input class="form-control" type="text" tabindex="1" name="edit_reason" id="edit_reason" value="{EDIT_REASON}" title="{L_EDIT_REASON}" placeholder="{L_EDIT_REASON}"/>
+								</div>
+								<!-- ENDIF -->
+
+								<!-- IF $EXTRA_POSTING_OPTIONS eq 1 -->
+
+								<!-- IF not S_SHOW_DRAFTS and not $SIG_EDIT eq 1 -->
+								<ul id="posting-tabs" class="nav nav-tabs posting-tabs" role="tablist" aria-controls="options-panel">
+									<li role="presentation" class="nav-item"><a class="nav-link active" href="#posting-options" data-toggle="tab">{L_OPTIONS}</a></li>
+									<!-- IF S_SHOW_ATTACH_BOX -->
+									<li class="nav-item" role="presentation"><a class="nav-link" href="#attach-panel" data-toggle="tab">{L_ATTACHMENTS} <strong id="file-total-progress" class="file-total-progress"><strong id="file-total-progress-bar" class="file-total-progress-bar"></strong></strong></a></li>
+									<!-- ENDIF -->
+									<!-- IF S_SHOW_POLL_BOX or S_POLL_DELETE -->
+									<li class="nav-item" role="presentation"><a class="nav-link" href="#posting-add-poll" data-toggle="tab">{L_ADD_POLL}</a></li>
+									<!-- ENDIF -->
+									<!-- EVENT posting_editor_add_panel_tab -->
+								</ul>
+								<!-- ENDIF -->
+
+								<div class="tab-content">
+									<!-- IF not S_SHOW_DRAFTS and not $SIG_EDIT eq 1 -->
+									<div id="posting-options" role="tabpanel" class="tab-pane fade show active">
+										<!-- IF S_BBCODE_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="disable_bbcode" id="disable_bbcode"{S_BBCODE_CHECKED}>
+												<label class="tgl-btn mr-2" for="disable_bbcode"></label>
+												{L_DISABLE_BBCODE}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF S_SMILIES_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="disable_smilies" id="disable_smilies"{S_SMILIES_CHECKED}>
+												<label class="tgl-btn mr-2" for="disable_smilies"></label>
+												{L_DISABLE_SMILIES}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF S_NOTIFY_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="notify" id="notify"{S_NOTIFY_CHECKED}>
+												<label class="tgl-btn mr-2" for="notify"></label>
+												{L_NOTIFY_REPLY}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF S_LOCK_TOPIC_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="lock_topic" id="lock_topic"{S_LOCK_TOPIC_CHECKED}>
+												<label class="tgl-btn mr-2" for="lock_topic"></label>
+												{L_LOCK_TOPIC}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF S_LOCK_POST_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="lock_post" id="lock_post"{S_LOCK_POST_CHECKED}>
+												<label class="tgl-btn mr-2" for="lock_post"></label>
+												{L_LOCK_POST}
+											</div>
+										</div>
+										<!-- ENDIF -->
+
+										<!-- IF S_TYPE_TOGGLE -->
+										<div class="form-check">
+											<div class="row">
+												<label class="col-auto"><!-- IF S_EDIT_POST -->{L_CHANGE_TOPIC_TO}<!-- ELSE -->{L_POST_TOPIC_AS}<!-- ENDIF -->{L_COLON}</label>
+												<div class="col-sm-9">
+													<!-- BEGIN topic_type -->
+													<label class="form-check-label mr-2">
+														<input class="form-check-input" type="radio" name="topic_type" id="topic_type-{topic_type.VALUE}" value="{topic_type.VALUE}"{topic_type.S_CHECKED} /> {topic_type.L_TOPIC_TYPE}
+													</label>
+													<!-- END topic_type -->
+												</div>
+											</div>
+										</div>
+										<!-- ENDIF -->
+
+										<!-- IF S_TOPIC_TYPE_ANNOUNCE or S_TOPIC_TYPE_STICKY -->
+										<div class="form-inline">
+											<label class="mr-2" for="topic_time_limit">{L_STICK_TOPIC_FOR}{L_COLON}</label>
+											<div class="input-group mb-0">
+												<input class="form-control" type="number" min="0" max="999" name="topic_time_limit" id="topic_time_limit" size="3" maxlength="3" value="{TOPIC_TIME_LIMIT}"/>
+												<div class="input-group-addon">{L_DAYS}*</div>
+											</div>
+											<span class="explain">* {L_STICK_TOPIC_FOR_EXPLAIN}</span>
+										</div>
+										<!-- ENDIF -->
+
+										<!-- IF S_SOFTDELETE_ALLOWED or S_DELETE_ALLOWED -->
+										<div class="form-check mt-4">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light tgl-red" name="delete" id="delete"{S_SOFTDELETE_CHECKED}>
+												<label class="tgl-btn tgl-red mr-2" for="delete"></label>
+												{L_DELETE_POST_WARN}
+											</div>
+										</div>
+										<!-- IF S_DELETE_ALLOWED and S_SOFTDELETE_ALLOWED -->
+										<div class="form-check mt-4">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="delete_permanent" id="delete_permanent">
+												<label class="tgl-btn tgl-red mr-2" for="delete_permanent"></label>
+												{L_DELETE_POST_PERMANENTLY}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- ENDIF -->
+									</div>
+									<!-- ENDIF -->
+									<!-- ENDIF -->
+
+									<!-- IF S_SHOW_ATTACH_BOX -->
+									<!-- INCLUDE posting_attach_body.html -->
+									<!-- ENDIF -->
+
+									<!-- IF S_SHOW_POLL_BOX or S_POLL_DELETE -->
+									<!-- INCLUDE posting_poll_body.html -->
+									<!-- ENDIF -->
+								</div>
+
+								<!-- IF not S_SHOW_DRAFTS and not $SIG_EDIT eq 1 -->
+								<div class="posting-buttons">
+									{S_HIDDEN_ADDRESS_FIELD}
+									{S_HIDDEN_FIELDS}
+									<!-- EVENT posting_editor_submit_buttons -->
+									<input type="submit" tabindex="5" name="preview" value="{L_PREVIEW}" class="btn btn-large btn-posting"<!-- IF not S_PRIVMSGS --> onclick="document.getElementById('postform').action += '#preview';"<!-- ENDIF --> />
+									<input type="submit" accesskey="s" tabindex="6" name="post" value="{L_SUBMIT}" class="btn btn-large btn-posting" />
+									<!-- IF S_HAS_DRAFTS -->
+									<input type="submit" accesskey="d" tabindex="8" name="load" value="{L_LOAD_DRAFT}" class="btn btn-large" onclick="load_draft = true;" />
+									<!-- ENDIF -->
+									<!-- IF S_SAVE_ALLOWED -->
+									<input type="submit" accesskey="k" tabindex="7" name="save" value="{L_SAVE_DRAFT}" class="btn btn-large" />
+									<!-- ENDIF -->
+								</div>
+								<!-- ENDIF -->

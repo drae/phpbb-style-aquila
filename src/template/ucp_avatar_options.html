@@ -1,0 +1,65 @@
+							<!-- IF not S_AVATARS_ENABLED -->
+							<p>{L_AVATAR_FEATURES_DISABLED}</p>
+							<!-- ENDIF -->
+
+							<p>{L_AVATAR_EXPLAIN}</p>
+
+							<hr />
+
+							<!-- IF ERROR -->
+							<div class="error">
+								<p>{ERROR}</p>
+							</div>
+							<!-- ENDIF -->
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="avatar_img">{L_CURRENT_IMAGE}{L_COLON}</label>
+								<div class="col-sm-9 radio">
+									<!-- IF AVATAR -->{AVATAR}<!-- ELSE --><img src="{T_THEME_PATH}/images/no_avatar.gif" alt="" /><!-- ENDIF -->
+									<br />
+									<label for="avatar_delete"></label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="avatar_delete">{L_DELETE_AVATAR}{L_COLON}</label>
+
+								<div class="col-sm-9 form-inline">
+									<label class="radio-inline" for="avatar_delete">
+										<input type="checkbox" name="avatar_delete" id="avatar_delete" value="1" />
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="avatar_delete">{L_AVATAR_TYPE}{L_COLON}#</label>
+								<div class="col-sm-9 form-inline">
+									<select class="form-control" name="avatar_driver" id="avatar_driver" data-togglable-settings="true">
+										<option value="">{L_NO_AVATAR_CATEGORY}</option>
+										<!-- BEGIN avatar_drivers -->
+										<option value="{avatar_drivers.DRIVER}"<!-- IF avatar_drivers.SELECTED --> selected="selected"<!-- ENDIF --> data-toggle-setting="#avatar_option_{avatar_drivers.DRIVER}">{avatar_drivers.L_TITLE}</option>
+										<!-- END avatar_drivers -->
+									</select>
+								</div>
+							</div>
+
+							<div id="avatar_options">
+								<!-- BEGIN avatar_drivers -->
+								<div id="avatar_option_{avatar_drivers.DRIVER}">
+									<noscript>
+									<h3 class="avatar_section_header">{avatar_drivers.L_TITLE}</h3>
+									</noscript>
+
+									<p class="col-sm-9 col-sm-offset-3">{avatar_drivers.L_EXPLAIN}</p>
+
+									{avatar_drivers.OUTPUT}
+								</div>
+								<!-- END avatar_drivers -->
+							</div>
+
+							<!-- IF not S_GROUP_MANAGE -->
+							<div class="posting-buttons">
+								<input class="btn btn-large btn-posting" type="submit" name="submit" value="{L_SUBMIT}" />
+								<input class="btn btn-large btn-default" type="reset" value="{L_RESET}" name="reset" />
+							</div>
+							<!-- ENDIF -->

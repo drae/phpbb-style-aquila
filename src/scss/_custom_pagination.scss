@@ -1,0 +1,61 @@
+.actionbar {
+    .pagination {
+        margin-left: auto;
+    }
+}
+
+.pagination {
+    align-items: center;
+
+    ul {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    li {
+        display: inline-block;
+        padding: 0;
+
+        a,
+        span {
+            background-color: $pagination-bg;
+            border: solid 1px $pagination-border;
+            color: $pagination-color;
+            font-size: 0.9rem;
+            padding: 2px 4px;
+            text-decoration: none;
+            text-shadow: none;
+        }
+
+        &.active span {
+            background-color: #555;
+        }
+
+        &.ellipsis span {
+            background-color: transparent;
+            border: none;
+            color: $body-color;
+        }
+
+        a:hover,
+        .active a {
+            background-color: $pagination-hover-bg;
+            border: solid 1px $pagination-hover-border;
+            color: $pagination-hover-color;
+        }
+    }
+}
+
+.topics-announce .pagination {
+    a,
+    span {
+        background-color: #3e5925;
+    }
+
+    a:hover,
+    .active a {
+        background-color: lighten(#253516, 25%);
+    }
+}

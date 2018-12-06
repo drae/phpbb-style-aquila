@@ -1,0 +1,57 @@
+<!-- INCLUDE ucp_header.html -->
+
+				<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+					<h2>{L_TITLE}</h2>
+
+					<p>{L_PROFILE_AUTOLOGIN_KEYS}</p>
+
+					<!-- IF ERROR -->
+					<div class="error">
+						<p>{ERROR}</p>
+					</div>
+					<!-- ENDIF -->
+
+					<ul class="table table-plain tabulated-list">
+						<li class="header">
+							<dl>
+								<dt class="key">{L_LOGIN_KEY}</dt>
+								<dd class="ip-address">{L_IP}</dd>
+								<dd class="login-time">{L_LOGIN_TIME}</dd>
+								<dd class="mark">{L_MARK}</dd>
+							</dl>
+						</li>
+						<!-- BEGIN sessions -->
+						<li class="row">
+							<dl>
+								<dt class="key"><label for="{sessions.KEY}">{sessions.KEY}</label></dt>
+								<dd class="ip-address">{sessions.IP}</dd>
+								<dd class="login-time">{sessions.LOGIN_TIME}</dd>
+								<dd class="mark"><input type="checkbox" name="keys[]" value="{sessions.KEY}" id="{sessions.KEY}"/></dd>
+							</dl>
+						</li>
+						<!-- BEGINELSE -->
+						<li class="category">
+							<dt>{L_PROFILE_NO_AUTOLOGIN_KEYS}</dt>
+						</li>
+						<!-- END sessions -->
+					</ul>
+
+					<div class="actionbar mb-0">
+						<div class="row">
+							<div class="actionbar-items">
+								<input class="btn btn-posting btn-large" type="submit" name="submit" value="{L_DELETE}" />
+								<!-- IF .sessions -->
+								<div class="tools">
+									<a href="#" onclick="$('#ucp input:checkbox').prop('checked', true); return false;">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="$('#ucp input:checkbox').prop('checked', false); return false;">{L_UNMARK_ALL}</a>
+								</div>
+								<!-- ENDIF -->
+							</div>
+						</div>
+					</div>
+
+					{S_HIDDEN_FIELDS}
+					{S_FORM_TOKEN}
+				</form>
+
+<!-- INCLUDE ucp_footer.html -->

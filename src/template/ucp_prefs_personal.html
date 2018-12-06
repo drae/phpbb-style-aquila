@@ -1,0 +1,174 @@
+<!-- INCLUDE ucp_header.html -->
+
+						<h2>{L_TITLE}</h2>
+
+						<p>{L_PROFILE_INFO_NOTICE}</p>
+
+						<hr />
+
+						<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+							<!-- IF ERROR -->
+							<div class="error">
+								<p>{ERROR}</p>
+							</div>
+							<!-- ENDIF -->
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="viewemail" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="viewemail" id="viewemail"<!-- IF S_VIEW_EMAIL --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="viewemail"></label>
+									{L_SHOW_EMAIL}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="evtemail" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="evtemail" id="evtemail"<!-- IF S_EVENT_EMAIL --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="evtemail"></label>
+									Allow automated event emails
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="massemail" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="massemail" id="massemail"<!-- IF S_MASS_EMAIL --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="massemail"></label>
+									{L_ADMIN_EMAIL}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="allowpm" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="allowpm" id="allowpm"<!-- IF S_ALLOW_PM --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="allowpm"></label>
+									{L_ALLOW_PM}
+								</div>
+							</div>
+
+							<!-- IF S_CAN_HIDE_ONLINE -->
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="hideonline" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="hideonline" id="hideonline"<!-- IF S_HIDE_ONLINE --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="hideonline"></label>
+									{L_HIDE_ONLINE}
+								</div>
+								<span class="help-block">{L_HIDE_ONLINE_EXPLAIN}</span>
+							</div>
+							<!-- ENDIF -->
+
+							<hr />
+
+							<!-- IF S_SELECT_NOTIFY -->
+							<div class="form-group mb-1">
+								<div class="d-flex">
+									<label class="col-sm-4 pl-0 mr-2" for="notifymethod0">{L_NOTIFY_METHOD}</label>
+									<label class="custom-control custom-radio">
+										<input id="notifymethod0" name="notifymethod" type="radio" class="custom-control-input" value="0"<!-- IF S_NOTIFY_EMAIL --> checked="checked"<!-- ENDIF -->>
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description">{L_NOTIFY_METHOD_EMAIL}</span>
+									</label>
+									<label class="custom-control custom-radio">
+										<input id="notifymethod1" name="notifymethod" type="radio" class="custom-control-input" value="1"<!-- IF S_NOTIFY_IM --> checked="checked"<!-- ENDIF -->>
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description">{L_NOTIFY_METHOD_IM}</span>
+									</label>
+									<label class="custom-control custom-radio">
+										<input id="notifymethod2" name="notifymethod" type="radio" class="custom-control-input" value="2"<!-- IF S_NOTIFY_BOTH --> checked="checked"<!-- ENDIF -->>
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description">{L_NOTIFY_METHOD_BOTH}</span>
+									</label>
+								</div>
+							</div>
+							<!-- ENDIF -->
+
+							<hr />
+
+							<!-- IF S_MORE_LANGUAGES -->
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-4 pl-0 mr-2" for="lang">{L_BOARD_LANGUAGE}{L_COLON}</label>
+									<select class="form-control" name="lang" id="lang">{S_LANG_OPTIONS}</select>
+								</div>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- IF S_STYLE_OPTIONS and S_MORE_STYLES -->
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-4 pl-0 mr-2" for="user_style">{L_BOARD_STYLE}{L_COLON}</label>
+									<select class="form-control" name="user_style" id="user_style">{S_STYLE_OPTIONS}</select>
+								</div>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- INCLUDE timezone_option.html -->
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-4 pl-0 mr-2" for="dateformat">{L_BOARD_DATE_FORMAT}{L_COLON}</label>
+									<div class="col-sm-7 pl-0">
+										<select class="form-control" name="dateoptions" id="dateoptions" onchange="if(this.value=='custom'){phpbb.toggleDisplay('custom_date',1);}else{phpbb.toggleDisplay('custom_date',-1);} if (this.value == 'custom') { document.getElementById('dateformat').value = default_dateformat; } else { document.getElementById('dateformat').value = this.value; }">
+											{S_DATEFORMAT_OPTIONS}
+										</select>
+										<div id="custom_date" class="mt-2" style="display:none;">
+											<input class="form-control" type="text" name="dateformat" id="dateformat" value="{DATE_FORMAT}" maxlength="30" />
+										</div>
+										<span class="form-text text-muted">{L_BOARD_DATE_FORMAT_EXPLAIN}</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- EVENT ucp_prefs_personal_append -->
+
+							<div class="posting-buttons">
+								<input class="btn btn-large btn-posting" type="submit" name="submit" value="{L_SUBMIT}" />
+								<input class="btn btn-large btn-default" type="reset" value="{L_RESET}" name="reset" />
+							</div>
+
+							{S_HIDDEN_FIELDS}
+							{S_FORM_TOKEN}
+						</form>
+
+						<script type="text/javascript">
+						// <![CDATA[
+							var date_format = '{A_DATE_FORMAT}';
+							var default_dateformat = '{A_DEFAULT_DATEFORMAT}';
+
+							function customDates()
+							{
+								var e = document.getElementById('dateoptions');
+
+								e.selectedIndex = e.length - 1;
+
+								// Loop and match date_format in menu
+								for (var i = 0; i < e.length; i++)
+								{
+									if (e.options[i].value == date_format)
+									{
+										e.selectedIndex = i;
+										break;
+									}
+								}
+
+								// Show/hide custom field
+								if (e.selectedIndex == e.length - 1)
+								{
+									phpbb.toggleDisplay('custom_date',1);
+								}
+								else
+								{
+									phpbb.toggleDisplay('custom_date',-1);
+								}
+							}
+
+							window.onload = customDates;
+						// ]]>
+						</script>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,171 @@
+/**
+*
+* Navs and form elements used in navs
+*
+**/
+
+/**
+* Forms
+**/
+/*.form-horizontal,
+.form-inline {
+    .explain {
+        color: #aaa;
+        display: inline-block;
+        font-weight: normal;
+        margin-top: .25rem;
+    }
+
+    .help-block {
+        color: #aaa;
+        display: inline-block;
+        font-weight: normal;
+        margin-bottom: 0;
+        margin-top: .25rem;
+    }
+}
+
+// These next two are currently styled with the posting screen/tab options in mind
+.form-horizontal .checkbox,
+.form-horizontal .radio {
+    min-height: 25px;
+    margin: 0;
+    padding: 0;
+
+    &.form-inline {
+        padding-top: 5px;
+    }
+}
+*/
+
+/**
+* Tabs
+**/
+.nav-tabs {
+    border: 0;
+    position: relative;
+
+    .nav-link {
+        background: rgba(0, 0, 0, 0.1);
+        padding: .5rem .75rem;
+
+        &:hover {
+            background-color: #666;
+            border-color: transparent;
+            border-bottom: solid 1px #000;
+        }
+
+        &.active {
+            &:focus,
+            &:hover {
+                border-bottom: solid 1px transparent;
+                border-left: solid 1px #000;
+                border-top: solid 1px #000;
+                border-right: solid 1px #000;
+            }
+        }
+    }
+}
+
+.tab-content {
+    background: #333;
+    border: solid 1px #000;
+    margin-bottom: 15px;
+
+    > .tab-pane {
+        padding: 15px;
+    }
+}
+
+.checkbox label,
+.radio label {
+    line-height: 22px; /* Slight adjustment to line height */
+}
+
+/**
+* Used on the UCP/MCP to contain a vertical list of nav pills
+**/
+.nav-pills-container {
+    background: rgba(255, 255, 255, 0.1);
+    height: 100%;
+    margin-bottom: 0;
+    padding: 15px;
+    width: 100%;
+
+    li {
+        &.active > a {
+            text-shadow: none;
+        }
+
+        > a {
+            &:hover,
+            &:focus {
+                background-color: rgba(255,255,255,0.5);
+            }
+        }
+    }
+}
+
+
+/**
+* Actionbar
+**/
+.actionbar {
+    @include make-container();
+    @include make-container-max-widths();
+
+    background: #444;
+    margin: 0 0 5px;
+    min-height: 45px;
+
+    .row {
+        align-items: center;
+        padding: 10px;
+
+        .actionbar-items {
+            align-items: center;
+            display: flex;
+            flex-basis: 100%;
+            margin-bottom: 10px;
+
+            @include media-breakpoint-up('md') {
+                flex-basis: auto;
+                justify-content: flex-end;
+                margin-bottom: 0;
+            }
+        }
+
+        .pagination {
+            flex-basis: 100%;
+            justify-content: flex-end;
+            padding-top: 10px;
+            border-top: solid 1px rgba(255,255,255,0.25);
+
+            .pagination-page {
+                display: none;
+
+                @include media-breakpoint-up('sm') {
+                    display: inline;
+                }
+            }
+
+            @include media-breakpoint-up('md') {
+                flex-basis: auto;
+                border-top: 0;
+                padding-top: 0;
+            }
+        }
+    }
+
+    .tools {
+        display: flex;
+
+        .dropdown + .dropdown {
+            margin-left: 10px;
+        }
+    }
+
+    * + .tools {
+        margin-left: 10px;
+    }
+}

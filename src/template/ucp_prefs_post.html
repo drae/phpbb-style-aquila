@@ -1,0 +1,66 @@
+<!-- INCLUDE ucp_header.html -->
+
+						<h2>{L_TITLE}</h2>
+
+						<hr />
+
+						<form class="form-horizontal" id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+							<!-- IF ERROR -->
+							<div class="error">
+								<p>{ERROR}</p>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- EVENT ucp_prefs_post_prepend -->
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="bbcode" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="bbcode" id="bbcode"<!-- IF S_BBCODE --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="bbcode"></label>
+									{L_DEFAULT_BBCODE}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="smilies" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="smilies" id="smilies"<!-- IF S_SMILIES --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="smilies"></label>
+									{L_DEFAULT_SMILIES}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="sig" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="sig" id="sig"<!-- IF S_SIG --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="sig"></label>
+									{L_DEFAULT_ADD_SIG}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="notify" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="notify" id="notify"<!-- IF S_NOTIFY --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="notify"></label>
+									{L_DEFAULT_NOTIFY}
+								</div>
+							</div>
+
+							<hr />
+
+							<!-- EVENT ucp_prefs_post_append -->
+
+							<div class="posting-buttons">
+								<input class="btn btn-large btn-posting" type="submit" name="submit" value="{L_SUBMIT}" />
+								<input class="btn btn-large btn-default" type="reset" value="{L_RESET}" name="reset" />
+							</div>
+
+							{S_HIDDEN_FIELDS}
+							{S_FORM_TOKEN}
+						</form>
+
+<!-- INCLUDE ucp_footer.html -->

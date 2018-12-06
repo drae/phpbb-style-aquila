@@ -1,0 +1,51 @@
+.form-control {
+    background-color: #292929 !important;
+    border-color: #000 !important;
+    border-radius: 0 !important;
+    color: $body-color !important;
+
+    &.emojionearea {
+        font-size: 1rem !important;
+    }
+
+    &:focus,
+    &.focused {
+        background: initial;
+        border-color: #000 !important;
+        box-shadow: 0 0 0 3px rgba(0,150,40,.75) !important;
+    }
+
+    .emojionearea-editor {
+        color: $body-color !important;
+    }
+
+    &.form-control-sm {
+        font-size: $font-size-base;
+    }
+
+}
+
+// Label spacing for tabulated lists
+.tabulated-list {
+    label {
+        margin-bottom: 0;
+    }
+}
+
+// Force selects to never be 100% - unless overriden
+select.form-control {
+    display: inline-block;
+    width: auto;
+}
+
+// Force custom control aligns
+.custom-control {
+    align-items: center;
+}
+
+//
+.emojionearea .emojionearea-picker .emojionearea-scroll-area h1 {
+    text-shadow: none;
+}
+
+

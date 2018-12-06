@@ -1,0 +1,162 @@
+				<div class="topicreview">
+					<section class="viewtopic">
+						<script type="text/javascript">
+						// <![CDATA[
+							bbcodeEnabled = {S_BBCODE_ALLOWED};
+						// ]]>
+						</script>
+
+						<!-- BEGIN topic_review_row -->
+						<article id="p{topic_review_row.POST_ID}" class="table posts has-profile<!-- IF topic_review_row.S_UNREAD_POST --> unreadpost<!-- ENDIF --><!-- IF topic_review_row.S_POST_REPORTED --> reported<!-- ENDIF --><!-- IF topic_review_row.S_ONLINE --> online<!-- ENDIF -->">
+							<!-- IF not topic_review_row.S_IGNORE_POST -->
+
+							<!-- IF not topic_review_row.S_IGNORE_POST -->
+							<div class="postprofile">
+								<div class="author-info">
+									<!-- IF topic_review_row.POSTER_AVATAR -->
+									<div class="avatar-container">
+										<!-- EVENT viewtopic_body_avatar_before -->
+										<!-- IF topic_review_row.U_POST_AUTHOR -->
+										<a class="avatar" data-profile-card="{topic_review_row.POST_AUTHOR}" href="{topic_review_row.U_POST_AUTHOR}">{topic_review_row.POSTER_AVATAR}</a>
+										<!-- ELSE -->
+										<a data-profile-card="{topic_review_row.POST_AUTHOR}" href="#" class="avatar">{topic_review_row.POSTER_AVATAR}</a>
+										<!-- ENDIF -->
+										<!-- EVENT viewtopic_body_avatar_after -->
+									</div>
+									<!-- ENDIF -->
+
+									<h3><a data-profile-card="{topic_review_row.POST_AUTHOR}" href="<!-- IF not topic_review_row.U_POST_AUTHOR -->#<!-- ELSE -->{topic_review_row.POST_AUTHOR}<!-- ENDIF -->"<!-- IF topic_review_row.POST_AUTHOR_COLOUR --> class="username-coloured" style="color:{topic_review_row.POST_AUTHOR_COLOUR}"<!-- ENDIF -->>{topic_review_row.POST_AUTHOR}</a></h3>
+									<!-- EVENT viewtopic_body_post_author_after -->
+
+									<!-- EVENT viewtopic_body_topic_review_row_rank_before -->
+									<!-- IF topic_review_row.RANK_TITLE or topic_review_row.RANK_IMG -->{topic_review_row.RANK_TITLE}<!-- IF topic_review_row.RANK_TITLE and topic_review_row.RANK_IMG --><br /><!-- ENDIF -->{topic_review_row.RANK_IMG}<br /><!-- ENDIF -->
+								</div>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- IF topic_review_row.S_IGNORE_POST -->
+							<div class="col-12 ignore">{topic_review_row.L_IGNORE_POST}</div>
+							<!-- ELSE -->
+
+							<div class="postoutput">
+								<!-- IF topic_review_row.S_POST_HIDDEN -->
+								<!-- IF topic_review_row.S_POST_DELETED -->
+								<div class="ignore" id="post_hidden{topic_review_row.POST_ID}">
+									{topic_review_row.L_POST_DELETED_MESSAGE}<br />
+									{topic_review_row.L_POST_DISPLAY}
+								</div>
+								<!-- ELSEIF topic_review_row.S_IGNORE_POST -->
+								<div class="ignore" id="post_hidden{topic_review_row.POST_ID}">
+									{topic_review_row.L_IGNORE_POST}<br />
+									{topic_review_row.L_POST_DISPLAY}
+								</div>
+								<!-- ENDIF -->
+								<!-- ENDIF -->
+
+								<div id="post_content{topic_review_row.POST_ID}" class="post-body"<!-- IF topic_review_row.S_POST_HIDDEN --> style="display: none;"<!-- ENDIF -->>
+									<!-- DEFINE $SHOW_POST_BUTTONS = (topic_review_row.U_EDIT or topic_review_row.U_DELETE or topic_review_row.U_REPORT or topic_review_row.U_WARN or topic_review_row.U_INFO or topic_review_row.U_QUOTE) -->
+									<!-- EVENT viewtopic_body_post_buttons_list_before -->
+									<ul class="post-buttons list-inline" style="visibility: hidden">
+										<!-- IF topic_review_row.U_MCP_DETAILS -->
+										<li>
+											<a class="btn btn-default btn-sm btn-icon-only" href="{topic_review_row.U_MCP_DETAILS}" title="{L_EDIT_POST}">
+												<i class="fa fa-info fa-fw" aria-hidden="true"></i><span class="sr-only">{L_POST_DETAILS}</span>
+											</a>
+										</li>
+										<!-- ENDIF -->
+										<!-- IF topic_review_row.POSTER_QUOTE and topic_review_row.DECODED_MESSAGE -->
+										<li>
+											<a class="btn btn-default btn-sm btn-icon-only" href="#postingbox" onclick="addquote({topic_review_row.POST_ID}, '{topic_review_row.POSTER_QUOTE}', '{LA_WROTE}', {post_id:{topic_review_row.POST_ID},time:{topic_review_row.POST_TIME},user_id:{topic_review_row.USER_ID}});" title="{L_QUOTE} {topic_review_row.POST_AUTHOR}">
+												<i class="fa fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">{L_QUOTE} {topic_review_row.POST_AUTHOR}</span>
+											</a>
+										</li>
+										<!-- ENDIF -->
+									</ul>
+									<!-- ENDIF -->
+									<!-- ENDIF -->
+
+									<!-- EVENT viewtopic_body_topic_review_row_post_details_before -->
+									<!-- IF topic_review_row.POST_SUBJECT -->
+									<h4 <!-- IF topic_review_row.S_FIRST_ROW -->class="first"<!-- ENDIF -->><!-- IF topic_review_row.POST_ICON_IMG --><img src="{T_ICONS_PATH}{topic_review_row.POST_ICON_IMG}" width="{topic_review_row.POST_ICON_IMG_WIDTH}" height="{topic_review_row.POST_ICON_IMG_HEIGHT}" alt="{topic_review_row.POST_ICON_IMG_ALT}" title="{topic_review_row.POST_ICON_IMG_ALT}" /> <!-- ENDIF --><a href="#p{topic_review_row.POST_ID}">{topic_review_row.POST_SUBJECT}</a></h4>
+									<!-- ENDIF -->
+
+									<p class="post-author">
+										<!-- IF S_IS_BOT -->
+										<span><i class="fa fa-file fa-fw fa-md" aria-hidden="true"></i><span class="sr-only">{topic_review_row.MINI_POST}</span></span>
+										<!-- ELSE -->
+										<a href="{topic_review_row.U_MINI_POST}" title="{topic_review_row.MINI_POST}">
+										<i class="fa fa-file fa-fw fa-md" aria-hidden="true"></i><span class="sr-only">{topic_review_row.MINI_POST}</span>
+										</a>
+										<!-- ENDIF -->
+										{topic_review_row.POST_DATE}
+									</p>
+									<!-- EVENT viewtopic_body_topic_review_row_post_details_after -->
+
+									<!-- IF topic_review_row.S_POST_UNAPPROVED -->
+									<form method="post" class="mcp_approve" action="{topic_review_row.U_APPROVE_ACTION}">
+										<p class="post-notice unapproved">
+											<strong>{L_POST_UNAPPROVED_ACTION}</strong>
+											<input class="btn btn-default btn-sm" type="submit" value="{L_DISAPPROVE}" name="action[disapprove]" />
+											<input class="btn btn-default btn-sm" type="submit" value="{L_APPROVE}" name="action[approve]" />
+											<input type="hidden" name="post_id_list[]" value="{topic_review_row.POST_ID}" />
+											{S_FORM_TOKEN}
+										</p>
+									</form>
+									<!-- ELSEIF topic_review_row.S_POST_DELETED -->
+									<form method="post" class="mcp_approve" action="{topic_review_row.U_APPROVE_ACTION}">
+										<p class="post-notice deleted">
+											<strong>{L_POST_DELETED_ACTION}</strong>
+											<!-- IF topic_review_row.S_DELETE_PERMANENT -->
+												<input class="btn btn-default btn-sm" type="submit" value="{L_DELETE}" name="action[delete]" />
+											<!-- ENDIF -->
+											<input class="btn btn-default btn-sm" type="submit" value="{L_RESTORE}" name="action[restore]" />
+											<input type="hidden" name="post_id_list[]" value="{topic_review_row.POST_ID}" />
+											{S_FORM_TOKEN}
+										</p>
+									</form>
+									<!-- ENDIF -->
+
+									<!-- IF topic_review_row.S_POST_REPORTED -->
+									<p class="post-notice reported">
+										<a href="{topic_review_row.U_MCP_REPORT}"><strong>{L_POST_REPORTED}</strong></a>
+									</p>
+									<!-- ENDIF -->
+
+									<div class="post-content">{topic_review_row.MESSAGE}</div>
+
+									<!-- IF topic_review_row.DELETED_MESSAGE or topic_review_row.DELETE_REASON -->
+									<div class="notice post_deleted_msg">
+										{topic_review_row.DELETED_MESSAGE}
+										<!-- IF topic_review_row.DELETE_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{topic_review_row.DELETE_REASON}</em><!-- ENDIF -->
+									</div>
+								<!-- ELSEIF topic_review_row.EDITED_MESSAGE or topic_review_row.EDIT_REASON -->
+									<div class="notice">
+										{topic_review_row.EDITED_MESSAGE}
+										<!-- IF topic_review_row.EDIT_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{topic_review_row.EDIT_REASON}</em><!-- ENDIF -->
+									</div>
+								<!-- ENDIF -->
+
+								<!-- IF topic_review_row.BUMPED_MESSAGE --><div class="notice">{topic_review_row.BUMPED_MESSAGE}</div><!-- ENDIF -->
+								<!-- EVENT viewtopic_body_topic_review_row_post_notices_after -->
+								<!-- IF topic_review_row.SIGNATURE --><div id="sig{topic_review_row.POST_ID}" class="signature">{topic_review_row.SIGNATURE}</div><!-- ENDIF -->
+								<!-- EVENT viewtopic_body_topic_review_row_post_content_footer -->
+								</div>
+							</div>
+						</article>
+
+						<div class="break"></div>
+						<!-- END topic_review_row -->
+					</section>
+				</div>
+
+				<script type="text/javascript">
+				// <![CDATA[
+					bbcodeEnabled = {S_BBCODE_ALLOWED};
+
+					$('.post-body').hover(function(){
+						$(this).find('.post-buttons').css('visibility','visible')
+					}, function(){
+						$(this).find('.post-buttons').css('visibility','hidden')
+					});
+				// ]]>
+				</script>

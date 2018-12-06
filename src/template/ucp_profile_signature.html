@@ -1,0 +1,64 @@
+<!-- INCLUDE ucp_header.html -->
+
+							<form class="form-horizontal" id="postform" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+								<!-- IF SIGNATURE_PREVIEW -->
+								<p>{L_SIGNATURE_PREVIEW}</p>
+
+								<br />
+
+								<div class="col-sm-12">
+									<div class="content">
+										<div class="signature">{SIGNATURE_PREVIEW}</div>
+									</div>
+								</div>
+
+								<div class="clearfix"></div><br />
+								<!-- ENDIF -->
+
+								<h2>{L_TITLE}</h2>
+
+								<hr />
+
+								<div>
+									<!-- DEFINE $SIG_EDIT = 1 -->
+									<!-- INCLUDE posting_editor.html -->
+
+								<div class="posting-buttons">
+									{S_HIDDEN_FIELDS}
+									<!-- EVENT posting_editor_submit_buttons -->
+									<input type="submit" tabindex="5" name="preview" value="{L_SAVE}" class="btn btn-large btn-posting"<!-- IF not S_PRIVMSGS --> onclick="document.getElementById('postform').action += '#preview';"<!-- ENDIF --> />
+									<input type="reset" accesskey="s" tabindex="6" name="reset" value="{L_RESET}" class="btn btn-large btn-default" />
+									{S_FORM_TOKEN}
+								</div>
+
+								<ul id="posting-tabs" class="nav nav-tabs posting-tabs" role="tablist" aria-controls="options-panel">
+									<li role="presentation" class="nav-item"><a class="nav-link active" href="#posting-options" data-toggle="tab">{L_OPTIONS}</a></li>
+								</ul>
+
+								<div class="tab-content">
+									<div id="posting-options" role="tabpanel" class="tab-pane fade show active">
+										<!-- IF S_BBCODE_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="disable_bbcode" id="disable_bbcode"{S_BBCODE_CHECKED}>
+												<label class="tgl-btn mr-2" for="disable_bbcode"></label>
+												{L_DISABLE_BBCODE}
+											</div>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF S_SMILIES_ALLOWED -->
+										<div class="form-check">
+											<div class="d-flex">
+												<input type="checkbox" class="tgl tgl-light" name="disable_smilies" id="disable_smilies"{S_SMILIES_CHECKED}>
+												<label class="tgl-btn mr-2" for="disable_smilies"></label>
+												{L_DISABLE_SMILIES}
+											</div>
+										</div>
+										<!-- ENDIF -->
+									</div>
+								</div>
+
+							</form>
+
+<!-- INCLUDE ucp_footer.html -->

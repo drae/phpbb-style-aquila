@@ -1,0 +1,90 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE breadcrumbs.html -->
+
+		<div class="actionbar">
+			<div class="row">
+				<div class="tools">
+					<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-cog"></i> Tools
+					</a>
+					<div class="dropdown-menu">
+						<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+						<!-- EVENT index_body_markforums_before -->
+						<a class="dropdown-item" href="{U_MARK_FORUMS}" data-ajax="mark_forums_read"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_MARK_FORUMS_READ}</a>
+						<!-- EVENT index_body_markforums_after -->
+						<!-- ENDIF -->
+						<!-- IF U_MCP -->
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- INCLUDE forumlist_body.html -->
+
+		<!-- EVENT index_body_forumlist_body_after -->
+
+		<div class="actionbar">
+			<div class="row">
+				<div class="tools">
+					<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-cog"></i> Tools
+					</a>
+					<div class="dropdown-menu">
+						<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+						<!-- EVENT index_body_markforums_before -->
+						<a class="dropdown-item" href="{U_MARK_FORUMS}" data-ajax="mark_forums_read"><i class="fa fa-check-square-o fa-fw" aria-hidden="true"></i> {L_MARK_FORUMS_READ}</a>
+						<!-- EVENT index_body_markforums_after -->
+						<!-- ENDIF -->
+						<!-- IF U_MCP -->
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+						<!-- ENDIF -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- EVENT index_body_stat_blocks_before -->
+
+		<div class="table-plain whoisonline">
+			<div class="row">
+				<div class="col-12">
+					<!-- IF S_DISPLAY_ONLINE_LIST -->
+					<!-- IF U_VIEWONLINE -->
+					<h2><a href="{U_VIEWONLINE}">{L_WHO_IS_ONLINE}</a></h2>
+					<!-- ELSE -->
+					<h2>{L_WHO_IS_ONLINE}</h2>
+					<!-- ENDIF -->
+
+					<!-- EVENT index_body_block_online_prepend -->
+
+					<p>{TOTAL_USERS_ONLINE}</p>
+
+					<p class="reg-user-list">{LOGGED_IN_USER_LIST}</p>
+
+					<!-- IF LEGEND --><p class="user-legend">{L_LEGEND}: {LEGEND}</p><!-- ENDIF -->
+
+					<!-- EVENT index_body_block_online_append -->
+					<!-- ENDIF -->
+
+					<!-- IF S_DISPLAY_BIRTHDAY_LIST and BIRTHDAY_LIST -->
+					<h2>{L_BIRTHDAYS}</h2>
+
+					<p class="user-birthdays">
+						<!-- EVENT index_body_block_birthday_prepend -->
+						<!-- IF BIRTHDAY_LIST -->{L_CONGRATULATIONS}: <strong>{BIRTHDAY_LIST}</strong><!-- ELSE -->{L_NO_BIRTHDAYS}<!-- ENDIF -->
+						<!-- EVENT index_body_block_birthday_append -->
+					</p>
+					<!-- ENDIF -->
+				</div>
+
+			</div>
+		</div>
+
+		<!-- EVENT index_body_stat_blocks_after -->
+
+<!-- INCLUDE overall_footer.html -->

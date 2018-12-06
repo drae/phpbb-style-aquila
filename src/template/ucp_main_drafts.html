@@ -1,0 +1,80 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="postform" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+	<h2>{L_TITLE}</h2>
+
+	<p>{L_DRAFTS_EXPLAIN}</p>
+
+	<!-- IF S_EDIT_DRAFT -->
+
+	<div>
+
+	<!-- INCLUDE posting_editor.html -->
+
+	<div class="posting-buttons">
+		{S_HIDDEN_FIELDS}
+		<!-- EVENT posting_editor_submit_buttons -->
+		<input type="submit" tabindex="5" name="preview" value="{L_SAVE}" class="btn btn-large btn-posting" />
+		<input type="reset" accesskey="s" tabindex="6" name="reset" value="{L_RESET}" class="btn btn-large btn-default" />
+		{S_FORM_TOKEN}
+	</div>
+
+	<!-- ELSE -->
+
+	<!-- IF .draftrow -->
+	<ul class="table table-plain topics-normal tabulated-list">
+		<li class="header">
+			<dl>
+				<dt>{L_DRAFT_TITLE}</dt>
+				<dd class="lastpost"><span>{L_SAVE_DATE}</span></dd>
+				<dd class="mark">{L_MARK}</dd>
+			</dl>
+		</li>
+		<!-- BEGIN draftrow -->
+		<li class="row">
+			<dl>
+				<dt>
+					<div class="forum-desc no-icon">
+						<div class="viewforum-topic-title drafts">
+							<a class="topictitle" href="{draftrow.U_VIEW_EDIT}">{draftrow.DRAFT_SUBJECT}</a>
+							<!-- IF draftrow.S_LINK_TOPIC -->{L_TOPIC}{L_COLON} <a href="{draftrow.U_VIEW}">{draftrow.TITLE}</a>
+							<!-- ELSEIF draftrow.S_LINK_FORUM -->{L_FORUM}{L_COLON} <a href="{draftrow.U_VIEW}">{draftrow.TITLE}</a>
+							<!-- ELSEIF S_PRIVMSGS -->
+							<!-- ELSE -->{L_NO_TOPIC_FORUM}<!-- ENDIF -->
+						</div>
+					</div>
+				</dt>
+				<dd class="lastpost"
+					><span>{draftrow.DATE}<br /><!-- IF draftrow.U_INSERT --><a href="{draftrow.U_INSERT}">{L_LOAD_DRAFT}</a> &bull; <!-- ENDIF --><a href="{draftrow.U_VIEW_EDIT}">{L_VIEW_EDIT}</a></span>
+				</dd>
+				<dd class="mark">
+					<input type="checkbox" name="d[{draftrow.DRAFT_ID}]" id="d{draftrow.DRAFT_ID}" />
+				</dd>
+			</dl>
+		</li>
+	<!-- END draftrow -->
+	</ul>
+	<!-- ELSE -->
+	<p><strong>{L_NO_SAVED_DRAFTS}</strong></p>
+	<!-- ENDIF -->
+
+	<!-- IF .draftrow -->
+	<div class="actionbar mb-0">
+		<div class="row">
+			<div class="actionbar-items">
+				<input class="btn btn-posting btn-large" type="submit" name="unwatch" value="{L_DELETE_MARKED}" />
+				<div class="tools">
+					<a href="#" onclick="marklist('ucp', 't', true); marklist('ucp', 'f', true); return false;">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="marklist('ucp', 't', false); marklist('ucp', 'f', false); return false;">{L_UNMARK_ALL}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{S_FORM_TOKEN}
+	<!-- ENDIF -->
+
+	<!-- ENDIF -->
+
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

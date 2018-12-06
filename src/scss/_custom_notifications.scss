@@ -1,0 +1,88 @@
+/*
+    Specific styling of the notifications dropdown in the navbar
+*/
+.dropdown-menu.notifications {
+	dl {
+		margin-bottom: 6px;
+		overflow: hidden;
+	}
+
+	dd {
+		margin-left: 50px;
+
+		.notification-title {
+			display: inline-block;
+		}
+
+		.notification-time {
+			padding: 0 6px;
+			display: block;
+			color: $gray-light;
+			font-size: 0.8em;
+		}
+
+		strong {
+			font-weight: normal;
+		}
+        
+        // Links within the dropdown menu
+        > a {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: normal;
+            line-height: $line-height-base;
+            color: $dropdown-link-color;
+            white-space: nowrap; // prevent links from randomly breaking onto new lines
+        }
+        
+        &:hover,
+        &:focus {
+            text-decoration: none;
+            color: $dropdown-link-hover-color;
+            background-color: $dropdown-link-hover-bg;
+        }
+	}
+
+	dt {
+		padding-top: 6px;
+		float: left;
+
+		img {
+			width: 40px;
+			height: 40px;
+		}
+	}
+    
+    .dropdown-header {
+        padding: 3px 0;
+
+        a {
+            padding: 0;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    > li > ul > li.dropdown-header a,
+    > li > ul > li > dl a {
+        white-space: normal;
+        display: inline-block;
+
+        &.mark-read {
+            padding: 0;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    > li > ul > li > dl a {
+        padding: 3px 6px;
+    }
+}

@@ -1,0 +1,87 @@
+<!-- INCLUDE overall_header.html -->
+
+<!-- INCLUDE breadcrumbs.html -->
+
+			<div class="actionbar"></div>
+
+			<div class="break-gradient"></div>
+
+			<!-- IF S_POST_REVIEW -->
+			<!-- INCLUDE posting_review.html -->
+			<!-- ENDIF -->
+
+			<!-- IF S_DISPLAY_PREVIEW -->
+			<!-- INCLUDE posting_preview.html -->
+			<!-- ENDIF -->
+
+			<!-- IF S_FORUM_RULES -->
+			<div class="rules">
+				<i class="rules-exclamation"></i>
+				<div class="rules-content">
+					<!-- IF U_FORUM_RULES -->
+					<a href="{U_FORUM_RULES}">{L_FORUM_RULES}</a>
+					<!-- ELSE -->
+					<h3>{L_FORUM_RULES}</h3>
+
+					<p class="justify">{FORUM_RULES}</p>
+					<!-- ENDIF -->
+				</div>
+			</div>
+			<!-- ENDIF -->
+
+			<div class="table-plain posting">
+				<form class="form-horizontal" id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
+					<!-- IF S_UNGLOBALISE -->
+					<div class="form-group row">
+						<label class="col-md-3 control-label" for="to_forum_id">{L_MOVE}{L_COLON}</label>
+						<div class="col-md-9">
+							<select class="form-control" id="to_forum_id" name="to_forum_id">{S_FORUM_SELECT}</select>
+						</div>
+					</div>
+
+					<fieldset class="center submit-buttons">
+						<button class="btn btn-large btn-primary" type="submit" id="post" name="post" tabindex="5" value="{L_CONFIRM}">{L_CONFIRM}</button>
+
+						<button class="btn btn-large btn-primary" type="submit" id="cancel_unglobalise" name="cancel_unglobalise" tabindex="5" value="{L_CANCEL}">{L_CANCEL}</button>
+					</fieldset>
+					<!-- ENDIF -->
+
+					<!-- IF S_DRAFT_LOADED -->
+					<div class="alert alert-info" role="alert">
+						<h3>{L_INFORMATION}</h3>
+
+						<p>{L_DRAFT_LOADED}</p>
+					</div>
+					<!-- ENDIF -->
+
+					<!-- IF S_SHOW_DRAFTS -->
+					<!-- INCLUDE drafts.html -->
+					<!-- ENDIF -->
+
+					<!-- DEFINE $EXTRA_POSTING_OPTIONS = 1 -->
+					<!-- INCLUDE posting_editor.html -->
+
+					<script type="text/javascript">
+						$('#posting-tabs a').click(function (e) {
+							e.preventDefault()
+							$(this).tab('show')
+						})
+					</script>
+
+					<!-- EVENT posting_layout_include_panel_body -->
+
+					<input type="hidden" name="show_panel" value="options-panel" />
+
+					{S_FORM_TOKEN}
+
+				</form>
+			</div>
+
+			<!-- IF S_DISPLAY_REVIEW -->
+			<!-- INCLUDE posting_topic_review.html -->
+			<!-- ENDIF -->
+
+			<div class="break-gradient"></div>
+			<div class="actionbar"></div>
+
+<!-- INCLUDE overall_footer.html -->

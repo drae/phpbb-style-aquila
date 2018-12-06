@@ -1,0 +1,317 @@
+/**
+*
+*
+*
+**/
+body {
+    background: $body-bg url('./images/leather-blue.jpg') repeat;
+}
+
+.starfield-gradient,
+.starfield-gradient-non-index {
+    height: 200px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+
+    &.at-top {
+        position: fixed;
+    }
+}
+
+.starfield-gradient-non-index {
+    position: fixed;
+}
+
+.landing, .news {
+    // Hide these by default, only shown on index landing page
+    display: none;
+
+    // These are "dark" backgrounds or at least have a dark overlay so bright text here
+    h1, h2, h3, h4, h5, h6, p {
+        color: #efefef;
+    }
+}
+
+main {
+//    background: $body-bg url('./images/bg_pattern.jpg') repeat;
+    position: relative;
+    border: 0;
+    margin: 0;
+    padding-bottom: 20px;
+    padding-top: 180px;
+/*
+    &:after {
+        background: linear-gradient(to top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 100px);
+        bottom: 0;
+        content: "";
+        height: 100px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+*/
+    .error {
+        background-color: theme-color("danger");
+        color: #efefef;
+        padding: 15px;
+        text-shadow: none;
+    }
+
+    .page-content {
+        @extend .container;
+        position: relative;
+        height: 100%;
+    }
+
+    .page-content-inner {
+        @include make-row();
+    }
+}
+
+.section-index {
+    .starfield-gradient-non-index {
+        display: none;
+    }
+
+    .landing {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+
+        background-image: url('./images/banner/starfield.jpg');
+        background-size: cover;
+
+        .site-logo {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+
+            @include media-breakpoint-up(lg) {
+                margin-left: -172px;
+                margin-top: -80px;
+                width: 344px;
+                height: 160px;
+                background: transparent url('./images/banner/aquila_logo_sml.png') center center no-repeat;
+            }
+
+            @include media-breakpoint-up(xs) {
+                margin-left: -275px;
+                margin-top: -112px;
+                width: 550px;
+                height: 225px;
+                background: transparent url('./images/banner/aquila_logo_550.png') center center no-repeat;
+            }
+
+            @include media-breakpoint-up(md) {
+                margin-left: -325px;
+                margin-top: -133px;
+                width: 650px;
+                height: 266px;
+                background: transparent url('./images/banner/aquila_logo_650.png') center center no-repeat;
+            }
+        }
+
+        .arrow-wrap {
+            position: absolute;
+            left: 50%;
+            bottom: -2em;
+            margin-left: -5em;
+            background: transparent;
+            width: 10em;
+            height: 6em;
+            display: block;
+            z-index: 2;
+        }
+
+        .arrow {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            margin-left:-20px;
+            width: 40px;
+            height: 40px;
+            background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik0yOTMuNzUxLDQ1NS44NjhjLTIwLjE4MSwyMC4xNzktNTMuMTY1LDE5LjkxMy03My42NzMtMC41OTVsMCwwYy0yMC41MDgtMjAuNTA4LTIwLjc3My01My40OTMtMC41OTQtNzMuNjcyICBsMTg5Ljk5OS0xOTBjMjAuMTc4LTIwLjE3OCw1My4xNjQtMTkuOTEzLDczLjY3MiwwLjU5NWwwLDBjMjAuNTA4LDIwLjUwOSwyMC43NzIsNTMuNDkyLDAuNTk1LDczLjY3MUwyOTMuNzUxLDQ1NS44Njh6Ii8+DQo8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMjIwLjI0OSw0NTUuODY4YzIwLjE4LDIwLjE3OSw1My4xNjQsMTkuOTEzLDczLjY3Mi0wLjU5NWwwLDBjMjAuNTA5LTIwLjUwOCwyMC43NzQtNTMuNDkzLDAuNTk2LTczLjY3MiAgbC0xOTAtMTkwYy0yMC4xNzgtMjAuMTc4LTUzLjE2NC0xOS45MTMtNzMuNjcxLDAuNTk1bDAsMGMtMjAuNTA4LDIwLjUwOS0yMC43NzIsNTMuNDkyLTAuNTk1LDczLjY3MUwyMjAuMjQ5LDQ1NS44Njh6Ii8+DQo8L3N2Zz4=);
+            background-size: contain;
+        }
+
+        @keyframes arrows {
+            0% { top: 0; }
+            2.5% { top: 12%; }
+            5% { top: 0; }
+            7.5% { top: 12%; }
+            10% { top: -12%; }
+            12.5% { top: 12%; }
+            15% { top: 0; }
+            17.5% { top: 12%; }
+            20% { top: -12%; }
+            22.5% { top: 12%; }
+            25% { top: 0; }
+            100% { top: 0; }
+        }
+
+        .arrow-wrap .arrow {
+            animation: arrows 12s 0.4s;
+            animation-delay: 3s;
+            animation-iteration-count: infinite;
+        }
+    }
+
+    .news {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100vh;
+
+        .news-item {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            background-position: 50% 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            &:before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0, 1) 80%);
+            }
+
+            .news-item-content {
+                position: absolute;
+                bottom: $grid-gutter-width / 2;
+
+                @include make-row();
+
+                > div {
+                    @include make-col(9);
+
+                    h1 {
+                        display: inline-block;
+                        margin: 0;
+                    }
+
+                    p {
+                        margin: 0;
+                        padding: 10px 0;
+                    }
+                }
+            }
+        }
+    }
+
+    main {
+       margin-top: 0;
+
+        &:before {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100px);
+            content: "";
+            height: 100px;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }
+}
+
+.section-signup {
+    main {
+/*        background: url('images/cover_dh.jpg') top center no-repeat;*/
+        background-size: 150%, initial;
+    }
+}
+
+.paper {
+    background-color: #ebdec2;
+    color: #352011;
+    box-shadow: 0 0 16px 6px rgba(0,0,0,.5);
+    border: 12px solid #ebdec2;
+    border-image: url(/styles/aquila/theme/images/paper.png) 12 repeat;
+    border-image-outset: 3px 3px 3px 3px;
+    overflow: hidden;
+
+    &.no-top {
+        border-top: 0;
+        border-image-outset: 0 3px 3px 3px;
+    }
+
+    &.no-bottom {
+        border-bottom: 0;
+        border-image-outset: 3px 3px 0 3px;
+    }
+}
+
+/**
+ * Footer
+**/
+footer {
+    font-size: 0.9rem;
+    padding-top: 20px;
+    position: relative;
+
+    &:before {
+        background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 200px);
+        bottom: 0;
+        content: "";
+        height: 200px;
+        left: 0;
+        position: absolute;
+        width: 100%;
+    }
+
+    a {
+        border-bottom-style: dotted;
+        border-bottom-width: 1px;
+    }
+
+    .page-footer-inner {
+        @include make-container();
+        @include make-container-max-widths();
+        margin-bottom: 5px;
+    }
+
+    .leaders {
+        @include make-row();
+        padding: 20px 0 20px;
+        position: relative;
+
+        .gm {
+            @include make-col(12)
+            padding: 0 15px;
+
+            @include media-breakpoint-up('md') {
+                @include make-col(5);
+            }
+
+            @include media-breakpoint-up('lg') {
+                @include make-col(4);
+            }
+        }
+
+        .officers {
+            @include make-col(12)
+            padding: 0 15px;
+
+            @include media-breakpoint-up('md') {
+                @include make-col(7);
+            }
+
+            @include media-breakpoint-up('lg') {
+                @include make-col(8);
+            }
+        }
+    }
+
+    .copyright {
+        @include make-row();
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        padding: 15px 0 10px;
+    }
+
+}

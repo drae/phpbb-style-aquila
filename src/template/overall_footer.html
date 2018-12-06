@@ -1,0 +1,248 @@
+			<!-- EVENT overall_footer_content_after -->
+
+			</div>
+		</div><!-- container-content row -->
+	</main><!-- main -->
+
+
+<footer class="page-footer-wrap">
+	<div class="page-footer-outer">
+		<div class="page-footer-inner">
+
+			<div class="row">
+				<div class="col-12">
+					<h1>About Aquila</h1>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<p class="text-justify">Aquila, a guild in World of Warcraft based on the Hellscream realm in Europe was created in April 2007. We formed after demerging from a much larger older guild, Divine Protectors which dated back to the realms opening in spring 2005. Basically we were a bunch of in-game (and some real life) friends who wanted to concentrate more on 25 man raiding.</p>
+				</div>
+
+				<div class="col-sm-6">
+					<p class="text-justify">While we had no intention of climbing the realm progression ranks we steadily did so. We finished out &quot;The Burning Crusade&quot; as realm No. 2. A place we have maintained through Wrath of the Lich King and as a 10 man raid group in Cataclysm. Several years may have passed but we still count a significant number of original members amongst our ranks.</p>
+				</div>
+			</div>
+
+			<!-- EVENT overall_footer_page_body_after -->
+
+			<div class="copyright">
+				<div class="col-12">
+					<p>Powered by <a href="http://www.phpbb.com/">phpBB</a> &copy; 2002-2012 phpBB Group Ltd. / Various source imagery &copy; Blizzard Entertainment Inc. <!-- IF DEBUG_OUTPUT --> / {DEBUG_OUTPUT}<!-- ENDIF --></p>
+				</div>
+			</div>
+
+		</div>
+	</div><!-- page-footer-outer -->
+</footer>
+
+<!-- IF not S_IS_BOT -->{RUN_CRON_TASK}<!-- ENDIF -->
+
+<div id="darkenwrapper" class="darkenwrapper" data-ajax-error-title="{L_AJAX_ERROR_TITLE}" data-ajax-error-text="{L_AJAX_ERROR_TEXT}" data-ajax-error-text-abort="{L_AJAX_ERROR_TEXT_ABORT}" data-ajax-error-text-timeout="{L_AJAX_ERROR_TEXT_TIMEOUT}" data-ajax-error-text-parsererror="{L_AJAX_ERROR_TEXT_PARSERERROR}">
+</div>
+
+<div id="phpbb_alert" class="phpbb_alert" data-l-err="{L_ERROR}" data-l-timeout-processing-req="{L_TIMEOUT_PROCESSING_REQ}">
+	<a href="#" class="alert_close">
+		<i class="fa fa-2x fa-times-circle fa-fw" aria-hidden="true"></i>
+	</a>
+	<h3 class="alert_title">&nbsp;</h3><p class="alert_text"></p>
+</div>
+
+<div id="phpbb_confirm" class="phpbb_alert">
+	<a href="#" class="alert_close">
+		<i class="fa fa-2x fa-times-circle fa-fw" aria-hidden="true"></i>
+	</a>
+	<div class="alert_text"></div>
+</div>
+
+<!-- Script loading -->
+<!-- 3rd party vendor scripts-->
+<script type="text/javascript" src="//wow.zamimg.com/widgets/power.js"></script>
+<script>var wowhead_tooltips = { "colorlinks": true, "iconizelinks": true, "renamelinks": true }</script>
+<script type="text/javascript" src="{T_ASSETS_PATH}/javascript/core.js?assets_version={T_ASSETS_VERSION}"></script>
+<!-- INCLUDEJS forum_fn.js -->
+<!-- INCLUDEJS ajax.js -->
+<script>
+// <![CDATA[
+		var waypoints = [];
+
+		$(document).ready(function() {
+			$(window).scroll( function(){
+				$('.arrow-wrap').css('opacity', 1 - ($(window).scrollTop() * 2.5) / $(window).height())
+				$(".site-logo").css("opacity", 1 - ($(window).scrollTop() * .75) / 250);
+			});
+
+			// Basic hovercard
+			$('a[data-profile-card]').popover({
+				html : true,
+				trigger: 'manual',
+				placement: function() {
+					return $(window).width() < 768 ? 'bottom' : 'right';
+				},
+				content: function() {
+					return $("div[data-profile-card='" + $(this).data('profile-card') + "']").html();
+				}
+			}).on("click", function(e) {
+				e.preventDefault();
+
+				var _this = this;
+				$(this).popover("show");
+				$(this).siblings(".popover").on("mouseleave", function() {
+					$(_this).popover('hide');
+				});
+			}).on("mouseleave", function() {
+				var _this = this;
+				setTimeout(function() {
+					if (!$(".popover:hover").length) {
+						$(_this).popover("hide")
+					}
+				}, 100);
+			});
+
+			// Marklist
+			function marklist(id, name, state)
+			{
+				var parent = document.getElementById(id);
+				if (!parent)
+				{
+					eval('parent = document.' + id);
+				}
+
+				if (!parent)
+				{
+					return;
+				}
+
+				var rb = parent.getElementsByTagName('input');
+
+				for (var r = 0; r < rb.length; r++)
+				{
+					if (rb[r].name.substr(0, name.length) == name)
+					{
+						rb[r].checked = state;
+					}
+				}
+			}
+
+			waypoints['container-main-navbar'] = $('.section-index .news').waypoint({
+				handler: function(direction) {
+					switch (direction) {
+						case 'down':
+							$('.navbar').addClass('at-top');
+							break;
+
+						case 'up':
+							$('.navbar').removeClass('at-top');
+							break;
+					}
+				},
+				offset: $('.navbar').height()
+			});
+
+			waypoints['container-main-navbar'] = $('.section-index .news').waypoint({
+				handler: function(direction) {
+					switch (direction) {
+						case 'down':
+							$('.navbar').addClass('at-navbar');
+							break;
+
+						case 'up':
+							$('.navbar').removeClass('at-navbar');
+							break;
+					}
+				},
+				offset: $('.navbar').outerHeight()
+			});
+
+			waypoints['container-main-navbar'] = $('.section-index .news').waypoint({
+				handler: function(direction) {
+					switch (direction) {
+						case 'down':
+							$('.starfield-gradient').addClass('at-top');
+							break;
+
+						case 'up':
+							$('.starfield-gradient').removeClass('at-top');
+							break;
+					}
+				}
+			});
+
+			// Auto-resize images within content
+			$(".post-content img")
+				.filter(function() {
+					return (this.width > 600);
+				}).each(function() {
+					var a = $('<a/>').attr('href', this.src).attr('title', '<a target="_blank" href="'+this.src+'">Original size</a>').colorbox({photo:true, maxHeight:'95%', maxWidth:'95%'});;
+					$(this).attr("height",this.height/this.width*600)
+					$(this).attr("width",600)
+					$(this).attr("title","Click for full size")
+					if(this.parentNode.tagName !== 'A') {
+						$(this).wrap(a);
+					}
+			});
+
+			$(".post-content img")
+				.filter(function() {
+					return (this.height > 325);
+				}).each(function() {
+					var a = $('<a/>').attr('href', this.src).attr('title', '<a target="_blank" href="'+this.src+'">Original size</a>').colorbox({photo:true, maxHeight:'95%', maxWidth:'95%'});
+					$(this).attr("width",this.width/this.height*325)
+					$(this).attr("height",325)
+					$(this).attr("title","Click for full size")
+					if(this.parentNode.tagName !== 'A') {
+						$(this).wrap(a);
+					}
+			});
+
+			Waypoint.refreshAll();
+
+			$('.landing a[href^="#"]').on('click',function (e) {
+				e.preventDefault();
+
+				var target = this.hash;
+				var $target = $(target);
+
+				$('html, body').stop().animate({
+					'scrollTop': $target.offset().top
+				}, 600, 'swing', function () {
+					window.location.hash = target;
+				});
+			});
+		});
+	// ]]>
+	</script>
+	<!-- IF S_COOKIE_NOTICE -->
+	<script src="{T_ASSETS_PATH}/cookieconsent/cookieconsent.min.js?assets_version={T_ASSETS_VERSION}"></script>
+	<script>
+		window.addEventListener("load", function(){
+			window.cookieconsent.initialise({
+				"palette": {
+					"popup": {
+						"background": "#0F538A"
+					},
+					"button": {
+						"background": "#E5E5E5"
+					}
+				},
+				"theme": "classic",
+				"content": {
+					"message": "{LA_COOKIE_CONSENT_MSG}",
+					"dismiss": "{LA_COOKIE_CONSENT_OK}",
+					"link": "{LA_COOKIE_CONSENT_INFO}",
+					"href": "{LA_COOKIE_CONSENT_HREF}"
+				}
+			})});
+	</script>
+	<!-- ENDIF -->
+
+	<!-- EVENT overall_footer_after -->
+
+	<!-- IF S_PLUPLOAD --><!-- INCLUDE plupload.html --><!-- ENDIF -->
+
+	{$SCRIPTS}
+
+	<!-- EVENT overall_footer_body_after -->
+</body>
+</html>

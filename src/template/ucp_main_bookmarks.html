@@ -1,0 +1,133 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+	<h2>{L_TITLE}</h2>
+
+	<p>{L_BOOKMARKS_EXPLAIN}</p>
+
+<!-- IF S_NO_DISPLAY_BOOKMARKS -->
+	<div class="error">
+		<p>{L_BOOKMARKS_DISABLED}</p>
+	</div>
+<!-- ELSE -->
+
+<!-- IF .topicrow -->
+	<ul class="table table-plain topics-normal tabulated-list">
+		<li class="header">
+			<dl>
+				<dt>{L_BOOKMARKS}</dt>
+				<dd class="lastpost"><span>{L_LAST_POST}</span></dd>
+				<dd class="mark">{L_MARK}</dd>
+			</dl>
+		</li>
+		<!-- BEGIN topicrow -->
+		<li class="row">
+			<dl>
+				<dt<!-- IF topicrow.TOPIC_ICON_IMG --> style="background-image: url({T_ICONS_PATH}{topicrow.TOPIC_ICON_IMG}); background-repeat: no-repeat;"<!-- ENDIF --> title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+
+					<div class="forum-desc no-icon">
+						<div class="viewforum-topic-title">
+
+							<!-- IF topicrow.S_UNREAD_TOPIC -->
+							<a href="{topicrow.U_NEWEST_POST}" class="row-item-link"></a>
+							<!-- ENDIF -->
+
+							<!-- IF topicrow.S_UNREAD_TOPIC -->
+							<a href="{topicrow.U_NEWEST_POST}">
+								<i class="fa fa-file fa-fw icon-red icon-md" aria-hidden="true"></i><span class="sr-only">{NEW_POST}</span>
+							</a>
+							<!-- ENDIF -->
+
+							<a href="{topicrow.U_VIEW_TOPIC}" class="topictitle">{topicrow.TOPIC_TITLE}</a>
+
+							<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+							<a href="{topicrow.U_MCP_QUEUE}" title="{TOPIC_UNAPPROVED}">
+								<i class="fa fa-question fa-fw icon-blue" aria-hidden="true"></i><span class="sr-only">{TOPIC_UNAPPROVED}</span>
+							</a>
+							<!-- ENDIF -->
+
+							<!-- IF topicrow.S_TOPIC_REPORTED -->
+							<a href="{topicrow.U_MCP_REPORT}" title="{TOPIC_REPORTED}">
+								<i class="fa fa-exclamation fa-fw icon-red" aria-hidden="true"></i><span class="sr-only">{TOPIC_REPORTED}</span>
+							</a>
+							<!-- ENDIF -->
+						</div>
+
+						<div class="viewforum-topic-extra">
+							<div class="viewforum-topic-author">
+								<!-- IF topicrow.ATTACH_ICON_IMG --><i class="fa fa-paperclip fa-fw" aria-hidden="true"></i> <!-- ENDIF -->
+								{L_LAST_POST} {L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL} &laquo; <a href="{topicrow.U_LAST_POST}" title="{L_GOTO_LAST_POST}">{topicrow.LAST_POST_TIME}</a>
+							</div>
+
+							<!-- IF .topicrow.pagination -->
+							<div class="pagination viewforum-pagination">
+								<ul>
+								<!-- BEGIN pagination -->
+									<!-- IF topicrow.pagination.S_IS_PREV -->
+									<!-- ELSEIF topicrow.pagination.S_IS_CURRENT --><li class="active"><span>{topicrow.pagination.PAGE_NUMBER}</span></li>
+									<!-- ELSEIF topicrow.pagination.S_IS_ELLIPSIS --><li class="ellipsis"><span>{L_ELLIPSIS}</span></li>
+									<!-- ELSEIF topicrow.pagination.S_IS_NEXT -->
+									<!-- ELSE --><li><a href="{topicrow.pagination.PAGE_URL}">{topicrow.pagination.PAGE_NUMBER}</a></li>
+									<!-- ENDIF -->
+								<!-- END pagination -->
+								</ul>
+							</div>
+							<!-- ENDIF -->
+						</div>
+					</div>
+				</dt>
+				<dd class="lastpost"><span><dfn>{L_LAST_POST} </dfn>{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}
+					<a href="{topicrow.U_LAST_POST}" title="{L_GOTO_LAST_POST}">
+						<i class="fa fa-external-link-square fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{VIEW_LATEST_POST}</span>
+					</a>
+					<br />{topicrow.LAST_POST_TIME}</span>
+				</dd>
+				<dd class="mark"><input type="checkbox" name="t[{topicrow.TOPIC_ID}]" id="t{topicrow.TOPIC_ID}" /></dd>
+			</dl>
+		</li>
+		<!-- END topicrow -->
+	</ul>
+
+	<div class="action-bar bar-bottom">
+		<div class="pagination">
+			{TOTAL_TOPICS}
+			<!-- IF .pagination -->
+				<!-- INCLUDE pagination.html -->
+			<!-- ELSE -->
+				 &bull; {PAGE_NUMBER}
+			<!-- ENDIF -->
+		</div>
+	</div>
+
+<!-- ELSE -->
+	<p><strong>{L_NO_BOOKMARKS}</strong></p>
+<!-- ENDIF -->
+
+<!-- ENDIF -->
+
+
+<!-- IF .topicrow and not S_NO_DISPLAY_BOOKMARKS -->
+	<div class="actionbar mb-0">
+		<div class="row">
+			<div class="actionbar-items">
+				<input class="btn btn-posting btn-large" type="submit" name="unwatch" value="{L_UNWATCH_MARKED}" />
+				<div class="tools">
+					<a href="#" onclick="marklist('ucp', 't', true); marklist('ucp', 'f', true); return false;">{L_MARK_ALL}</a>&nbsp;&bull;&nbsp;<a href="#" onclick="marklist('ucp', 't', false); marklist('ucp', 'f', false); return false;">{L_UNMARK_ALL}</a>
+				</div>
+			</div>
+			<div class="pagination">
+				{TOTAL_TOPICS}
+				<!-- IF .pagination -->
+					<!-- INCLUDE pagination.html -->
+				<!-- ELSE -->
+				&nbsp;&bull;&nbsp;<span class="pagination-page">{PAGE_NUMBER}</span>
+				<!-- ENDIF -->
+			</div>
+		</div>
+	</div>
+	{S_FORM_TOKEN}
+<!-- ENDIF -->
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

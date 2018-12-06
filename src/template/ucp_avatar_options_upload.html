@@ -1,0 +1,17 @@
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="avatar_upload_file">{L_UPLOAD_AVATAR_FILE}{L_COLON}</label>
+								<div class="col-sm-9">
+									<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_UPLOAD_SIZE}" />
+									<input class="form-control" type="file" name="avatar_upload_file" id="avatar_upload_file" />
+								</div>
+							</div>
+
+							<!-- IF S_UPLOAD_AVATAR_URL -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="avatar_upload_url">{L_UPLOAD_AVATAR_URL}{L_COLON}#</label>
+								<div class="col-sm-9">
+									<input class="form-control" type="text" name="avatar_upload_url" id="avatar_upload_url" value="" />
+									<span class="help-block">#{L_UPLOAD_AVATAR_URL_EXPLAIN}</span>
+								</div>
+							</div>
+							<!-- ENDIF -->

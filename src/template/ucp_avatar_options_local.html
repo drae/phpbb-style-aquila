@@ -1,0 +1,25 @@
+							<!-- IF .avatar_local_cats -->
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="category">{L_AVATAR_CATEGORY}{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<select class="form-control" name="avatar_local_cat" id="category">
+										<!-- BEGIN avatar_local_cats -->
+										<option value="{avatar_local_cats.NAME}"<!-- IF avatar_local_cats.SELECTED --> selected="selected"<!-- ENDIF -->>{avatar_local_cats.NAME}</option>
+										<!-- END avatar_local_cats -->
+									</select>
+									<input class="btn btn-default btn-sm" type="submit" name="avatar_local_go" id="avatar_local_go" value="{L_GO}"/>
+								</div>
+							</div>
+
+							<div id="gallery" class="avatar-gallery col-sm-10 col-sm-offset-2">
+							<!-- BEGIN avatar_local_row -->
+							<!-- BEGIN avatar_local_col -->
+								<label for="av-{avatar_local_row.S_ROW_COUNT}-{avatar_local_row.avatar_local_col.S_ROW_COUNT}"><img src="{avatar_local_row.avatar_local_col.AVATAR_IMAGE}" alt="" /><br />
+								<input type="radio" name="avatar_local_file" id="av-{avatar_local_row.S_ROW_COUNT}-{avatar_local_row.avatar_local_col.S_ROW_COUNT}" value="{avatar_local_row.avatar_local_col.AVATAR_FILE}" /></label>
+							<!-- END avatar_local_col -->
+							<!-- END avatar_local_row -->
+							</div>
+							<!-- ELSE -->
+							<p><strong>{L_NO_AVATARS}</strong></p>
+							<!-- ENDIF -->
+

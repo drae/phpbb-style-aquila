@@ -1,0 +1,15 @@
+							<!-- IF S_TYPE == 1 -->
+							<h3 class="text-center">{L_CONFIRMATION}</h3>
+							
+							<p></p>
+							<!-- ENDIF -->
+	
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="qa_answer">*{QA_CONFIRM_QUESTION}<sup>#</sup>{L_COLON}</label>
+								<div class="col-sm-9 form-inline">
+									<input class="form-control" type="text"" tabindex="{$CAPTCHA_TAB_INDEX}" name="qa_answer" id="answer" title="{L_ANSWER}" />
+									<span class="help-block"># {L_CONFIRM_QUESTION_EXPLAIN}</span>
+								</div>
+							</div>
+							
+							<input type="hidden" name="qa_confirm_id" id="qa_confirm_id" value="{QA_CONFIRM_ID}" />

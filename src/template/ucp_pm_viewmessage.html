@@ -1,0 +1,229 @@
+<!-- INCLUDE ucp_header.html -->
+
+<!-- INCLUDE ucp_pm_message_header.html -->
+
+	<!-- IF S_DISPLAY_HISTORY and (U_VIEW_PREVIOUS_HISTORY or U_VIEW_NEXT_HISTORY) -->
+	<fieldset class="display-options clearfix">
+		<!-- IF U_VIEW_PREVIOUS_HISTORY -->
+			<a href="{U_VIEW_PREVIOUS_HISTORY}" class="left-box arrow-{S_CONTENT_FLOW_BEGIN}">
+				<i class="icon fa-angle-{S_CONTENT_FLOW_BEGIN} fa-fw icon-black" aria-hidden="true"></i><span>{L_VIEW_PREVIOUS_HISTORY}</span>
+			</a>
+		<!-- ENDIF -->
+		<!-- IF U_VIEW_NEXT_HISTORY -->
+			<a href="{U_VIEW_NEXT_HISTORY}" class="right-box arrow-{S_CONTENT_FLOW_END}">
+				<i class="icon fa-angle-{S_CONTENT_FLOW_END} fa-fw icon-black" aria-hidden="true"></i><span>{L_VIEW_NEXT_HISTORY}</span>
+			</a>
+		<!-- ENDIF -->
+	</fieldset>
+	<!-- ENDIF -->
+
+	<section class="viewmessage">
+		<article id="post-{MESSAGE_ID}" class="table pm has-profile<!-- IF S_POST_UNAPPROVED or S_POST_REPORTED --> reported<!-- ENDIF --><!-- IF S_ONLINE --> online<!-- ENDIF -->">
+
+			<div class="postprofile">
+				<div class="author-info">
+					<!-- IF MESSAGE_AVATAR -->
+					<!-- DEFINE $AVATAR = '{MESSAGE_AVATAR}' -->
+					<!-- ELSE -->
+					<!-- DEFINE $AVATAR = '<img src="{T_THEME_PATH}/images/no_avatar.gif" width="100" height="100" alt="{L_USER_AVATAR}" />' -->
+					<!-- ENDIF -->
+
+					<!-- IF AVATAR -->
+					<div class="avatar-container">
+						<!-- EVENT ucp_pm_viewmessage_avatar_before -->
+						<!-- IF U_MESSAGE_AUTHOR --><a class="avatar" data-profile-card="{MESSAGE_AUTHOR}" href="{U_MESSAGE_AUTHOR}">{AVATAR}</a><!-- ELSE --><a data-profile-card="{MESSAGE_AUTHOR}" href="#" class="avatar">{AVATAR}</a><!-- ENDIF -->
+						<!-- EVENT ucp_pm_viewmessage_avatar_after -->
+					</div>
+					<!-- ENDIF -->
+
+					<!-- EVENT ucp_pm_viewmessage_MESSAGE_AUTHOR_before -->
+					<h3><a data-profile-card="{MESSAGE_AUTHOR}" href="<!-- IF not U_MESSAGE_AUTHOR -->#<!-- ELSE -->{MESSAGE_AUTHOR}<!-- ENDIF -->"<!-- IF MESSAGE_AUTHOR_COLOUR --> class="username-coloured" style="color:{MESSAGE_AUTHOR_COLOUR}"<!-- ENDIF -->>{MESSAGE_AUTHOR}</a></h3>
+					<!-- EVENT ucp_pm_viewmessage_MESSAGE_AUTHOR_after -->
+
+					<!-- EVENT ucp_pm_viewmessage_postrow_rank_before -->
+					<!-- IF RANK_TITLE or RANK_IMG -->{RANK_TITLE}<!-- IF RANK_TITLE and RANK_IMG --><br /><!-- ENDIF -->{RANK_IMG}<br /><!-- ENDIF -->
+					<!-- EVENT ucp_pm_viewmessage_postrow_rank_after -->
+
+					<!-- IF S_PROFILE_EMAIL -->
+					<!-- Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
+					<strong>{PROFILE_CUSTOM_BATTLETAG}{L_COLON}</strong> {PROFILE_CUSTOM_BATTLETAG}<br />
+					<!-- ENDIF -->
+
+					<!-- EVENT ucp_pm_viewmessage_postrow_custom_fields_before -->
+
+					<!-- BEGIN custom_fields -->
+					<!-- IF not custom_fields.S_PROFILE_CONTACT -->
+					<strong>{custom_fields.PROFILE_FIELD_NAME}{L_COLON}</strong> {custom_fields.PROFILE_FIELD_VALUE}<br />
+					<!-- ENDIF -->
+					<!-- END custom_fields -->
+
+					<br />
+
+					<strong>{L_SENT_AT}{L_COLON}</strong> {SENT_DATE}
+
+					<br /><strong>{L_PM_FROM}{L_COLON}</strong> {MESSAGE_AUTHOR_FULL}
+
+					<!-- IF S_TO_RECIPIENT -->
+					<br /><strong>{L_TO}{L_COLON}</strong>
+					<!-- BEGIN to_recipient -->
+					<!-- IF to_recipient.NAME_FULL -->{to_recipient.NAME_FULL}<!-- ELSE --><a href="{to_recipient.U_VIEW}" style="color:<!-- IF to_recipient.COLOUR -->{to_recipient.COLOUR}<!-- ELSEIF to_recipient.IS_GROUP -->#0000FF<!-- ENDIF -->;">{to_recipient.NAME}</a><!-- ENDIF -->
+					<!-- END to_recipient -->
+					<!-- ENDIF -->
+
+					<!-- IF S_BCC_RECIPIENT -->
+					<br /><strong>{L_BCC}{L_COLON}</strong>
+					<!-- BEGIN bcc_recipient -->
+					<!-- IF bcc_recipient.NAME_FULL -->{bcc_recipient.NAME_FULL}<!-- ELSE --><a href="{bcc_recipient.U_VIEW}" style="color:<!-- IF bcc_recipient.COLOUR -->{bcc_recipient.COLOUR}<!-- ELSEIF bcc_recipient.IS_GROUP -->#0000FF<!-- ENDIF -->;">{bcc_recipient.NAME}</a><!-- ENDIF -->
+					<!-- END bcc_recipient -->
+					<!-- ENDIF -->
+
+					<!-- EVENT ucp_pm_viewmessage_postrow_custom_fields_after -->
+
+					<!-- EVENT ucp_pm_viewmessage_contact_fields_before -->
+					<div data-profile-card="{MESSAGE_AUTHOR}" style="display:none;">
+						<div class="profile-card hovercard">
+							<div class="cardheader"></div>
+
+							<div class="avatar">
+								<!-- EVENT ucp_pm_viewmessage_avatar_before -->
+								<!-- IF U_MESSAGE_AUTHOR --><a href="{U_MESSAGE_AUTHOR}">{$AVATAR}</a><!-- ELSE -->{$AVATAR}<!-- ENDIF -->
+								<!-- EVENT ucp_pm_viewmessage_avatar_after -->
+							</div>
+
+							<h3><a data-profile-card="{MESSAGE_AUTHOR}" href="<!-- IF not U_MESSAGE_AUTHOR -->#<!-- ELSE -->{MESSAGE_AUTHOR}<!-- ENDIF -->"<!-- IF MESSAGE_AUTHOR_COLOUR --> class="username-coloured" style="color:{MESSAGE_AUTHOR_COLOUR}"<!-- ENDIF -->>{MESSAGE_AUTHOR}</a></h3>
+
+							<div class="profile-contacts">
+								<!-- BEGIN contact -->
+								<!-- IF contact.ID == 'email' -->
+								<a class="contact-icon email" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-envelope fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'pm' -->
+								<a class="contact-icon pm" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-comments fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'phpbb_facebook' -->
+								<a class="contact-icon facebook" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-facebook fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'phpbb_skype' -->
+								<a class="contact-icon skype" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-skype fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'phpbb_googleplus' -->
+								<a class="contact-icon google-plus" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-google-plus fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'phpbb_twitter' -->
+								<a class="contact-icon twitter" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-twitter fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'phpbb_youtube' -->
+								<a class="contact-icon youtube" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-youtube fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'twitch' -->
+								<a class="contact-icon twitch" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-twitch fa-fw"></i></a>
+								<!-- ELSEIF contact.ID == 'custom_instagram' -->
+								<a class="contact-icon instagram" href="<!-- IF contact.U_CONTACT -->{contact.U_CONTACT}<!-- ELSE -->{U_MESSAGE_AUTHOR}<!-- ENDIF -->" title="{contact.NAME}"><i class="fa fa-instagram fa-fw"></i></a>
+								<!-- ENDIF -->
+								<!-- END contact -->
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="postoutput">
+				<div class="post-body">
+
+					<h3 class="first">{SUBJECT}</h3>
+
+					<!-- DEFINE $SHOW_PM_POST_BUTTONS = (U_EDIT or U_DELETE or U_REPORT or U_QUOTE) -->
+					<!-- EVENT ucp_pm_viewmessage_post_buttons_list_before -->
+					<!-- IF $SHOW_PM_POST_BUTTONS -->
+					<ul class="post-buttons list-inline" style="visibility: hidden">
+						<!-- EVENT ucp_pm_viewmessage_post_buttons_before -->
+						<!-- IF U_EDIT -->
+						<li>
+							<a class="btn btn-default btn-sm btn-icon-only" href="{U_EDIT}" title="{L_POST_EDIT_PM}">
+								<i class="fa fa-pencil fa-fw" aria-hidden="true"></i><span class="sr-only">{L_POST_EDIT_PM}</span>
+							</a>
+						</li>
+						<!-- ENDIF -->
+						<!-- IF U_DELETE -->
+						<li>
+							<a class="btn btn-default btn-sm btn-icon-only" href="{U_DELETE}" title="{L_DELETE_MESSAGE}">
+								<i class="fa fa-times fa-fw" aria-hidden="true"></i><span class="sr-only">{L_DELETE_MESSAGE}</span>
+							</a>
+						</li>
+						<!-- ENDIF -->
+						<!-- IF U_REPORT -->
+						<li>
+							<a class="btn btn-default btn-sm btn-icon-only" href="{U_REPORT}" title="{L_REPORT_PM}">
+								<i class="fa fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{L_REPORT_PM}</span>
+							</a>
+						</li>
+						<!-- ENDIF -->
+						<!-- IF U_QUOTE -->
+						<li>
+							<a class="btn btn-default btn-sm btn-icon-only" href="{U_QUOTE}" title="{L_POST_QUOTE_PM}">
+								<i class="fa fa-quote-left fa-fw" aria-hidden="true"></i><span class="sr-only">{L_POST_QUOTE_PM}</span>
+							</a>
+						</li>
+						<!-- ENDIF -->
+						<!-- EVENT ucp_pm_viewmessage_post_buttons_after -->
+					</ul>
+					<!-- ENDIF -->
+					<!-- EVENT ucp_pm_viewmessage_post_buttons_list_after -->
+
+					<div class="content">{MESSAGE}</div>
+
+					<!-- IF S_HAS_ATTACHMENTS -->
+					<dl class="attachbox">
+						<dt>
+							{L_ATTACHMENTS}
+						</dt>
+						<!-- BEGIN attachment -->
+							<dd>{attachment.DISPLAY_ATTACHMENT}</dd>
+						<!-- END attachment -->
+					</dl>
+					<!-- ENDIF -->
+
+					<!-- IF S_DISPLAY_NOTICE -->
+					<div class="post-notice error">{L_DOWNLOAD_NOTICE}</div>
+					<!-- ENDIF -->
+
+					<!-- IF EDITED_MESSAGE or EDIT_REASON -->
+					<div class="notice">{EDITED_MESSAGE}
+						<!-- IF EDIT_REASON --><br /><strong>{L_REASON}{L_COLON}</strong> <em>{EDIT_REASON}</em><!-- ENDIF -->
+					</div>
+					<!-- ENDIF -->
+
+					<!-- IF SIGNATURE -->
+					<div id="sig{MESSAGE_ID}" class="signature">{SIGNATURE}</div>
+					<!-- ENDIF -->
+				</div>
+			</div>
+
+		</article>
+	</section>
+
+	<script type="text/javascript">
+		$('.post-body').hover(function(){
+			$(this).find('.post-buttons').css('visibility','visible')
+		}, function(){
+			$(this).find('.post-buttons').css('visibility','hidden')
+		});
+	</script>
+
+	<!-- EVENT ucp_pm_viewmessage_options_before -->
+
+	<!-- IF S_VIEW_MESSAGE -->
+	<div class="results-order">
+		<div class="form-inline">
+			<!-- IF not S_UNREAD and not S_SPECIAL_FOLDER -->
+			<label for="dest_folder"><!-- IF S_VIEW_MESSAGE -->{L_MOVE_TO_FOLDER}{L_COLON} <!-- ELSE -->{L_MOVE_MARKED_TO_FOLDER}<!-- ENDIF --> <select class="form-control mr-2" name="dest_folder" id="dest_folder">{S_TO_FOLDER_OPTIONS}</select></label>
+			<input class="btn btn-default" type="submit" name="move_pm" value="{L_GO}" />
+			<!-- ENDIF -->
+			<input type="hidden" name="marked_msg_id[]" value="{MSG_ID}" />
+			<input type="hidden" name="cur_folder_id" value="{CUR_FOLDER_ID}" />
+			<input type="hidden" name="p" value="{MSG_ID}" />
+		</div>
+	</div>
+	<!-- ENDIF -->
+
+<!-- INCLUDE ucp_pm_message_footer.html -->
+
+<!-- IF S_DISPLAY_HISTORY -->
+<!-- INCLUDE ucp_pm_history.html -->
+<!-- ENDIF -->
+
+<!-- INCLUDE ucp_footer.html -->

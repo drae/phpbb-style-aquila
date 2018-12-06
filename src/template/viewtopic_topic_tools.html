@@ -1,0 +1,54 @@
+					<div class="tools">
+						<!-- IF not S_IS_BOT and (U_WATCH_TOPIC or U_BOOKMARK_TOPIC or U_BUMP_TOPIC or S_HAS_ATTACHMENTS or U_EMAIL_TOPIC or U_PRINT_TOPIC or S_DISPLAY_TOPIC_TOOLS) -->
+						<div class="dropdown" id="dropdown-tools">
+							<a class="btn btn-tools dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-cog"></i> Tools
+							</a>
+							<div class="dropdown-menu">
+								<!-- EVENT viewtopic_topic_tools_before -->
+								<!-- IF U_WATCH_TOPIC -->
+								<a href="{U_WATCH_TOPIC}" class="dropdown-item watch-topic-link" title="{S_WATCH_TOPIC_TITLE}" data-ajax="toggle_link" data-toggle-class="small-icon icon-<!-- IF not S_WATCHING_TOPIC -->unsubscribe<!-- ELSE -->subscribe<!-- ENDIF -->" data-toggle-text="{S_WATCH_TOPIC_TOGGLE}" data-toggle-url="{U_WATCH_TOPIC_TOGGLE}" data-update-all=".watch-topic-link">
+										<i class="fa fa-fw fa-<!-- IF S_WATCHING_TOPIC -->square-o<!-- ELSE -->check-square-o<!-- ENDIF -->" aria-hidden="true"></i><span>{S_WATCH_TOPIC_TITLE}</span>
+								</a>
+								<!-- ENDIF -->
+								<!-- IF U_BOOKMARK_TOPIC -->
+								<a href="{U_BOOKMARK_TOPIC}" class="dropdown-item bookmark-link" title="{L_BOOKMARK_TOPIC}" data-ajax="alt_text" data-alt-text="{S_BOOKMARK_TOGGLE}" data-update-all=".bookmark-link">
+										<i class="fa fa-fw fa-bookmark"></i><span>{S_BOOKMARK_TOPIC}</span>
+								</a>
+								<!-- ENDIF -->
+								<!-- IF U_BUMP_TOPIC -->
+								<a class="dropdown-item" href="{U_BUMP_TOPIC}" title="{L_BUMP_TOPIC}">
+										<i class="fa fa-level-up fa-fw" aria-hidden="true"></i><span>{L_BUMP_TOPIC}</span>
+								</a>
+								<!-- ENDIF -->
+								<!-- IF U_EMAIL_TOPIC -->
+								<a class="dropdown-item" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}">
+										<i class="fa fa-envelope-o fa-fw" aria-hidden="true"></i><span>{L_EMAIL_TOPIC}</span>
+								</a>
+								<!-- ENDIF -->
+								<!-- IF U_PRINT_TOPIC -->
+								<a class="dropdown-item" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}"><i class="fa fa-print fa-fw" aria-hidden="true">
+										</i><span>{L_PRINT_TOPIC}</span>
+								</a>
+								<!-- ENDIF -->
+
+								<!-- EVENT viewtopic_topic_tools_after -->
+
+								<!-- IF .quickmod -->
+								<h6 class="dropdown-header">{L_QUICK_MOD}</h5>
+
+								<!-- BEGIN quickmod -->
+								<!-- DEFINE $QUICKMOD_AJAX = (quickmod.VALUE in ['lock', 'unlock', 'delete_topic', 'restore_topic', 'make_normal', 'make_sticky', 'make_announce', 'make_global']) -->
+								<a class="dropdown-item" href="{quickmod.LINK}"<!-- IF $QUICKMOD_AJAX --> data-ajax="true" data-refresh="true"<!-- ENDIF -->>{quickmod.TITLE}</a>
+								<!-- END quickmod -->
+								<!-- ENDIF -->
+
+								<!-- IF U_MCP -->
+								<div class="dropdown-divider"></div>
+
+								<a class="dropdown-item" href="{U_MCP}" title="{L_MCP}" role="menuitem"><i class="fa fa-gavel fa-fw" aria-hidden="true"></i> {L_MCP}</a>
+								<!-- ENDIF -->
+							</div>
+						</div>
+						<!-- ENDIF -->
+					</div>

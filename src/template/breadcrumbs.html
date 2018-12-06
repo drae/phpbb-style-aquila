@@ -1,0 +1,30 @@
+		<!-- Main content -->
+		<div class="container center-block page-content-outer">
+
+			<div class="page-content-inner">
+
+				<nav class="breadcrumb">
+					<ul id="nav-breadcrumbs" class="breadcrumb" role="menubar">
+						<!-- DEFINE $MICRODATA = ' itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""' -->
+						<!-- EVENT overall_header_breadcrumbs_before -->
+						<!-- IF U_SITE_HOME -->
+						<li {$MICRODATA}><a href="{U_SITE_HOME}#page-top" data-navbar-reference="home"><i class="fa fa-home" aria-hidden="true"></i> {L_SITE_HOME}</a></li>
+						<!-- ENDIF -->
+						<!-- EVENT overall_header_breadcrumb_prepend -->
+						<li {$MICRODATA}><a href="{U_INDEX}#page-top" accesskey="h" data-navbar-reference="index"><i class="fa fa-home fa-fw" aria-hidden="true"></i>{L_INDEX}</a></li>
+						<!-- BEGIN navlinks -->
+						<!-- EVENT overall_header_navlink_prepend -->
+						<li {$MICRODATA}<!-- IF navlinks.MICRODATA --> {navlinks.MICRODATA}<!-- ENDIF -->><a href="{navlinks.U_VIEW_FORUM}#page-top" itemprop="url">{navlinks.FORUM_NAME}</a></li>
+					<!-- EVENT overall_header_navlink_append -->
+					<!-- END navlinks -->
+					<!-- EVENT overall_header_breadcrumb_append -->
+					<!-- EVENT overall_header_breadcrumbs_after -->
+					</ul>
+				</nav>
+
+				<!-- TODO -->
+				<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+				<div id="message" class="rules">
+					<strong>{L_INFORMATION}:</strong> {L_BOARD_DISABLED}
+				</div>
+				<!-- ENDIF -->

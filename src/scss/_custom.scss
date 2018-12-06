@@ -1,0 +1,186 @@
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+  );
+
+
+  // Grid containers
+  //
+  // Define the maximum width of `.container` for different screen sizes.
+
+  $container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+  );
+
+
+$gray-darker:            lighten(#000, 13.5%); // #222
+$gray-dark:              lighten(#000, 20%);   // #333
+$gray-darkish:           lighten(#000, 27%);   // #444
+$gray:                   lighten(#000, 33.5%); // #555
+$gray-light:             lighten(#000, 46.7%); // #777
+$gray-lighter:           lighten(#000, 75%);
+$gray-lightest:          lighten(#000, 93.5%); // #eee
+
+//#3f704d
+
+//** Background color for `<body>`.
+$body-bg:               #222;
+//** Global text color on `<body>`.
+$body-color:            #e2e2e2;
+//** Global textual link color.
+$link-color:            #ddd;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      lighten($link-color, 15%);
+
+$font-family-sans-serif:  "Linux Biolinum", Optima, sans-serif;
+$font-family-serif:       $font-family-sans-serif;
+$font-family-monospace:   Consolas, Menlo, Monaco, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
+
+$font-size-base:    0.9rem;
+$font-size-lg:      1.0rem;
+$font-size-sm:      0.75rem;
+
+$h1-font-size: 2rem;
+$h2-font-size: 1.6rem;
+$h3-font-size: 1.4rem;
+$h4-font-size: 1.2rem;
+$h5-font-size: 1.1rem;
+$h6-font-size: 1rem;
+
+//** By default, this inherits from the `<body>`.
+$headings-font-family:    Asul, $font-family-serif;
+$headings-font-weight:    500;
+$headings-line-height:    1.4;
+$headings-color:          #efefef;
+
+$border-radius:          0;
+$border-radius-lg:       0;
+$border-radius-sm:       0;
+
+//== Dropdowns
+//
+//## Dropdown menu container and contents.
+$dropdown-padding-y:            0.25rem;
+//** Background for the dropdown menu.
+$dropdown-bg:                    $gray-dark;
+//** Dropdown menu `border-color`.
+$dropdown-border:                $gray-dark;
+//** Dropdown menu `border-color` **for IE8**.
+$dropdown-fallback-border:       #333;
+//** Divider color for between dropdown items.
+$dropdown-divider-bg:            darken($dropdown-bg, 15%);
+
+//** Dropdown link text color.
+$dropdown-link-color:            #fefefe;
+//** Hover color for dropdown links.
+$dropdown-link-hover-color:      #fefefe;
+//** Hover background for dropdown links.
+$dropdown-link-hover-bg:         rgba(0, 0, 0, 0.25);
+
+// Navs
+$nav-tabs-border-color:                       #000;
+$nav-tabs-border-width:                       1px;
+$nav-tabs-link-hover-border-color:            #000;
+$nav-tabs-link-active-color:                  #efefef;
+$nav-tabs-link-active-bg:                     #333;
+$nav-tabs-link-active-border-color:           #000;
+$nav-pills-link-active-color:                 #efefef;
+$nav-pills-link-active-bg:                    #333;
+
+//
+$badge-border-radius:               3px;
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+$navbar-height:                    55px;
+$navbar-margin-bottom:             0;
+$navbar-border-radius:             0;
+$navbar-collapse-max-height:       340px;
+$navbar-padding-vertical:           18px;
+
+$navbar-default-color:             $gray-lighter;
+$navbar-default-bg:                transparent;
+$navbar-default-border:            0;
+
+// Navbar links
+$navbar-padding-y:                          1rem;
+
+$navbar-default-link-color:                $gray-lighter;
+$navbar-default-link-hover-color:          #fff;
+$navbar-default-link-hover-bg:             $gray-dark;
+$navbar-default-link-active-color:         $navbar-default-link-hover-color;
+$navbar-default-link-active-bg:            theme-color("primary"); //darken($navbar-default-bg, 6.5%);
+$navbar-default-link-disabled-color:       #444;
+$navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+$navbar-default-brand-color:               $navbar-default-link-color;
+$navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%);
+$navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+$navbar-default-toggle-hover-bg:           #333;
+$navbar-default-toggle-icon-bar-bg:        #fff;
+$navbar-default-toggle-border-color:       #333;
+
+
+//== Pagination
+//
+//##
+
+$pagination-color:                     #fefefe;
+$pagination-bg:                        #222;
+$pagination-border:                    darken($pagination-bg, 25%);
+
+$pagination-hover-color:               #efefef;
+$pagination-hover-bg:                  lighten($pagination-bg, 25%);
+$pagination-hover-border:              #000;
+
+$pagination-active-color:              #fefefe;
+$pagination-active-bg:                 #555;
+$pagination-active-border:             #000;
+
+$pagination-disabled-color:            $gray-light;
+$pagination-disabled-bg:               #000;
+$pagination-disabled-border:           #020202;
+
+//
+//
+//
+$btn-focus-box-shadow:           0 0 0 3px rgba(120, 40, 0, .75);
+
+//
+//
+//
+$input-bg:                       #333;
+$input-disabled-bg:              #111;
+
+$input-color:                    #efefef;
+$input-border-color:             #000;
+
+$input-focus-box-shadow:         $btn-focus-box-shadow;
+
+$input-group-addon-color:        #efefef;
+$input-group-addon-bg:           #444;
+$input-group-addon-border-color: #000;
+$input-group-btn-border-color:   #000;
+
+//
+$progress-bar-bg:               #3f704d;
+
+//
+$popover-header-padding-y:          .5rem;
+$popover-header-padding-x:          .5rem;
+
+//
+$custom-control-indicator-checked-bg: #3f704d;
+$custom-control-indicator-focus-box-shadow: 0 0 0 1px rgba(0,150,40,.75);

@@ -1,0 +1,131 @@
+<!-- INCLUDE ucp_header.html -->
+
+						<h2>{L_TITLE}</h2>
+
+						<hr />
+
+						<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+
+							<!-- IF ERROR -->
+							<div class="error">
+								<p>{ERROR}</p>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- EVENT ucp_prefs_view_radio_buttons_prepend -->
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="images" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="images" id="images"<!-- IF S_IMAGES --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="images"></label>
+									{L_VIEW_IMAGES}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="flash" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="flash" id="flash"<!-- IF S_FLASH --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="flash"></label>
+									{L_VIEW_FLASH}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="smilies" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="smilies" id="smilies"<!-- IF S_SMILIES --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="smilies"></label>
+									{L_VIEW_SMILIES}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="sigs" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="sigs" id="smilies"<!-- IF S_SIGS --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="sigs"></label>
+									{L_VIEW_SIGS}
+								</div>
+							</div>
+
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="avatars" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="avatars" id="avatars"<!-- IF S_AVATARS --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="avatars"></label>
+									{L_VIEW_AVATARS}
+								</div>
+							</div>
+
+							<!-- IF S_CHANGE_CENSORS -->
+							<div class="form-check">
+								<div class="d-flex">
+									<input type="hidden" name="wordcensor" value="0" />
+									<input type="checkbox" class="tgl tgl-light" name="wordcensor" id="wordcensor"<!-- IF S_DISABLE_CENSORS --> checked="checked"<!-- ENDIF -->>
+									<label class="tgl-btn mr-2" for="wordcensor"></label>
+									{L_DISABLE_CENSORS}
+								</div>
+							</div>
+							<!-- ENDIF -->
+
+							<!-- EVENT ucp_prefs_view_radio_buttons_append -->
+
+							<!-- EVENT ucp_prefs_view_select_menu_prepend -->
+
+							<hr />
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_TOPICS_DAYS}{L_COLON}</label>
+									{S_TOPIC_SORT_DAYS}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_TOPICS_KEY}{L_COLON}</label>
+									{S_TOPIC_SORT_KEY}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_TOPICS_DIR}{L_COLON}</label>
+									{S_TOPIC_SORT_DIR}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_POSTS_DAYS}{L_COLON}</label>
+									{S_POST_SORT_DAYS}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_POSTS_KEY}{L_COLON}</label>
+									{S_POST_SORT_KEY}
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="d-flex">
+									<label class="col-sm-5 pl-0 mr-2">{L_VIEW_POSTS_DIR}{L_COLON}</label>
+									{S_POST_SORT_DIR}
+								</div>
+							</div>
+
+							<!-- EVENT ucp_prefs_view_select_menu_append -->
+
+							<div class="posting-buttons">
+								<input class="btn btn-large btn-posting" type="submit" name="submit" value="{L_SUBMIT}" />
+								<input class="btn btn-large btn-default" type="reset" value="{L_RESET}" name="reset" />
+							</div>
+
+							{S_HIDDEN_FIELDS}
+							{S_FORM_TOKEN}
+						</form>
+
+<!-- INCLUDE ucp_footer.html -->

@@ -1,0 +1,345 @@
+table {
+	max-width: 100%;
+	background-color: transparent;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.table {
+    box-shadow: 12px 0 50px -15px rgba(0,0,0, 0.25), -12px 0 50px -15px rgba(0,0,0, 0.25);
+	display: block;
+	margin: 0;
+	list-style-type: none;
+	overflow: hidden;
+    padding: 0 0 10px;
+
+    &.no-shadow {
+        box-shadow: none;
+    }
+
+    + .table {
+        border-bottom: solid 2px transparent;
+    }
+
+    &.fora {
+        border: solid 1px rgba(0,0,0,0.25);
+        margin-bottom: 5px;
+    }
+
+    &.simple {
+        background: transparent;
+        width: 100%;
+
+        .mark {
+            width: 5%;
+            background: transparent;
+        }
+    }
+
+    &.topics-announce {
+        border: solid 1px rgba(0,0,0,0.25);
+        position: relative;
+        margin-bottom: 5px;
+
+        &:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,200,0,0) 0%, rgba(0,200,0,.15) 100%);
+        }
+    }
+
+    &.topics-normal {
+        border: solid 1px rgba(0,0,0,0.25);
+        margin-bottom: 5px;
+    }
+
+    &.general {
+        border: 0;
+    }
+
+    &.two-columns-mark {
+        dt {
+            width: 90%;
+        }
+
+        dd {
+            width: 10%;
+            text-align: center;
+        }
+    }
+
+    > li {
+        position: relative;
+        display: block;
+        padding: 10px 0;
+        margin-right: 0;
+        margin-left: 0;
+        list-style-type: none;
+    }
+
+    .header {
+        padding-bottom: 0;
+        padding-top: 0;
+
+        dl {
+            padding: 5px 0 0;
+        }
+
+        dt {
+            padding-left: 10px;
+        }
+
+        dt,
+        dd {
+            color: #ccc;
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 2rem;
+            text-transform: none;
+            text-shadow: 0 1px 0 rgba(0,0,0,.5);
+        }
+
+        dt a,
+        dd a {
+            color: #ccc;
+            text-shadow: none;
+            border-bottom: dotted 1px rgba(#fefefe, 0.33);
+            font-size: 1.1rem;
+        }
+    }
+
+    dl {
+        align-items: center;
+        display: flex;
+        position: relative;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    dt,
+    dd {
+        margin: 0;
+    }
+
+    dfn {
+        display: none;
+    }
+
+    .row {
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .lastpost {
+            color: $gray-light;
+        }
+    }
+
+    .row + .row {
+        border-top: solid 1px rgba(255, 255, 255, 0.05);
+    }
+}
+
+.table-plain {
+    @include make-container();
+    @include make-container-max-widths();
+    box-shadow: 12px 0 50px -15px rgba(0,0,0, 0.15), -12px 0 50px -15px rgba(0,0,0, 0.15);
+    margin-bottom: 5px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+
+    &.rules {
+        box-shadow: none;
+        margin-top: 5px;
+    }
+
+    &.posting {
+        background: rgba(255, 255, 255, 0.1);
+        border: solid 1px rgba(0,0,0,0.25);
+    }
+
+    &.poll {
+        background: rgba(255, 255, 255, 0.1);
+        border: solid 1px rgba(0,0,0,0.5);
+    }
+
+    &.login {
+        background: rgba(255, 255, 255, 0.1);
+        border: solid 1px rgba(0,0,0,0.25);
+
+        [class*="col"] {
+            border-bottom: solid 1px rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+        }
+
+        [class*="col"] ~ [class*="col"] {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        @include media-breakpoint-up('sm') {
+            [class*="col"] {
+                border-right: solid 1px rgba(255,255,255,0.1);
+                border-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            [class*="col"] ~ [class*="col"] {
+                border-right: 0;
+            }
+        }
+    }
+
+    &.whoisonline {
+        box-shadow: none;
+    }
+
+    &.viewonline {
+        box-shadow: none;
+
+        .posting-rules {
+            @include make-col(12);
+            padding: 0 15px;
+
+            @include media-breakpoint-up('sm') {
+                @include make-col(6);
+            }
+
+            @include media-breakpoint-up('md') {
+                @include make-col(5);
+            }
+
+            @include media-breakpoint-up('lg') {
+                @include make-col(4);
+            }
+        }
+
+        .forum-online {
+            @include make-col(12);
+            padding: 0 15px;
+
+            @include media-breakpoint-up('sm') {
+                @include make-col(6);
+            }
+
+            @include media-breakpoint-up('md') {
+                @include make-col(7);
+            }
+
+            @include media-breakpoint-up('lg') {
+                @include make-col(8);
+            }
+        }
+    }
+
+    &.info {
+        background: rgba(0,0,0, 0.1);
+        border: solid 1px rgba(0,0,0,0.25);
+    }
+
+    &.tabulated-list {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+
+        .category {
+            background: rgba(0,0,0,0.1);
+            padding: 5px;
+        }
+
+        dt,
+        dd {
+            padding: 0 5px;
+        }
+
+        .key {
+            flex-basis: 25%;
+        }
+
+        .ip-address {
+            flex-basis: 35%;
+        }
+
+        .login-time {
+            flex-basis: 25%;
+        }
+
+        .mark {
+            flex-basis: 15%;
+        }
+    }
+
+    &.ucp {
+        padding: 0 15px;
+
+        // No icon on forum-desc in ucp except pm tables
+        .forum-desc.no-icon {
+            padding-left: 0;
+        }
+
+        .ucp-content {
+            @include make-row();
+            background: #333;
+            border: solid 1px #000;
+            padding: 15px 0;
+
+            .nav-link-ucp {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .badge {
+                    border-radius: 3px;
+                }
+            }
+
+            .progress {
+                background-color: darken($progress-bar-bg, 15%);
+                margin-bottom: 5px;
+
+            }
+        }
+
+        dt {
+            flex-basis: 90%;
+        }
+
+        dd {
+            flex-basis: 10%;
+        }
+
+        .ucp-pm-options {
+            display: flex;
+            flex-basis: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 10px;
+
+            @include media-breakpoint-up('md') {
+                flex-direction: row;
+            }
+
+            label {
+                display: none;
+                margin: 0;
+                padding: 0;
+
+                @include media-breakpoint-up('lg') {
+                    display: block;
+                }
+            }
+
+            .form-inline + .form-inline {
+                margin-top: 5px;
+
+                @include media-breakpoint-up('lg') {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
